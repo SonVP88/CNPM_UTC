@@ -2,6 +2,7 @@ package com.example.demo.Repository;
 
 import com.example.demo.Dto.NhanVienDTO;
 import com.example.demo.Entity.ChucVu;
+import com.example.demo.Entity.KhachHang;
 import com.example.demo.Entity.NhanVien;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

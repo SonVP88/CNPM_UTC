@@ -31,47 +31,43 @@
                 <img src="images/team.jpg" alt="IMG">
             </div>
             <!--=====TIÊU ĐỀ======-->
-            <form class="login100-form validate-form">
-                    <span class="login100-form-title">
-                        <b>ĐĂNG NHẬP HỆ THỐNG AZURA</b>
-                    </span>
-                <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
-                <form action="">
-                    <div class="wrap-input100 validate-input">
-                        <input class="input100" type="text" placeholder="Tài khoản quản trị" name="username"
-                               id="username">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                                <i class='bx bx-user'></i>
-                            </span>
-                    </div>
-                    <div class="wrap-input100 validate-input">
-                        <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu"
-                               name="current-password" id="password-field">
-                        <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                                <i class='bx bx-key'></i>
-                            </span>
-                    </div>
+           <form action="/admin/login" method="POST" class="login100-form validate-form">
+    <span class="login100-form-title">
+        <b>ĐĂNG NHẬP HỆ THỐNG AZURA</b>
+    </span>
 
-                    <!--=====ĐĂNG NHẬP======-->
-                    <div class="container-login100-form-btn">
-                        <input type="button" value="Đăng nhập" id="submit" onclick="validate()" />
-                    </div>
-                    <!--=====LINK TÌM MẬT KHẨU======-->
-                    <div class="text-right p-t-12">
-                        <a class="txt2" href="/">
-                            Bạn quên mật khẩu?
-                        </a>
-                    </div>
-                </form>
-                <!--=====FOOTER======-->
-                <div class="text-center p-t-70 txt2">
-                    Phần mềm quản lý Azura <i class="far fa-copyright" aria-hidden="true"></i>
-                    <script type="text/javascript">document.write(new Date().getFullYear());</script>
-                </div>
-            </form>
+    <c:if test="${not empty error}">
+        <p style="color: red; text-align: center;">${error}</p>
+    </c:if>
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="email" placeholder="Tài khoản quản trị"
+               name="username" id="username" required>
+        <span class="focus-input100"></span>
+        <span class="symbol-input100"><i class='bx bx-user'></i></span>
+    </div>
+
+    <div class="wrap-input100 validate-input">
+        <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu"
+               name="password" id="password" required>
+        <span toggle="#password" class="bx fa-fw bx-hide field-icon click-eye"></span>
+        <span class="focus-input100"></span>
+        <span class="symbol-input100"><i class='bx bx-key'></i></span>
+    </div>
+
+    <div class="container-login100-form-btn">
+        <button type="submit">Đăng nhập</button>
+    </div>
+
+    <div class="text-right p-t-12">
+        <a class="txt2" href="/">Bạn quên mật khẩu?</a>
+    </div>
+
+    <div class="text-center p-t-70 txt2">
+        Phần mềm quản lý Azura © <script>document.write(new Date().getFullYear());</script>
+    </div>
+</form>
+
         </div>
     </div>
 </div>

@@ -1261,4 +1261,8 @@ public class HoaDonService {
 
         return false;
     }
+
+    public List<HoaDon> findByKhachHangAndTrangThai(Long maKhachHang, int trangThai) {
+        return repository.findByKhachHangAndTrangThai(maKhachHang, trangThai);
+    }
 }

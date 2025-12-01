@@ -14,6 +14,7 @@ import com.example.demo.Repository.*;
 import com.example.demo.Service.*;
 import com.example.demo.Service.giamGia.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -88,18 +90,39 @@ public class HomeAdminController {
     @Autowired
     private GiamGiaSanPhamService giamGiaSanPhamService;
 
-    @GetMapping("/login")
+    @GetMapping("/admin-login")
     public String login() {
         return "Admin/DangNhap";
     }
+    @PostMapping("/login")
+    public String doLogin(@RequestParam("username") String username,
+                          @RequestParam("password") String password,
+                          HttpSession session,
+                          Model model) {
 
+        NhanVien tk = nhanVienService.getByEmailAndMatKhau(username, password);
+        System.out.println(tk);
+        if (tk != null) {
+            session.setAttribute("admin", tk);
+            return "redirect:/admin/doc/home";
+        }
+
+        model.addAttribute("error", "Sai tài khoản hoặc mật khẩu!");
+        return "Admin/DangNhap";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
+    }
     @GetMapping("{maNhanVien}/home")
     public String home(Model model, @PathVariable(name = "maNhanVien") Long maNhanVien) {
 
         //Lấy nhân viên theo mã
         NhanVien nhanVien = nhanVienRepository.getReferenceById(maNhanVien);
         model.addAttribute("nhanVien", nhanVien);
-        return "Admin/doc/Home";
+        return "/doc/Home";
     }
 
     @GetMapping("{maNhanVien}/pos_banHang")

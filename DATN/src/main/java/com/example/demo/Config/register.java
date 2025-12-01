@@ -1,16 +1,14 @@
 package com.example.demo.Config;
 
 import com.example.demo.Dto.Request.KhachHangRequest;
-import com.example.demo.Entity.GioHang;
-import com.example.demo.Entity.KhachHang;
-import com.example.demo.Entity.ViShop;
+import com.example.demo.Entity.*;
 import com.example.demo.Repository.GioHangRepository;
 import com.example.demo.Repository.KhachHangRepository;
+import com.example.demo.Repository.vi.GiaoDichViRepository;
 import com.example.demo.Repository.vi.ViShopRepository;
-import com.example.demo.Service.EmailService;
-import com.example.demo.Service.GioHangService;
-import com.example.demo.Service.KhachHangService;
+import com.example.demo.Service.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,9 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 //@RestController
 @Controller
@@ -44,6 +40,14 @@ public class register {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private HoaDonService hoaDonService;
+
+    @Autowired
+    private GiaoDichViRepository giaoDichViRepository;
+
+    @Autowired
+    private HoaDonChiTietService hoaDonChiTietService;
 
     @Autowired
     private ViShopRepository viShopRepository;
@@ -101,14 +105,77 @@ public class register {
         return "redirect:/loginView";
     }
 
-    @GetMapping("detailKh/{maKhachHang}")
-    public String detailKh(Model model, @PathVariable(name = "maKhachHang") Long maKhachHang) {
-        KhachHang khachHang = khachHangService.getByMa(maKhachHang);
-        Date ngaySinh = khachHang.getNgaySinh();
-        model.addAttribute("ngaySinh", ngaySinh);
-        model.addAttribute("kh", khachHang);
-        return "detailKH";
+ @GetMapping("/detailKh")
+public String detailKhSession(Model model, HttpSession session) {
+    KhachHang khachHang = (KhachHang) session.getAttribute("khachHang");
+
+    if (khachHang == null) {
+        return "redirect:/loginView";
     }
+
+    model.addAttribute("kh", khachHang);
+    model.addAttribute("ngaySinh", khachHang.getNgaySinh());
+
+    List<HoaDon> listHD = hoaDonService.getAllBykhachHang(khachHang);
+    model.addAttribute("listHD", listHD);
+
+    Map<Integer, List<HoaDon>> hoaDonTheoTrangThai = new HashMap<>();
+    for (int trangThai = 0; trangThai <= 3; trangThai++) {
+        List<HoaDon> ds = hoaDonService.findByKhachHangAndTrangThai(khachHang.getMaKhachHang(), trangThai);
+        hoaDonTheoTrangThai.put(trangThai, ds);
+    }
+    model.addAttribute("hoaDonTheoTrangThai", hoaDonTheoTrangThai);
+
+    // Lấy chi tiết sản phẩm đắt nhất của từng hóa đơn
+     Map<Long, HoaDonChiTiet> sanPhamDacNhat = new HashMap<>();
+     for (HoaDon hd : listHD) {
+         List<HoaDonChiTiet> chiTiets = hoaDonChiTietService.getByHoaDon(hd);
+         HoaDonChiTiet maxCt = chiTiets.stream()
+                 .max(Comparator.comparing(HoaDonChiTiet::getGiaTien))
+                 .orElse(null);
+         sanPhamDacNhat.put(hd.getMaHoaDon(), maxCt);
+     }
+     model.addAttribute("sanPhamDacNhat", sanPhamDacNhat);
+     int soLuongDon = listHD.size();
+    // Lấy chi tiết tất cả sản phẩm (nếu cần)
+    Map<Long, Integer> DSSP = new HashMap<>();
+    List<SanPham> listSanPham = new ArrayList<>();
+    for (HoaDon hd : listHD) {
+        List<HoaDonChiTiet> chiTiets = hoaDonChiTietService.getByHoaDon(hd);
+        for (HoaDonChiTiet ct : chiTiets) {
+            listSanPham.add(ct.getChiTietSanPham().getSanPham());
+            DSSP.put(ct.getChiTietSanPham().getMaChiTietSanPham(), ct.getSoLuongMua());
+        }
+    }
+    model.addAttribute("listSanPhamHoaDon", listSanPham);
+    model.addAttribute("DSSP", DSSP);
+
+    ViShop viShop = viShopRepository.getByKhachHang(khachHang);
+    model.addAttribute("viShop", viShop);
+    if (viShop != null) {
+        model.addAttribute("gdVi", giaoDichViRepository.getByViShopAndTrangThai(viShop, 1));
+    }
+     BigDecimal tongTienDon = BigDecimal.ZERO;
+     for (HoaDon hd : listHD) {
+         if (hd.getTongTien() != null) {
+             tongTienDon = tongTienDon.add(hd.getTongTien());
+         }
+     }
+
+     model.addAttribute("tongTienDon", tongTienDon);
+    String addThanhCong = (String) session.getAttribute("napThanhCong");
+    String addThatBai = (String) session.getAttribute("napThatBai");
+    if (addThanhCong != null) model.addAttribute("themThanhCong", "2");
+    if (addThatBai != null) model.addAttribute("themThatBai", "2");
+    session.removeAttribute("napThanhCong");
+    session.removeAttribute("napThatBai");
+    model.addAttribute("soLuongDon", soLuongDon);
+    return "detailKH";
+}
+
+
+
+
 
     @PostMapping("/update/{maKhachHang}")
     public String update(Model model, @PathVariable(name = "maKhachHang") Long maKhachHang, HttpServletRequest request) {

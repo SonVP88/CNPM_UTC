@@ -2,12 +2,8 @@ package com.example.demo.Repository;
 
 import com.example.demo.Dto.*;
 import com.example.demo.Dto.Response.DetailSanPhamResponse;
+import com.example.demo.Dto.SanPhamViewDTO;
 import com.example.demo.Entity.ChiTietSanPham;
-import com.example.demo.Entity.GioHang;
-import com.example.demo.Entity.GioHangChiTiet;
-import com.example.demo.Entity.HoaDon;
-import com.example.demo.Entity.SanPham;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -278,4 +274,41 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "FROM  ChiTietSanPham ctsp WHERE ctsp.trangThai = 0")
     List<ChiTietSanPhamDTO> getDanhSachSanPhamHetHang();
 
+    @Query("SELECT new com.example.demo.Dto.SanPhamViewDTO(" +
+            "sp.maSanPham, " +
+            "sp.tenSanPham, " +
+            "ctsp.hinhAnhURL, " +
+            "ctsp.giaBan, " +
+            "COALESCE(gg.giaSauKhiGiam, ctsp.giaBan), " +
+            "COALESCE(ctsp.moTa, '')" +
+            ") " +
+            "FROM ChiTietSanPham ctsp " +
+            "JOIN ctsp.sanPham sp " +
+            "LEFT JOIN GiamGiaChiTietSanPham gg ON gg.chiTietSanPham = ctsp " +
+            "WHERE ctsp.trangThai = 1 AND sp.trangThai = 1 " +
+            "ORDER BY ctsp.lastUpdate DESC")
+    List<SanPhamViewDTO> findTop20SanPhamMoiNhat(Pageable pageable);
+
+    @Query("SELECT c.hinhAnhURL " +
+            "FROM ChiTietSanPham c " +
+            "WHERE c.sanPham.tenSanPham = :tenSanPham " +
+            "AND c.dungLuong.maDungLuong = :maDungLuong " +
+            "AND c.mauSac.maMauSac = :maMauSac")
+    String getHinhAnhOfMauSac(
+            @Param("tenSanPham") String tenSanPham,
+            @Param("maDungLuong") Long maDungLuong,
+            @Param("maMauSac") Long maMauSac
+    );
+    @Query(value = "SELECT * FROM ChiTietSanPham " +
+            "WHERE MaSanPham = :maSanPham " +
+            "AND MaDungLuong = :maDungLuong " +
+            "AND MaMauSac = :maMauSac", nativeQuery = true)
+    ChiTietSanPham findByTenDungLuongMauSac(@Param("maSanPham") Long maSanPham,
+                                            @Param("maDungLuong") Long maDungLuong,
+                                            @Param("maMauSac") Long maMauSac);
+
+
+    List<ChiTietSanPham> findBySanPham_MaSanPhamAndDungLuong_MaDungLuong(Long maSanPham, Long maDungLuong);
+
+    List<ChiTietSanPham> findBySanPham_MaSanPham(long maSanPham);
 }
