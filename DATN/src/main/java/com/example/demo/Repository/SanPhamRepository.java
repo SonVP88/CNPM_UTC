@@ -1,8 +1,9 @@
 package com.example.demo.Repository;
 
-import com.example.demo.Dto.ChiTietSanPhamDTO;
 import com.example.demo.Dto.SanPhamTHongKeDTO;
 import com.example.demo.Entity.SanPham;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,11 +22,16 @@ public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
 
 
 
-    @Query("SELECT new com.example.demo.Dto.SanPhamTHongKeDTO(SUM(hdct.soLuongMua), sp.maSanPham, sp.tenSanPham, ctsp.giaBan) FROM SanPham sp JOIN ChiTietSanPham ctsp ON sp.maSanPham = ctsp.sanPham.maSanPham " +
-            "JOIN HoaDonChiTiet hdct ON ctsp.maChiTietSanPham = hdct.chiTietSanPham.maChiTietSanPham JOIN HoaDon HD on hdct.hoaDon.maHoaDon = HD.maHoaDon WHERE HD.trangThai IN (2,4) " +
+    @Query("SELECT new com.example.demo.Dto.SanPhamTHongKeDTO(SUM(hdct.soLuongMua), sp.maSanPham, sp.tenSanPham, ctsp.giaBan) " +
+            "FROM SanPham sp " +
+            "JOIN ChiTietSanPham ctsp ON sp.maSanPham = ctsp.sanPham.maSanPham " +
+            "JOIN HoaDonChiTiet hdct ON ctsp.maChiTietSanPham = hdct.chiTietSanPham.maChiTietSanPham " +
+            "JOIN HoaDon HD on hdct.hoaDon.maHoaDon = HD.maHoaDon " +
+            "WHERE HD.trangThai IN (2,4) " +
             "GROUP BY sp.tenSanPham, sp.maSanPham, ctsp.giaBan " +
-            "ORDER BY SUM(hdct.soLuongMua) DESC ")
-    List<SanPhamTHongKeDTO> top10SanPhamBanChayNhat();
+            "ORDER BY SUM(hdct.soLuongMua) DESC")
+    List<SanPhamTHongKeDTO> topSanPhamBanChayNhat(Pageable pageable);
+
 
 
 

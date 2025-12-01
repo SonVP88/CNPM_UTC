@@ -3,6 +3,7 @@ package com.example.demo.Service;
 import com.example.demo.Dto.ChiTietSanPhamDTO;
 import com.example.demo.Dto.Request.ChiTietSanPhamRequest;
 import com.example.demo.Dto.Request.SanPhamRequest;
+import com.example.demo.Dto.SanPhamViewDTO;
 import com.example.demo.Dto.SanPhamTHongKeDTO;
 import com.example.demo.Entity.ChiTietSanPham;
 import com.example.demo.Entity.SanPham;
@@ -10,13 +11,12 @@ import com.example.demo.Repository.ChiTietSanPhamRepository;
 import com.example.demo.Repository.SanPhamRepository;
 import com.example.demo.Utils.Constants;
 import com.example.demo.Utils.DateUtils;
-import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +32,54 @@ public class SanPhamService {
     public List<SanPham> getAll() {
         return repository.findAll();
     }
+    public List<SanPhamTHongKeDTO> getTop20SanPhamDeHienThi() {
+        Pageable pageRequest = PageRequest.of(0, 20);
+        List<SanPhamTHongKeDTO> topList = repository.topSanPhamBanChayNhat(pageRequest);
+
+        // Chuyển đổi giá sang định dạng
+        topList.forEach(SanPhamTHongKeDTO::convert);
+
+        int soSanPhamCanThem = 20 - topList.size();
+        if (soSanPhamCanThem > 0) {
+            List<SanPham> danhSachSPConHang = repository.danhSachSPConHang();
+            // Lọc bỏ những sản phẩm đã có trong topList
+            List<Long> daCo = topList.stream().map(SanPhamTHongKeDTO::getMaSanPham).toList();
+            int count = 0;
+            for (SanPham sp : danhSachSPConHang) {
+                if (!daCo.contains(sp.getMaSanPham()) && count < soSanPhamCanThem) {
+                    SanPhamTHongKeDTO dto = new SanPhamTHongKeDTO(0L, sp.getMaSanPham(), sp.getTenSanPham(), BigDecimal.ZERO);
+                    dto.convert(); // chuyển đổi giá (0 -> "0 ₫")
+                    topList.add(dto);
+                    count++;
+                }
+            }
+        }
+        return topList;
+    }
+
+    public List<SanPhamViewDTO> get20SanPhamMoiNhat() {
+        // Lấy top 20 sản phẩm mới nhất từ repository
+        Pageable top20 = PageRequest.of(0, 20);
+        List<SanPhamViewDTO> danhSachMoiNhat = chiTietSanPhamRepository.findTop20SanPhamMoiNhat( top20);
+
+        // Chuyển sang DTO, format giá
+        List<SanPhamViewDTO> dtos = danhSachMoiNhat.stream()
+                .map(ctsp -> new SanPhamViewDTO(
+                        ctsp.getMaSanPham(),
+                        ctsp.getTenSanPham(),
+                        ctsp.getAnh(),
+                        ctsp.getGiaBan(),
+                        ctsp.getGiaBanGG(),
+                        ctsp.getGioiThieu()
+                ))
+                .toList();;
+        System.out.println("Service - danhSachMoiNhat size: " + dtos.size());
+        return dtos;
+    }
+
+
+
+
 
     public SanPham addSP(ChiTietSanPhamRequest sanPhamRequest) {
         SanPham sanPham = new SanPham();
@@ -95,18 +143,11 @@ public class SanPhamService {
         return chiTietSanPhamRepository.countSanPhamHetHang();
     }
 
-    public List<SanPhamTHongKeDTO> top10SanPhamBanChayNhat(){
-        List<SanPhamTHongKeDTO> sanPhamTHongKeDTOS = repository.top10SanPhamBanChayNhat();
-        List<SanPhamTHongKeDTO> top10SanPhamBanChayNhat = new ArrayList<>();
-        if (sanPhamTHongKeDTOS.size() >= 10) {
-            top10SanPhamBanChayNhat = sanPhamTHongKeDTOS.subList(0, 10);
-        }else {
-            top10SanPhamBanChayNhat = sanPhamTHongKeDTOS;
-        }
-        for (SanPhamTHongKeDTO sanPhamTHongKeDTO: top10SanPhamBanChayNhat){
-            sanPhamTHongKeDTO.convert();
-        }
-        return top10SanPhamBanChayNhat;
+    public List<SanPhamTHongKeDTO> top10SanPhamBanChayNhat() {
+        Pageable top10 = PageRequest.of(0, 10);
+        List<SanPhamTHongKeDTO> topList = repository.topSanPhamBanChayNhat(top10);
+        topList.forEach(SanPhamTHongKeDTO::convert); // chuyển đổi giaBan -> giaBanString
+        return topList;
     }
 
     public List<ChiTietSanPhamDTO> danhSachSanPhamHetHang(){

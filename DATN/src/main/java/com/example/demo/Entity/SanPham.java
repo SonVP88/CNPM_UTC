@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
@@ -62,4 +63,18 @@ public class SanPham {
     @Column(name = "lastupdate")
     private Date lastUpdate;
 
+    @Column(name = "Hangsanxuat")
+    private String Hangsanxuat;
+
+//    @Column(name = "hinhanhurl")
+//    private String hinhAnhUrl;
+
+//    @Column(name = "giaBan")
+//    private BigDecimal giaBan;
+
+//    @Column(name = "giamGia")
+//    private BigDecimal giamGia;
+//
+//    @Column(name = "gioiThieu")
+//    private String gioiThieu;
 }

@@ -36,6 +36,10 @@ public class NhanVienService {
     @Value("${FILE_TEMP_UPLOAD_PATH}")
     private String fileNameFullFolder;
 
+    public NhanVien getByEmailAndMatKhau(String email, String pass){
+        return repository.getByEmailAndMatKhau(email, pass);
+    }
+
     public List<NhanVien> getAll(){
         return repository.findAllByOrderByTrangThaiDesc();
     }

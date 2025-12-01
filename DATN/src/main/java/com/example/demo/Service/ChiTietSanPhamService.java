@@ -11,11 +11,8 @@ import com.example.demo.Entity.SanPham;
 import com.example.demo.Repository.*;
 import com.example.demo.Utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -234,4 +231,19 @@ public class ChiTietSanPhamService {
         return listMauSacOfSanPhamDTOS;
     }
 
+    public ChiTietSanPham findByTenDungLuongMauSac(long sanPham, Long maDungLuong, Long maMauSac) {
+        return chiTietSanPhamRepository.findByTenDungLuongMauSac(sanPham, maDungLuong, maMauSac);
+    }
+
+    public GiamGiaChiTietSanPham findByChiTietSanPham(ChiTietSanPham chiTiet) {
+        return giamGiaCTSPRepository.findByChiTietSanPham(chiTiet);
+    }
+
+    public List<ChiTietSanPham> findBySanPhamAndDungLuong(long sanPhamId, Long maDungLuong) {
+        if (maDungLuong != null) {
+            return chiTietSanPhamRepository.findBySanPham_MaSanPhamAndDungLuong_MaDungLuong(sanPhamId,maDungLuong);
+        } else {
+            return chiTietSanPhamRepository.findBySanPham_MaSanPham(sanPhamId);
+        }
+    }
 }

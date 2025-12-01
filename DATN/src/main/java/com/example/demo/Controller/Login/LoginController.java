@@ -11,6 +11,7 @@ import com.example.demo.Service.KhachHangService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +61,34 @@ public class LoginController {
         response.addCookie(cookie);
         return "login";
     }
+    @PostMapping("/login")
+    public String loginSubmit(@RequestParam("Email") String email,
+                              @RequestParam("Password") String pass,
+                              Model model,
+                              HttpSession session) {
+
+        try {
+            if(email == null || email.trim().isEmpty() || pass == null || pass.trim().isEmpty()) {
+                model.addAttribute("error", "Email hoặc mật khẩu không được để trống!");
+                return "login"; // Trở lại trang login + hiển thị lỗi
+            }
+            KhachHang kh = khachHangService.getKhachHangByEmailAndAndMatKhau(email, pass);
+
+            if (kh == null) {
+                model.addAttribute("error", "Email hoặc mật khẩu không đúng!");
+                return "login"; // Trở lại trang login + hiển thị lỗi
+            }
+
+            // Lưu thông tin khách hàng vào session
+            session.setAttribute("khachHang", kh);
+            model.addAttribute("message", "Đăng nhập thành công!");
+            return "redirect:/index"; // Đăng nhập thành công
+        }
+        catch (Exception e) {
+            model.addAttribute("error", "Có lỗi xảy ra, vui lòng thử lại!");
+            return "login";
+        }
+    }
 
     //Chưa đăng nhập
     @GetMapping("/home")
@@ -68,7 +97,7 @@ public class LoginController {
         List<SanPhamHTDTO> listgg = chiTietSanPhamRepository.findAllSanPhamGiamGia();
         model.addAttribute("ctsp", ctsp);
         model.addAttribute("ctsps", listgg);
-        return "home";
+        return "page/home";
     }
 
 
@@ -84,7 +113,7 @@ public class LoginController {
         model.addAttribute("viShop", viShop);
         model.addAttribute("kh", kh);
 //        model.addAttribute("ctsp", ctsp);
-        return "index";
+        return "page/home";
     }
 
 
@@ -104,14 +133,12 @@ public class LoginController {
                 Cookie cookie = new Cookie("makhachhang", String.valueOf(khachHang.getMaKhachHang()));
                 cookie.setMaxAge(36000); // Thời gian sống của cookie (đơn vị là giây), ở đây là 1 giờ
                 response.addCookie(cookie);
-
-
+                request.getSession().setAttribute("khachHang", khachHang);
                 List<ChiTietSanPhamDTO> ctsp = chiTietSanPhamRepository.findAllNotGiamGiaTrangChu();
                 List<SanPhamHTDTO> listgg = chiTietSanPhamRepository.findAllSanPhamGiamGia();
                 model.addAttribute("ctsp", ctsp);
                 model.addAttribute("ctspgg", listgg);
-                model.addAttribute("kh", khachHang);
-                return "index";
+                return "page/index";
             } else {
                 // Lưu thông tin nhân viên vào cookie (adjust the attributes accordingly)
                 Cookie cookie = new Cookie("manhanvien", String.valueOf(nhanVien.getMaNhanVien()));

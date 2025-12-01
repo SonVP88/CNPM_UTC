@@ -12,6 +12,7 @@ import com.example.demo.Repository.*;
 import com.example.demo.Service.ChiTietSanPhamService;
 import com.example.demo.Service.KhachHangService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -169,45 +170,90 @@ public class SmartPhonesController {
         return "shop"; // Trả về trang shop với kết quả tìm kiếm
     }
 
-    @GetMapping("/view/{maKhachHang}/{tenSanPham}")
-    public String ViewUpdate(Model model, @PathVariable(name = "tenSanPham") String tenSanPham,
-                             @PathVariable(name = "maKhachHang") Long maKhachHang) {
+    @GetMapping("/san-pham/{tenSanPham}")
+    public String viewSanPham(
+            Model model,
+            HttpSession session,
+            @PathVariable("tenSanPham") String tenSanPham
+    ) {
+        // Lấy thông tin khách hàng
+        KhachHang khachHang = (KhachHang) session.getAttribute("khachHang");
+        Long maKhachHang = (khachHang != null) ? khachHang.getMaKhachHang() : null;
+        model.addAttribute("kh", khachHang != null ? khachHang : null);
+
+        // Lấy thông tin sản phẩm
         DetailSanPhamResponse sanPham = service.detailSanPhamByTenSanPham(tenSanPham);
-        KhachHang khachHangs = khachHangService.getByMa(maKhachHang);
-        List<ListDungLuongOfSanPhamDTO> listDungLuongOfSanPhamDTOS = sanPham.getListDungLuongOfSanPhamDTOS();
-        ListDungLuongOfSanPhamDTO listDungLuongOfSanPhamDTO = listDungLuongOfSanPhamDTOS.get(0);
-        List<ListMauSacOfSanPhamDTO> listMauSacOfSanPhamDTOS = service.getListMauSacOfSanPhamByDungLuong(tenSanPham, listDungLuongOfSanPhamDTO.getMaDungLuong());
-        ListDungLuongOfSanPhamDTO giaSPViewTong = chiTietSanPhamRepository.getGiaBanOfSP(tenSanPham, listMauSacOfSanPhamDTOS.get(0).getMaDungLuong());
-        model.addAttribute("listMauSac", listMauSacOfSanPhamDTOS);
-        model.addAttribute("tenDungLuongCheck", listDungLuongOfSanPhamDTO.getTenDungLuong());
-        for (ListDungLuongOfSanPhamDTO luongOfSanPhamDTO : sanPham.getListDungLuongOfSanPhamDTOS()) {
-            ListDungLuongOfSanPhamDTO giaSP = chiTietSanPhamRepository.getGiaBanOfSP(tenSanPham, luongOfSanPhamDTO.getMaDungLuong());
-            if (giaSP == null) {
-                luongOfSanPhamDTO.setGiaBanSauKhiGG(null);
-            } else {
-                luongOfSanPhamDTO.setGiaBanSauKhiGG(giaSP.getGiaBanSauKhiGG());
-            }
-        }
-        if (giaSPViewTong == null) {
-            model.addAttribute("giaBan", listDungLuongOfSanPhamDTO.getGiaBan());
-            model.addAttribute("giaBanGG", "");
-        } else {
-            model.addAttribute("giaBan", listDungLuongOfSanPhamDTO.getGiaBan());
-            model.addAttribute("giaBanGG", giaSPViewTong.getGiaBanSauKhiGG());
-        }
         model.addAttribute("sanPham", sanPham);
-//        model.addAttribute("listDungLuongOfSanPhamDTOS", chiTietSanPham);
-        List<DanhGia> danhGiaList = danhGiaRepository.findAllBySanPham(sanPhamRepository.findByTenSanPham(tenSanPham));
-        model.addAttribute("danhGiaList", danhGiaList);
-        for (DanhGia danhGia : danhGiaList) {
-            Date date = danhGia.getNgayDanhGia();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String ngayDanhGia = sdf.format(date);
-            model.addAttribute("ngayDanhGia", ngayDanhGia);
+
+        // Lấy danh sách dung lượng của sản phẩm
+        List<ListDungLuongOfSanPhamDTO> listDungLuong = sanPham.getListDungLuongOfSanPhamDTOS();
+        ListDungLuongOfSanPhamDTO dungLuongDefault = listDungLuong.get(0); // Dung lượng mặc định
+
+        // Lấy danh sách màu theo dung lượng mặc định
+        List<ListMauSacOfSanPhamDTO> listMauSac = service.getListMauSacOfSanPhamByDungLuong(
+                tenSanPham, dungLuongDefault.getMaDungLuong()
+        );
+        // Gán hinhAnhURL cho từng màu (nếu service chưa set)
+        for (ListMauSacOfSanPhamDTO mauSac : listMauSac) {
+            String hinhAnh = chiTietSanPhamRepository.getHinhAnhOfMauSac(
+                    tenSanPham,
+                    dungLuongDefault.getMaDungLuong(),
+                    mauSac.getMaMauSac()
+            );
+            mauSac.setHinhAnhURL(hinhAnh);
         }
 
-        model.addAttribute("kh", khachHangs);
-        return "single-product";
+// Chọn màu mặc định để hiển thị ảnh lớn
+        ListMauSacOfSanPhamDTO mauSacDefault = listMauSac.get(0);
+        model.addAttribute("mauSacDefault", mauSacDefault);
+        model.addAttribute("listMauSac", listMauSac);
+        model.addAttribute("tenDungLuongCheck", dungLuongDefault.getTenDungLuong());
+
+        // Lấy giá theo từng dung lượng
+        List<Map<String, Object>> variantsDungLuong = new ArrayList<>();
+        for (ListDungLuongOfSanPhamDTO dl : listDungLuong) {
+            ListDungLuongOfSanPhamDTO giaSP = chiTietSanPhamRepository.getGiaBanOfSP(
+                    tenSanPham, dl.getMaDungLuong()
+            );
+
+            // Cập nhật giá giảm cho từng dung lượng
+            dl.setGiaBanSauKhiGG(giaSP != null ? giaSP.getGiaBanSauKhiGG() : null);
+
+            Map<String, Object> variant = new HashMap<>();
+            variant.put("tenDungLuong", dl.getTenDungLuong());
+            variant.put("maDungLuong", dl.getMaDungLuong());
+            variant.put("giaBan", dl.getGiaBan());
+            variant.put("giaBanGG", dl.getGiaBanSauKhiGG());
+            variantsDungLuong.add(variant);
+        }
+        model.addAttribute("variantsDungLuong", variantsDungLuong);
+
+        // Giá mặc định hiển thị
+        if (!variantsDungLuong.isEmpty()) {
+            Map<String, Object> firstVariant = variantsDungLuong.get(0);
+            model.addAttribute("giaBan", firstVariant.get("giaBan"));
+            model.addAttribute("giaBanGG", firstVariant.get("giaBanGG") != null ? firstVariant.get("giaBanGG") : "");
+        }
+
+        // Lấy danh sách đánh giá
+        List<DanhGia> danhGiaList = danhGiaRepository.findAllBySanPham(
+                sanPhamRepository.findByTenSanPham(tenSanPham)
+        );
+        model.addAttribute("danhGiaList", danhGiaList);
+
+        // Định dạng ngày đánh giá
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if (!danhGiaList.isEmpty()) {
+            // Lấy ngày của đánh giá mới nhất (hoặc bạn có thể map từng đánh giá)
+            model.addAttribute("ngayDanhGia", sdf.format(danhGiaList.get(0).getNgayDanhGia()));
+        }
+
+        // Các attribute khác cho layout
+        model.addAttribute("kh", maKhachHang);
+        model.addAttribute("bodyPage", "/WEB-INF/views/single-product.jsp");
+        model.addAttribute("pageTitle", "Trang chủ");
+
+        return "/layout/layout";
     }
 
     @GetMapping("/view/{maKhachHang}/{tenSanPham}/{tenDungLuong}")

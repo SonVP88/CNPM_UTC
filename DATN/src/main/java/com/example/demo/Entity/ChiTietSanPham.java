@@ -85,6 +85,7 @@ public class ChiTietSanPham {
     @Column(name = "lastupdate")
     private Date lastUpdate;
 
+
     public ChiTietSanPham(BigDecimal giaBan, SanPham sanPham, HinhAnh hinhAnh) {
         this.giaBan = giaBan;
         this.sanPham = sanPham;

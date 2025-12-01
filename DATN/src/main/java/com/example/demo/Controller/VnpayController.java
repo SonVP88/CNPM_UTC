@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 
 import com.example.demo.Dto.GioHangChiTietDTO;
+import com.example.demo.Dto.SanPhamViewDTO;
 import com.example.demo.Entity.*;
 import com.example.demo.Repository.*;
 import com.example.demo.Service.*;
@@ -15,10 +16,7 @@ import jakarta.mail.MessagingException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +27,6 @@ import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.Date;
-import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -38,7 +35,8 @@ import java.util.*;
 public class VnpayController {
     @Autowired
     private VnpayService vnPayService;
-
+    @Autowired
+    private SanPhamService SanPhamService;
     @Autowired
     private KhachHangService khachHangService;
 
@@ -85,9 +83,15 @@ public class VnpayController {
     private VnpayServiceDN vnpayServiceDN;
 
     @GetMapping("index")
-    public String home() {
-        return "index";
+    public String home(Model model) {
+        // Set body page và tiêu đề
+        List<SanPhamViewDTO> products = SanPhamService.get20SanPhamMoiNhat();
+        model.addAttribute("bodyPage", "/WEB-INF/views/page/index.jsp");
+        model.addAttribute("pageTitle", "Trang chủ");
+        model.addAttribute("products", products);
+        return "/layout/layout";
     }
+
 
     @PostMapping("/submitOrder")
     public String submidOrderKhiDangNhap(@CookieValue("makhachhang") Long maKhachHang, @RequestParam("tongTien") String orderTotal,

@@ -35,6 +35,7 @@ public class ChiTietSanPhamDTO {
     private Long maDL;
     private Long maMS;
     private String giaNhapString;
+    private String moTa;
 
     public ChiTietSanPhamDTO(Long maSanPham, Long maChiTietSanPham, String tenSanPham, String dungLuong, BigDecimal giaBan, String hinhAnh, Integer soLuongNhap, Integer soLuongBan, Integer tinhTrang, String mauSac, String tenNSX, String tenChip, Integer dungLuongPin, String manHinh, BigDecimal giaNhap) {
         this.maSanPham = maSanPham;
@@ -86,6 +87,22 @@ public class ChiTietSanPhamDTO {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
     }
+    public ChiTietSanPhamDTO(
+            Long maSanPham,
+            Long maChiTietSanPham,
+            String tenSanPham,
+            BigDecimal giaBan,
+            String hinhAnhURL,
+            String moTa
+    ) {
+        this.maSanPham = maSanPham;
+        this.maChiTietSanPham = maChiTietSanPham;
+        this.tenSanPham = tenSanPham;
+        this.giaBan = giaBan != null ? giaBan : BigDecimal.ZERO;
+        this.hinhAnhURL = hinhAnhURL;
+        this.moTa = moTa != null ? moTa : "";
+    }
+
 
     public void convertGiaBan(){
         if(this.giaBan != null){

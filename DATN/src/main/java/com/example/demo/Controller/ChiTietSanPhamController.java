@@ -30,7 +30,7 @@ public class ChiTietSanPhamController {
     public String hienThi1(Model model) {
         List<ChiTietSanPham> chiTietSanPhamList = service.hienThi();
         model.addAttribute("ctsp", chiTietSanPhamList);
-        return "index";
+        return "page/index";
     }
 
 

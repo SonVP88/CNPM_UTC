@@ -49,4 +49,5 @@ public class SanPhamGiamGiaDTO {
         this.phanTramGiamGia = phanTramGiamGia;
         this.moTa = moTa;
     }
+
 }
