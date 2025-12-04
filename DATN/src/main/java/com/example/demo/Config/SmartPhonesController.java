@@ -1,19 +1,17 @@
 package com.example.demo.Config;
 
-import com.example.demo.Dto.ChiTietSanPhamDTO;
-import com.example.demo.Dto.DungLuongDTO;
-import com.example.demo.Dto.ListDungLuongOfSanPhamDTO;
-import com.example.demo.Dto.ListMauSacOfSanPhamDTO;
+import com.example.demo.Dto.*;
 import com.example.demo.Dto.Response.DetailSanPhamResponse;
-import com.example.demo.Dto.SanPhamGiamGiaDTO;
-import com.example.demo.Dto.SanPhamHTDTO;
 import com.example.demo.Entity.*;
 import com.example.demo.Repository.*;
 import com.example.demo.Service.ChiTietSanPhamService;
 import com.example.demo.Service.KhachHangService;
+import com.example.demo.Service.NSXService;
+import com.example.demo.Service.SanPhamService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,16 +21,16 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class SmartPhonesController {
     @Autowired
     private ChiTietSanPhamService service;
+
+    @Autowired
+    private SanPhamService sanPhamService;
 
     @Autowired
     private ChiTietSanPhamRepository chiTietSanPhamRepository;
@@ -54,6 +52,8 @@ public class SmartPhonesController {
 
     @Autowired
     private MauSacRepository mauSacRepository;
+    @Autowired
+    private NSXService nSXService;
 
     @Autowired
     private DungLuongRepository dungLuongRepository;
@@ -147,28 +147,34 @@ public class SmartPhonesController {
 
         model.addAttribute("page", page);
         model.addAttribute("totalPage", totalPage); // Truyền tổng số trang vào view
-
-        return "shop";
+          model.addAttribute("bodyPage", "/WEB-INF/views/shop.jsp");
+        model.addAttribute("pageTitle", "Trang chủ");
+        return "/layout/layout";
     }
 
 
-    @PostMapping("/hien-thi-shop/{maKhachHang}")
-    public String timKiemSanPham(
-            @PathVariable(name = "maKhachHang") Long maKhachHang,
-            @RequestParam("tenSanPham") String tenSanPham,
+    @GetMapping("/{tenNsx}")
+    public String hienThiTheoNsx(
+            @PathVariable String tenNsx,
+            @RequestParam(defaultValue = "0") int page,
             Model model
     ) {
-        KhachHang khachHang = khachHangService.getByMa(maKhachHang);
+        Long maNsx = nSXService.getbyTenNsx(tenNsx);
 
-        List<SanPhamHTDTO> danhSachTimKiem = sanPhamViewRepository.SearchSanPhamHTDTO(tenSanPham.trim());
+        Page<SanPhamViewDTO> pageSanPham = sanPhamService.getSanPhamByNsx(maNsx, page);
 
-        List<NSX> nsxList = nsxRepository.findAll();
+        model.addAttribute("pageSanPham", pageSanPham.getContent());
+        model.addAttribute("totalPages", pageSanPham.getTotalPages());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("tenNsx", tenNsx);
+        model.addAttribute("bodyPage", "/WEB-INF/views/shop.jsp");
+        model.addAttribute("pageTitle", "Trang chủ");
 
-        model.addAttribute("listNSX", nsxList);
-        model.addAttribute("kh", khachHang);
-        model.addAttribute("ctsps", danhSachTimKiem);
-        return "shop"; // Trả về trang shop với kết quả tìm kiếm
+        return "/layout/layout";
     }
+
+
+
 
     @GetMapping("/san-pham/{tenSanPham}")
     public String viewSanPham(
@@ -179,12 +185,17 @@ public class SmartPhonesController {
         // Lấy thông tin khách hàng
         KhachHang khachHang = (KhachHang) session.getAttribute("khachHang");
         Long maKhachHang = (khachHang != null) ? khachHang.getMaKhachHang() : null;
-        model.addAttribute("kh", khachHang != null ? khachHang : null);
-
+        String tenKhachHang = (khachHang != null) ? khachHang.getTen() : null;
+        model.addAttribute("kh", khachHang);
+        model.addAttribute("maKhachHang", maKhachHang);
+        model.addAttribute("tenKhachHang", tenKhachHang);
         // Lấy thông tin sản phẩm
         DetailSanPhamResponse sanPham = service.detailSanPhamByTenSanPham(tenSanPham);
         model.addAttribute("sanPham", sanPham);
-
+        Long maSP = sanPham.getMaSanPham();
+        NSX maNSX =service.getSanPhamByNSX(maSP);
+        List<DetailSanPhamResponse> sanPhamGanNhat = service.findTop5SanPhamGanNhat(maSP,maNSX.getMaNSX());
+        model.addAttribute("sanPhamGanNhat", sanPhamGanNhat);
         // Lấy danh sách dung lượng của sản phẩm
         List<ListDungLuongOfSanPhamDTO> listDungLuong = sanPham.getListDungLuongOfSanPhamDTOS();
         ListDungLuongOfSanPhamDTO dungLuongDefault = listDungLuong.get(0); // Dung lượng mặc định
@@ -202,6 +213,7 @@ public class SmartPhonesController {
             );
             mauSac.setHinhAnhURL(hinhAnh);
         }
+
 
 // Chọn màu mặc định để hiển thị ảnh lớn
         ListMauSacOfSanPhamDTO mauSacDefault = listMauSac.get(0);

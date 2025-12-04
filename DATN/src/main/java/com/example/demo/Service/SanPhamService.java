@@ -6,17 +6,21 @@ import com.example.demo.Dto.Request.SanPhamRequest;
 import com.example.demo.Dto.SanPhamViewDTO;
 import com.example.demo.Dto.SanPhamTHongKeDTO;
 import com.example.demo.Entity.ChiTietSanPham;
+import com.example.demo.Entity.DanhGia;
 import com.example.demo.Entity.SanPham;
 import com.example.demo.Repository.ChiTietSanPhamRepository;
+import com.example.demo.Repository.DanhGiaRepository;
 import com.example.demo.Repository.SanPhamRepository;
 import com.example.demo.Utils.Constants;
 import com.example.demo.Utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +32,9 @@ public class SanPhamService {
 
     @Autowired
     private ChiTietSanPhamRepository chiTietSanPhamRepository;
+    @Autowired
+    private DanhGiaRepository danhGiaRepository;
+
 
     public List<SanPham> getAll() {
         return repository.findAll();
@@ -76,7 +83,10 @@ public class SanPhamService {
         System.out.println("Service - danhSachMoiNhat size: " + dtos.size());
         return dtos;
     }
-
+    public Page<SanPhamViewDTO> getSanPhamByNsx(Long maNsx, int page) {
+        Pageable pageable = PageRequest.of(page, 20); // 12 sản phẩm mỗi trang
+        return chiTietSanPhamRepository.getSanPhamViewByNsx(maNsx, pageable);
+    }
 
 
 

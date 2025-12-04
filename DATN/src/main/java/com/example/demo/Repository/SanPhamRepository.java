@@ -1,5 +1,6 @@
 package com.example.demo.Repository;
 
+import com.example.demo.Dto.Response.DetailSanPhamResponse;
 import com.example.demo.Dto.SanPhamTHongKeDTO;
 import com.example.demo.Entity.SanPham;
 import org.springframework.data.domain.PageRequest;
@@ -63,6 +64,43 @@ public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
                            @Param("maDungLuong") Long maDungLuong,
                            @Param("maMauSac") Long maMauSac,
                            @Param("maSP") Long maSP);
+
+    @Query("""
+    SELECT new com.example.demo.Dto.Response.DetailSanPhamResponse(
+        sp.maSanPham,
+        sp.tenSanPham,
+        MAX(ct.hinhAnhURL),
+        MAX(sp.trangThai),
+        MAX(nsx.tenNSX),
+        MAX(c.tenChip),
+        MAX(sp.dungLuongPin),
+        MAX(sp.manhinh),
+        MAX(sp.sim),
+        MAX(ct.moTa),
+        MAX(sp.camerasau),
+        MAX(sp.cameratruoc),
+        MAX(sp.heDieuHanh),
+        MAX(sp.ram),
+        MAX(ct.soLuongBan),
+        MAX(ct.soLuongNhap),
+        MAX(ct.giaBan),
+        MAX(gia.giaSauKhiGiam)
+    )
+    FROM ChiTietSanPham ct
+    JOIN ct.sanPham sp
+    JOIN ct.nsx nsx
+    JOIN ct.chip c
+    LEFT JOIN GiamGiaChiTietSanPham gia ON gia.chiTietSanPham = ct
+    WHERE sp.maSanPham <> :maSP
+      AND nsx.maNSX = :maNSX
+    GROUP BY sp.maSanPham, sp.tenSanPham
+    ORDER BY sp.maSanPham DESC
+""")
+    List<DetailSanPhamResponse> findTop5SanPhamGanNhat(
+            @Param("maSP") Long maSP,
+            @Param("maNSX") Long maNSX,
+            Pageable pageable
+    );
 
 }
 

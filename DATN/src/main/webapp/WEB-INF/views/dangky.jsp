@@ -27,20 +27,20 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
       <meta name="theme-color" content="#FFFFFF">
       <meta name="next-size-adjust" content="">
-      <meta name="description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership của CellphoneS. Tích điểm Smember săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
+      <meta name="description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership . Tích điểm Smember săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
       <link rel="manifest" href="/manifest.webmanifest">
       <meta name="keywords" content="Smember,Tri ân khách hàng,Khách hàng thân thiết,Tích điểm đổi quà">
       <meta name="robots" content="index, follow">
       <link rel="canonical" href="http://localhost:8080/">
       <meta property="og:title" content="Smember | Tri ân khách hàng thân thiết - Tích điểm đổi quà">
-      <meta property="og:description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership của CellphoneS. Tích điểm Smember săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
+      <meta property="og:description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership . Tích điểm Smember săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
       <meta property="og:url" content="http://localhost:8080/">
       <meta property="og:site_name" content="Web Smember">
       <meta property="og:locale" content="vi_VN">
       <meta property="og:type" content="website">
       <meta name="twitter:card" content="summary">
       <meta name="twitter:title" content="Smember | Tri ân khách hàng thân thiết - Tích điểm đổi quà">
-      <meta name="twitter:description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership của CellphoneS. Tích điểm Smember săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
+      <meta name="twitter:description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership . Tích điểm Smember săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
    </head>
    <body class="__className_f92a78">
       <style>
@@ -242,7 +242,7 @@
                   </div>
                   <div class="w-full grid grid-cols-1 gap-medium items-stretch py-medium">
                      <div class="flex gap-1x-small items-center"><button type="button" role="checkbox" aria-checked="false" data-state="unchecked" value="on" data-slot="checkbox" class="cpsui:font-bold cpsui:block cpsui:rounded-[4px] cpsui:border cpsui:border-neutral-300 cpsui:bg-neutral-50 cpsui:hover:border-blue-500 cpsui:cursor-pointer cpsui:disabled:border-neutral-100 cpsui:disabled:bg-neutral-50 cpsui:disabled:cursor-not-allowed cpsui:w-[20px] cpsui:h-[20px] cpsui:data-[state=checked]:bg-blue-500 cpsui:data-[state=checked]:border-blue-500 cpsui:data-[state=checked]:cpsui:text-pure-white cpsui:hover:shadow-[0_0px_4px_rgba(59,130,246,0.7)] cpsui:hover:disabled:border-neutral-300 cpsui:disabled:data-[state=checked]:border-neutral-200  cpsui:disabled:data-[state=checked]:border-neutral-100 cpsui:disabled:data-[state=checked]:bg-neutral-50 cpsui:hover:disabled:shadow-none cpsui:disabled:data-[state=unchecked]:border-neutral-100 cpsui:disabled:data-[state=unchecked]:bg-neutral-50 cpsui:hover:disabled:shadow-none" id="checkbox-promotionConsent" fdprocessedid="vf3d4i"></button><input aria-hidden="true" tabindex="-1" type="checkbox" value="on" name="promotionConsent" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px; width: 20px; height: 20px;"><label data-slot="label" class="cpsui:flex cpsui:items-center cpsui:gap-2x-small cpsui:font-medium cpsui:select-none cpsui:group-data-[disabled=true]:pointer-events-none cpsui:group-data-[disabled=true]:opacity-50 cpsui:peer-data-[disabled=true]:cursor-not-allowed cpsui:peer-data-[disabled=true]:opacity-50 cpsui:text-base font-regular text-small" for="checkbox-promotionConsent">Đăng ký nhận tin khuyến mãi từ CellphoneS</label></div>
-                     <div class="flex gap-1x-small items-center"><label data-slot="label" class="cpsui:flex cpsui:items-center cpsui:gap-2x-small cpsui:font-medium cpsui:select-none cpsui:group-data-[disabled=true]:pointer-events-none cpsui:group-data-[disabled=true]:opacity-50 cpsui:peer-data-[disabled=true]:cursor-not-allowed cpsui:peer-data-[disabled=true]:opacity-50 cpsui:text-base font-regular !inline-block text-base">Bằng việc Đăng ký, bạn đã đọc và đồng ý với <a class="font-bold text-info-500" target="_blank" href="https://cellphones.com.vn/tos">Điều khoản sử dụng</a> và <a class="font-bold text-info-500" target="_blank" href="https://cellphones.com.vn/tos?part=privacy-policy">Chính sách bảo mật của CellphoneS</a>.</label></div>
+                     <div class="flex gap-1x-small items-center"><label data-slot="label" class="cpsui:flex cpsui:items-center cpsui:gap-2x-small cpsui:font-medium cpsui:select-none cpsui:group-data-[disabled=true]:pointer-events-none cpsui:group-data-[disabled=true]:opacity-50 cpsui:peer-data-[disabled=true]:cursor-not-allowed cpsui:peer-data-[disabled=true]:opacity-50 cpsui:text-base font-regular !inline-block text-base">Bằng việc Đăng ký, bạn đã đọc và đồng ý với <a class="font-bold text-info-500" target="_blank" href="">Điều khoản sử dụng</a> và <a class="font-bold text-info-500" target="_blank" href="">Chính sách bảo mật của CellphoneS</a>.</label></div>
                   </div>
                   <div class="w-full h-0 border-t-[1px]" style="border-image: repeating-linear-gradient(90deg, rgb(207, 207, 211) 0px, rgb(207, 207, 211) 8px, transparent 8px, transparent 16px) 8 / 1 / 0 stretch;"></div>
                   <div class="w-full py-medium flex flex-col gap-medium">

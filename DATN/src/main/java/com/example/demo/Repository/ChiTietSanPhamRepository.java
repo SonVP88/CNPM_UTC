@@ -4,6 +4,8 @@ import com.example.demo.Dto.*;
 import com.example.demo.Dto.Response.DetailSanPhamResponse;
 import com.example.demo.Dto.SanPhamViewDTO;
 import com.example.demo.Entity.ChiTietSanPham;
+import com.example.demo.Entity.NSX;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -154,7 +156,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     DetailSanPhamResponse detailSanPham(@Param("tenSanPham") String tenSanPham);
 
 
-    @Query("SELECT new com.example.demo.Dto.ListMauSacOfSanPhamDTO(sp.tenSanPham, sp.maSanPham, ctsp.mauSac.maMauSac, " +
+    @Query("SELECT new com.example.demo.Dto.ListMauSacOfSanPhamDTO(sp.tenSanPham, sp.maSanPham, ctsp.mauSac.maMauSac," +
             "ctsp.dungLuong.maDungLuong, ms.tenMauSac, ctsp.hinhAnhURL) " +
             "FROM ChiTietSanPham ctsp JOIN SanPham sp ON ctsp.sanPham.maSanPham = sp.maSanPham " +
             "JOIN MauSac ms ON ms.maMauSac = ctsp.mauSac.maMauSac " +
@@ -289,6 +291,30 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "ORDER BY ctsp.lastUpdate DESC")
     List<SanPhamViewDTO> findTop20SanPhamMoiNhat(Pageable pageable);
 
+    @Query("""
+    SELECT new com.example.demo.Dto.SanPhamViewDTO(
+        sp.maSanPham,
+        sp.tenSanPham,
+        ctsp.hinhAnhURL,
+        ctsp.giaBan,
+        COALESCE(gg.giaSauKhiGiam, ctsp.giaBan),
+        COALESCE(ctsp.moTa, '')
+    )
+    FROM ChiTietSanPham ctsp
+    JOIN ctsp.sanPham sp
+    LEFT JOIN GiamGiaChiTietSanPham gg ON gg.chiTietSanPham = ctsp
+    WHERE ctsp.nsx.maNSX = :maNsx
+      AND ctsp.trangThai = 1
+      AND sp.trangThai = 1
+    ORDER BY ctsp.maChiTietSanPham DESC
+""")
+    Page<SanPhamViewDTO> getSanPhamViewByNsx(
+            @Param("maNsx") Long maNsx,
+            Pageable pageable
+    );
+
+
+
     @Query("SELECT c.hinhAnhURL " +
             "FROM ChiTietSanPham c " +
             "WHERE c.sanPham.tenSanPham = :tenSanPham " +
@@ -311,4 +337,9 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     List<ChiTietSanPham> findBySanPham_MaSanPhamAndDungLuong_MaDungLuong(Long maSanPham, Long maDungLuong);
 
     List<ChiTietSanPham> findBySanPham_MaSanPham(long maSanPham);
+
+    @Query("SELECT c.nsx FROM ChiTietSanPham c WHERE c.sanPham.maSanPham = :maSanPham")
+    NSX findNSXByMaSanPham(@Param("maSanPham") Long maSanPham);
+
+
 }

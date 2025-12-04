@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -48,7 +46,8 @@ public class MyAccountController {
 
     @Autowired
     private GioHangService gioHangService;
-
+    @Autowired
+    private SanPhamService sanPhamService;
     @Autowired
     private GioHangChiTietRepository gioHangChiTietRepository;
 
@@ -322,28 +321,42 @@ public class MyAccountController {
         return "redirect:/MyAccount/" + hoaDon.getKhachHang().getMaKhachHang();
     }
 
-    @PostMapping("/danh_gia")
-    public String addDanhGia(HttpServletRequest request){
-
-        String idKh = request.getParameter("maKhachHang");
-        String tenSanPham = request.getParameter("san-pham");
-        String binhLuan = request.getParameter("binhLuan");
-
-
-        KhachHang khachHang = khachHangService.getByMa(Long.parseLong(idKh));
-
-        DanhGia danhGia = new DanhGia();
-        danhGia.setKhachHang(khachHang);
-//        danhGia.setChiTietSanPham(chiTietSanPham);
-        danhGia.setSanPham(sanPhamRepository.findByTenSanPham(tenSanPham));
-        danhGia.setDanhGia(binhLuan);
-        ZoneOffset zoneOffset = ZoneOffset.of("+07:00");
-        danhGia.setNgayDanhGia(new Date(LocalDateTime.now().toInstant(zoneOffset).toEpochMilli()));
-        danhGia.setTrangThai(1);
-
-        danhGiaRepository.save(danhGia);
-
-        return "redirect:/MyAccount/"+ idKh;
+    @PostMapping("/binhluan")
+public String addDanhGia(
+        @RequestParam("maKH") Long maKhachHang,
+        @RequestParam("maSP") Long maSanPham,
+        @RequestParam("comment") String binhLuan,
+        RedirectAttributes redirectAttributes
+) {
+    if (maKhachHang == null) {
+        redirectAttributes.addFlashAttribute("error", "Bạn cần đăng nhập để bình luận!");
+        return "redirect:/loginView";
     }
+
+    KhachHang khachHang = khachHangService.getByMa(maKhachHang);
+    SanPham sanPham = sanPhamService.getByMa(maSanPham);
+
+    if (sanPham == null) {
+        redirectAttributes.addFlashAttribute("error", "Sản phẩm không tồn tại!");
+        return "redirect:/";
+    }
+
+    DanhGia danhGia = new DanhGia();
+    danhGia.setKhachHang(khachHang);
+    danhGia.setSanPham(sanPham);
+    danhGia.setDanhGia(binhLuan);
+    danhGia.setNgayDanhGia(
+        Date.from(LocalDateTime.now()
+            .atZone(ZoneId.of("Asia/Ho_Chi_Minh"))
+            .toInstant())
+    );
+    danhGia.setTrangThai(1);
+
+    danhGiaRepository.save(danhGia);
+
+    redirectAttributes.addFlashAttribute("success", "Gửi bình luận thành công!");
+    return "redirect:/san-pham/" + sanPham.getTenSanPham();
+}
+
 
 }

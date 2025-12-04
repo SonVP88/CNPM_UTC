@@ -9,3 +9,5 @@
 <script src="/assets/js/toast.js"></script>
 <script src="/assets/js/singleproduct.js"></script>
 <script src="/assets/js/toast.js"></script>
+<script src="/assets/js/cart.js"></script>
+<script src="/assets/js/checkout.js"></script>

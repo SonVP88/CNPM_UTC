@@ -19,11 +19,14 @@
     <link rel="stylesheet" href="../../../assets/css/style.css">
     <link rel="stylesheet" href="../../../assets/css/responsive.css">
     <link rel="stylesheet" href="../../../assets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="../../../assets/css/.css">
     <script src="../../../assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="icon" type="image/png" href="assets\img\logo\AZURA.png">
     <script src="https://example.com/path/to/currencyFormat.js"></script>
+    <link rel="stylesheet" href="../../../assets/css/single-product.css">
+    <link rel="stylesheet" href="../../../assets/css/cart.css">
     <link rel="stylesheet" href="../../../assets/css/toast.css">
-<link rel="stylesheet" id="flatsome-swatches-frontend-css" href="https://cellphones.mauthemewp.com/wp-content/themes/flatsome/assets/css/extensions/flatsome-swatches-frontend.css?ver=3.20.1" type="text/css" media="all">
+    <link rel="stylesheet" href="../../../assets/css/checkout.css">
+    <link rel="stylesheet" href="../../../assets/css/flatsome-swatches-frontend.css">
+    <link rel="stylesheet" href="../../../assets/css/breadcrumbs.css">
 </head>
