@@ -1,6 +1,6 @@
 ﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<div class="container">
+<div class="container" style="margin-top: 15px;">
    <div class="row">
       <div class="col large-3 hide-for-medium box_left">
          <div class="menu-top">
@@ -8,30 +8,30 @@
                <div class="menu-main-menu-container">
                   <ul id="menu-main-menu-1" class="menu">
                      <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-27 menu-item-design-default has-dropdown has-icon-left has-child" aria-expanded="false">
-                        <a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/" class="nav-top-link" aria-expanded="false" aria-haspopup="menu"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-1.png" alt="">Điện thoại</a>
+                        <a href="/apple" class="nav-top-link" aria-expanded="false" aria-haspopup="menu"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-1.png" alt="">Điện thoại</a>
                         <button class="toggle" aria-label="Chuyển đổi"><i class="icon-angle-down" aria-hidden="true"></i></button>
                         <ul class="sub-menu">
                            <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-1289 nav-dropdown-col has-child" aria-expanded="false">
-                              <a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/apple/">Apple</a>
+                              <a href="/apple">Apple</a>
                               <button class="toggle" aria-label="Chuyển đổi"><i class="icon-angle-down" aria-hidden="true"></i></button>
                               <ul class="sub-menu nav-column">
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1290"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/apple/iphone-11-series/">iPhone 11 Series</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1291"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/apple/iphone-12-series/">iPhone 12 Series</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1292"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/apple/iphone-se/">iPhone SE</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1293"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/apple/iphone-13-series/">iPhone 13 Series</a></li>
+                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1290"><a href="https://cellphones.mauthemewp.com/apple/iphone-11-series/">iPhone 11 Series</a></li>
+                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1291"><a href="https://cellphones.mauthemewp.com/apple/iphone-12-series/">iPhone 12 Series</a></li>
+                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1292"><a href="https://cellphones.mauthemewp.com/apple/iphone-se/">iPhone SE</a></li>
+                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1293"><a href="https://cellphones.mauthemewp.com/apple/iphone-13-series/">iPhone 13 Series</a></li>
                               </ul>
                            </li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-36"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/samsung/">Samsung</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-39"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/xiaomi/">Xiaomi</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-33"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/oppo/">OPPO</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1283"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/nokia/">Nokia</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1286"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/realme/">Realme</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1288"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/vsmart/">Vsmart</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-29"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/asus/">ASUS</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1287"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/vivo/">Vivo</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1284"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/oneplus/">OnePlus</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1285"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/nubia/">Nubia</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1294"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/dien-thoai-pho-thong/">Điện thoại phổ thông</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-36"><a href="https://cellphones.mauthemewp.com/samsung/">Samsung</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-39"><a href="https://cellphones.mauthemewp.com/xiaomi/">Xiaomi</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-33"><a href="https://cellphones.mauthemewp.com/oppo/">OPPO</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1283"><a href="https://cellphones.mauthemewp.com/nokia/">Nokia</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1286"><a href="https://cellphones.mauthemewp.com/realme/">Realme</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1288"><a href="https://cellphones.mauthemewp.com/vsmart/">Vsmart</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-29"><a href="https://cellphones.mauthemewp.com/asus/">ASUS</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1287"><a href="https://cellphones.mauthemewp.com/vivo/">Vivo</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1284"><a href="https://cellphones.mauthemewp.com/oneplus/">OnePlus</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1285"><a href="https://cellphones.mauthemewp.com/nubia/">Nubia</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1294"><a href="https://cellphones.mauthemewp.com/dien-thoai-pho-thong/">Điện thoại phổ thông</a></li>
                         </ul>
                      </li>
                      <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-1357 menu-item-design-default has-dropdown has-icon-left has-child" aria-expanded="false">
@@ -231,7 +231,7 @@
             <div id="col-703424715" class="col medium-12 small-12 large-3">
                <div class="col-inner" style="width: 102%;">
                   <h3>ĐIỆN THOẠI NỔI BẬT NHẤT</h3>
-                  <a href="/danh-muc-san-pham/dien-thoai/" class="button primary is-link btn-read-more show-for-medium" style="border-radius:99px;">
+                  <a href="/" class="button primary is-link btn-read-more show-for-medium" style="border-radius:99px;">
                   <span>Xem tất cả</span>
                   </a>
                </div>
@@ -239,12 +239,12 @@
             <div id="col-68942984" class="col brand-items medium-12 small-12 large-9">
                <div class="col-inner text-left">
                   <div class="list-brand-items2">
-                     <a title="Apple" href="/danh-muc-san-pham/dien-thoai/apple/">Apple</a>
-                     <a title="Samsung" href="/danh-muc-san-pham/dien-thoai/samsung/">Samsung</a>
-                     <a title="Xiaomi" href="/danh-muc-san-pham/dien-thoai/xiaomi/">Xiaomi</a>
-                     <a title="OPPO" href="/danh-muc-san-pham/dien-thoai/oppo/">OPPO</a>
-                     <a title="Realme" href="/danh-muc-san-pham/dien-thoai/realme/">Realme</a>
-                     <a title="Xem tất cả" href="/danh-muc-san-pham/dien-thoai/">Xem tất cả</a>
+                     <a title="Apple" href="/apple">Apple</a>
+                     <a title="Samsung" href="/samsung">Samsung</a>
+                     <a title="Xiaomi" href="/xiaomi">Xiaomi</a>
+                     <a title="OPPO" href="/oppo">OPPO</a>
+                     <a title="Realme" href="/realme">Realme</a>
+                     <a title="Xem tất cả" href="/">Xem tất cả</a>
                   </div>
                </div>
             </div>

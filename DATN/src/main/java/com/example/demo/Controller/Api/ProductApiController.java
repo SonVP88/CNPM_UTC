@@ -5,24 +5,56 @@ import com.example.demo.Entity.GiamGiaChiTietSanPham;
 import com.example.demo.Repository.ColorDetailResponse;
 import com.example.demo.Repository.ProductDetailResponse;
 import com.example.demo.Service.ChiTietSanPhamService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class ProductApiController {
-
+    @Autowired
     private final ChiTietSanPhamService chiTietSanPhamService;
-
+    @Autowired
     public ProductApiController(ChiTietSanPhamService chiTietSanPhamService) {
         this.chiTietSanPhamService = chiTietSanPhamService;
+    }
+    private final RestTemplate restTemplate = new RestTemplate();
+    private static final String BASE_URL = "https://production.cas.so/address-kit/2025-07-01";
+    @GetMapping("/provinces")
+    public ResponseEntity<String> getProvinces() {
+        String url = BASE_URL + "/provinces";
+        return restTemplate.getForEntity(url, String.class);
+    }
+
+
+    @GetMapping("/provinces/{provinceId}/communes")
+    public ResponseEntity<?> getCommunesByProvince(@PathVariable String provinceId) {
+        try {
+            // Gọi trực tiếp API mới
+            String url = BASE_URL + "/provinces/" + provinceId + "/communes";
+            String responseJson = restTemplate.getForObject(url, String.class);
+
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode responseNode = mapper.readTree(responseJson);
+
+            // Trả về luôn JSON như API gốc
+            return ResponseEntity.ok(responseNode);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
     }
 
     // API lấy chi tiết sản phẩm theo màu & dung lượng
@@ -40,6 +72,7 @@ public class ProductApiController {
         GiamGiaChiTietSanPham giamGiaChiTiet = chiTietSanPhamService.findByChiTietSanPham(chiTiet);
 
         ProductDetailResponse response = new ProductDetailResponse();
+        response.SetMaChiTietSanPham(chiTiet.getMaChiTietSanPham());
         response.setHinhAnhURL(chiTiet.getHinhAnhURL());
         response.setGiaBan(chiTiet.getGiaBan());
         response.setGiaBanGG(giamGiaChiTiet != null ? giamGiaChiTiet.getGiaSauKhiGiam() : null);
@@ -76,4 +109,15 @@ public class ProductApiController {
 
         return ResponseEntity.ok(responseList);
     }
+    @GetMapping("/account/check-login")
+    @ResponseBody
+    public Map<String, Object> checkLogin(HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("loggedIn", session.getAttribute("khachHang") != null);
+        return response;
+    }
+
+
+
+
 }

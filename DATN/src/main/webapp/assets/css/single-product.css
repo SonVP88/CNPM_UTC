@@ -137,3 +137,13 @@
     right: 0;
     top: 2px
 }
+.mo-ta-san-pham {
+    display: -webkit-box;        /* cần cho line-clamp */
+    -webkit-line-clamp: 2;       /* số dòng hiển thị */
+    -webkit-box-orient: vertical; /* cần cho line-clamp */
+    overflow: hidden;            /* ẩn phần dư thừa */
+    text-overflow: ellipsis;     /* thêm dấu ... */
+}
+.show{
+	display: table-row;
+}

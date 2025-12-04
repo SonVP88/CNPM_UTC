@@ -19,8 +19,6 @@ var header = {
 				var top = boxSlidingMenu.offset().top;
 				var height = boxSlidingMenu.height();
 				var offsettop = (top + height) - heightHeader;
-				console.log(top,height,offsettop)
-
 				jQuery(window).on('scroll', function() {
 					if (jQuery(window).scrollTop() < offsettop) {
 						boxHeaderMenu.css({ 'pointer-events': 'none' });

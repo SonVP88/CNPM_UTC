@@ -5,9 +5,59 @@ document.addEventListener("DOMContentLoaded", () => {
     const priceWrapper = document.querySelector(".price-wrapper .product-page-price");
     const colorContainer = document.querySelector(".ux-swatches");
     const dungLuongBtns = document.querySelectorAll(".item-linked-product");
-
+    const btnAddcart = document.querySelector(".single_add_to_cart_button");
     const maSanPham = el ? parseInt(el.id) : null;
 
+    btnAddcart.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const activeDungLuong = document.querySelector(".item-linked-product.active");
+    const activeColor = document.querySelector(".ux-swatch.selected");
+
+    if (!activeDungLuong || !activeColor) {
+        alert("Vui lòng chọn dung lượng và màu sắc!");
+        return;
+    }
+
+    const maDungLuong = activeDungLuong.id;
+    const maMauSac = activeColor.getAttribute("data-value");
+
+    try {
+        // Lấy chi tiết sản phẩm
+        const resDetail = await fetch(`/api/getProductDetail?id=${maSanPham}&maDungLuong=${maDungLuong}&maMauSac=${maMauSac}`);
+        const productDetail = await resDetail.json();
+        
+        if (!productDetail || !productDetail.maChiTietSanPham) {
+            alert("Không lấy được thông tin chi tiết sản phẩm!");
+            return;
+        }
+       
+        const maChiTietSanPham = productDetail.maChiTietSanPham;
+
+        // Thêm vào giỏ hàng
+        const resCart = await fetch("/cart/add-san-pham", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                maChiTietSanPham: maChiTietSanPham,
+                quantity: 1
+            })
+        });
+
+        const dataCart = await resCart.json();
+
+        if (dataCart.success) {
+            showSuccessToast(dataCart.message);
+            updateCartCount();
+        } else {
+
+            showErrorToast(dataCart.message);
+        }
+
+    } catch (err) {
+        showErrorToast("Lỗi không xác định!");
+    }
+});
     // ================= CLICK DUNG LƯỢNG =================
    dungLuongBtns.forEach(dl => {
     dl.addEventListener("click", () => {
@@ -137,5 +187,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Bind màu lần đầu (màu của dung lượng mặc định)
-    bindColorEvents();
+    bindColorEvents();  
 });

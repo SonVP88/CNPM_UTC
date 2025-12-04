@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 import java.util.Date;
 import java.util.List;
@@ -82,5 +83,12 @@ public class NSXService {
         nsx.setTrangThai(0);
         repository.save(nsx);
         return new ResponseEntity<>( HttpStatus.OK);
+    }
+
+
+    public Long getbyTenNsx(String tenNsx) {
+        return repository.findByTenNSX(tenNsx)
+                .map(NSX::getMaNSX)      // lấy mã NSX
+                .orElse(null);           // không có trả về null (hoặc bạn muốn ném lỗi cũng được)
     }
 }

@@ -15,18 +15,18 @@
       <meta name="next-size-adjust" content="">
       <meta name="theme-color" content="#FFFFFF">
       <title>Azuza | Tri ân khách hàng thân thiết - Tích điểm đổi quà</title>
-      <meta name="description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership của CellphoneS. Tích điểm Azuza săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
+      <meta name="description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership . Tích điểm Azuza săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
       <link rel="manifest" href="/manifest.webmanifest">
       <meta name="keywords" content="Azuza,Tri ân khách hàng,Khách hàng thân thiết,Tích điểm đổi quà">
       <meta name="robots" content="index, follow">
       <meta property="og:title" content="Azuza | Tri ân khách hàng thân thiết - Tích điểm đổi quà">
-      <meta property="og:description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership của CellphoneS. Tích điểm Azuza săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
+      <meta property="og:description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership . Tích điểm Azuza săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
       <meta property="og:site_name" content="Web Azuza">
       <meta property="og:locale" content="vi_VN">
       <meta property="og:type" content="website">
       <meta name="twitter:card" content="summary">
       <meta name="twitter:title" content="Azuza | Tri ân khách hàng thân thiết - Tích điểm đổi quà">
-      <meta name="twitter:description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership của CellphoneS. Tích điểm Azuza săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
+      <meta name="twitter:description" content="Quà tặng tri ân khách hàng thân thiết - VIP membership . Tích điểm Azuza săn voucher, mức chiết khấu và ưu đãi sinh nhật hấp dẫn.">
       <style type="text/css">[data-vaul-drawer]{touch-action:none;will-change:transform;transition:transform .5s cubic-bezier(.32, .72, 0, 1);animation-duration:.5s;animation-timing-function:cubic-bezier(0.32,0.72,0,1)}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=bottom][data-state=open]{animation-name:slideFromBottom}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=bottom][data-state=closed]{animation-name:slideToBottom}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=top][data-state=open]{animation-name:slideFromTop}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=top][data-state=closed]{animation-name:slideToTop}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=left][data-state=open]{animation-name:slideFromLeft}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=left][data-state=closed]{animation-name:slideToLeft}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=right][data-state=open]{animation-name:slideFromRight}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=right][data-state=closed]{animation-name:slideToRight}[data-vaul-drawer][data-vaul-snap-points=true][data-vaul-drawer-direction=bottom]{transform:translate3d(0,var(--initial-transform,100%),0)}[data-vaul-drawer][data-vaul-snap-points=true][data-vaul-drawer-direction=top]{transform:translate3d(0,calc(var(--initial-transform,100%) * -1),0)}[data-vaul-drawer][data-vaul-snap-points=true][data-vaul-drawer-direction=left]{transform:translate3d(calc(var(--initial-transform,100%) * -1),0,0)}[data-vaul-drawer][data-vaul-snap-points=true][data-vaul-drawer-direction=right]{transform:translate3d(var(--initial-transform,100%),0,0)}[data-vaul-drawer][data-vaul-delayed-snap-points=true][data-vaul-drawer-direction=top]{transform:translate3d(0,var(--snap-point-height,0),0)}[data-vaul-drawer][data-vaul-delayed-snap-points=true][data-vaul-drawer-direction=bottom]{transform:translate3d(0,var(--snap-point-height,0),0)}[data-vaul-drawer][data-vaul-delayed-snap-points=true][data-vaul-drawer-direction=left]{transform:translate3d(var(--snap-point-height,0),0,0)}[data-vaul-drawer][data-vaul-delayed-snap-points=true][data-vaul-drawer-direction=right]{transform:translate3d(var(--snap-point-height,0),0,0)}[data-vaul-overlay][data-vaul-snap-points=false]{animation-duration:.5s;animation-timing-function:cubic-bezier(0.32,0.72,0,1)}[data-vaul-overlay][data-vaul-snap-points=false][data-state=open]{animation-name:fadeIn}[data-vaul-overlay][data-state=closed]{animation-name:fadeOut}[data-vaul-animate=false]{animation:none!important}[data-vaul-overlay][data-vaul-snap-points=true]{opacity:0;transition:opacity .5s cubic-bezier(.32, .72, 0, 1)}[data-vaul-overlay][data-vaul-snap-points=true]{opacity:1}[data-vaul-drawer]:not([data-vaul-custom-container=true])::after{content:'';position:absolute;background:inherit;background-color:inherit}[data-vaul-drawer][data-vaul-drawer-direction=top]::after{top:initial;bottom:100%;left:0;right:0;height:200%}[data-vaul-drawer][data-vaul-drawer-direction=bottom]::after{top:100%;bottom:initial;left:0;right:0;height:200%}[data-vaul-drawer][data-vaul-drawer-direction=left]::after{left:initial;right:100%;top:0;bottom:0;width:200%}[data-vaul-drawer][data-vaul-drawer-direction=right]::after{left:100%;right:initial;top:0;bottom:0;width:200%}[data-vaul-overlay][data-vaul-snap-points=true]:not([data-vaul-snap-points-overlay=true]):not(
          [data-state=closed]
          ){opacity:0}[data-vaul-overlay][data-vaul-snap-points-overlay=true]{opacity:1}[data-vaul-handle]{display:block;position:relative;opacity:.7;background:#e2e2e4;margin-left:auto;margin-right:auto;height:5px;width:32px;border-radius:1rem;touch-action:pan-y}[data-vaul-handle]:active,[data-vaul-handle]:hover{opacity:1}[data-vaul-handle-hitarea]{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max(100%,2.75rem);height:max(100%,2.75rem);touch-action:inherit}@media (hover:hover) and (pointer:fine){[data-vaul-drawer]{user-select:none}}@media (pointer:fine){[data-vaul-handle-hitarea]:{width:100%;height:100%}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes fadeOut{to{opacity:0}}@keyframes slideFromBottom{from{transform:translate3d(0,var(--initial-transform,100%),0)}to{transform:translate3d(0,0,0)}}@keyframes slideToBottom{to{transform:translate3d(0,var(--initial-transform,100%),0)}}@keyframes slideFromTop{from{transform:translate3d(0,calc(var(--initial-transform,100%) * -1),0)}to{transform:translate3d(0,0,0)}}@keyframes slideToTop{to{transform:translate3d(0,calc(var(--initial-transform,100%) * -1),0)}}@keyframes slideFromLeft{from{transform:translate3d(calc(var(--initial-transform,100%) * -1),0,0)}to{transform:translate3d(0,0,0)}}@keyframes slideToLeft{to{transform:translate3d(calc(var(--initial-transform,100%) * -1),0,0)}}@keyframes slideFromRight{from{transform:translate3d(var(--initial-transform,100%),0,0)}to{transform:translate3d(0,0,0)}}@keyframes slideToRight{to{transform:translate3d(var(--initial-transform,100%),0,0)}}
@@ -149,10 +149,10 @@
       <div class="w-full bg-neutral-200 pb-[70px] tablet:pb-0">
          <header id="header" class="from-primary-300 to-primary-500 fixed top-0 right-0 left-0 z-1000  max-w-screen flex-col items-center justify-center bg-linear-to-b text-white tablet:flex hidden">
             <div class="mx-auto max-w-[1440px] flex w-full px-3x-large py-[16px] h-[72px] items-center">
-               <a title="CellphoneS" class="flex mr-[28px] h-10 items-center transition-all duration-300 md:hover:scale-95" href="https://cellphones.com.vn">
+               <a title="" class="flex mr-[28px] h-10 items-center transition-all duration-300 md:hover:scale-95" href="">
                   <div>
                      <svg class="w-[130px] overflow-hidden transition-all duration-200 lg:w-[169px]" width="169" height="28" viewBox="0 0 169 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <title>Logo CellphoneS</title>
+                        <title>Logo Azuza</title>
                         <path d="M4.41629 20.9623H4.40528C0.348454 20.6122 -0.0258864 18.2113 0.00127161 17.1954V17.1638V10.1468V10.1365C0.24863 6.97884 3.82982 6.94287 3.98176 6.94287H12.6151V9.75923H5.48719C4.79356 9.75923 4.28563 9.91924 3.97882 10.2356C3.60668 10.6187 3.62136 11.1443 3.6265 11.3175C3.6265 11.3373 3.62724 11.3535 3.62724 11.366V16.6405C3.62724 18.0417 5.55913 18.129 5.57821 18.129H12.6143V20.963H4.41482L4.41629 20.9623Z" fill="white"></path>
                         <path d="M12.3499 7.20715H3.98227C3.74666 7.20715 0.490631 7.28569 0.266761 10.1564V17.1631C0.266761 17.412 0.0164668 20.3171 4.42708 20.6974H12.3499V18.3941H5.57872C5.34311 18.3941 3.36204 18.2018 3.36204 16.6405V11.366C3.36204 11.1568 3.19616 9.4943 5.48697 9.4943H12.3499V7.20789V7.20715Z" fill="white"></path>
                         <path d="M37.4663 20.9623V0.000732422L33.7831 0.000732422V20.9623H37.4663Z" fill="white"></path>
@@ -195,7 +195,7 @@
                </div>
                <div class="mx-auto flex max-w-screen-xl gap-6 overflow-hidden px-2 text-xs transition-all duration-200 ease-in-out xl:px-1 mr-[20px] ml-[1px]">
                   <div class="hidden items-center gap-7.5 md:flex">
-                     <a class="flex items-center text-[12px] gap-1 whitespace-nowrap relative before:absolute before:top-1/2 before:-translate-y-1/2 before:-left-[15px] before:w-0.5 before:h-3 before:bg-primary-200" target="blank" href="https://cellphones.com.vn/dia-chi-cua-hang">
+                     <a class="flex items-center text-[12px] gap-1 whitespace-nowrap relative before:absolute before:top-1/2 before:-translate-y-1/2 before:-left-[15px] before:w-0.5 before:h-3 before:bg-primary-200" target="blank" href="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 25 25" class="size-[17px]">
                            <path stroke="white" stroke-linecap="round" stroke-width="1.5" d="M8.32 22.66h8.36c2.31 0 4.18-1.786 4.18-3.99v-4.877c0-.708.296-1.387.82-1.888 1.216-1.16 1.058-3.083-.332-4.048l-6.39-4.434a4.343 4.343 0 0 0-4.917 0L3.653 7.857c-1.391.965-1.55 2.888-.333 4.048.524.5.82 1.18.82 1.888v4.878c0 2.203 1.87 3.989 4.18 3.989Z"></path>
                            <path fill="white" d="M8.9 12.916V9.66h7v2.816l-.987-1.222h-4.419V12l2.004 2.175-.128.183-3.47-1.441Z"></path>
@@ -298,17 +298,17 @@
                               <path d="M9 7l4 0"></path>
                               <path d="M9 11l4 0"></path>
                            </svg>
-                           Tổng tiền và số đơn hàng được tính chung từ CellphoneS và Điện Thoại Vui.
+                           Tổng tiền và số đơn hàng được tính chung từ Azuza và Điện Thoại Vui.
                         </div>
                      </div>
                      <div class="">
                         <div class="hidden tablet:flex flex-col items-end justify-center gap-1x-small">
                            <span class="text-small laptop:text-base font-regular">Bạn đang ở kênh thành viên</span>
                            <div class="hidden tablet:flex gap-2x-small items-center">
-                              <a class="inline-block h-[56px] w-[56px]" href="https://cellphones.com.vn"><img alt="icon-company" title="icon-company" loading="lazy" width="56" height="56" decoding="async" data-nimg="1" class="h-[56px] w-[56px] aspect-square object-contain rounded-base" style="color:transparent" src="https://cdn-static.Smember.com.vn/_next/static/media/cellphones-icon.1b92082f.svg"></a>
+                              <a class="inline-block h-[56px] w-[56px]" href=""><img alt="icon-company" title="icon-company" loading="lazy" width="56" height="56" decoding="async" data-nimg="1" class="h-[56px] w-[56px] aspect-square object-contain rounded-base" style="color:transparent" src="https://cdn-static.Smember.com.vn/_next/static/media/cellphones-icon.1b92082f.svg"></a>
                               <div class="max-w-[180px] flex flex-col gap-2x-small">
                                  <div class="cpsui:flex cpsui:flex-col cpsui:gap-2x-small cpsui:peer w-[180px] !text-base">
-                                    <input type="hidden" value="cellphones">
+                                    <input type="hidden" value="Azuza">
                                     <div aria-controls="radix-«R2dedblhlb»" aria-expanded="false" aria-haspopup="dialog" data-slot="popover-trigger" data-state="closed" class="cpsui:flex cpsui:flex-col cpsui:gap-2x-small cpsui:peer cpsui:w-full">
                                        <div class="cpsui:p-1x-small cpsui:flex cpsui:items-center cpsui:gap-1x-small cpsui:min-w-0 cpsui:border cpsui:transition-colors cpsui:data-[disabled=true]:bg-neutral-100 cpsui:data-[disabled=true]:cursor-not-allowed cpsui:border-neutral-300 cpsui:focus-within:border-neutral-600 cpsui:data-[disabled=true]:border-neutral-200 cpsui:text-small cpsui:min-h-[40px] cpsui:rounded-small cpsui:pl-medium !text-base py-2x-small !h-[32px] !min-h-[32px]">
                                           <input type="text" data-slot="input" class="cpsui:w-full cpsui:h-full cpsui:bg-transparent cpsui:border-none cpsui:outline-none cpsui:shadow-none cpsui:ring-0 cpsui:focus:outline-none cpsui:focus:border-none cpsui:focus:ring-0 cpsui:focus-visible:outline-none cpsui:focus-visible:border-none cpsui:focus-visible:ring-0 cpsui:placeholder:text-neutral-300 cpsui:placeholder:select-none cpsui:disabled:opacity-80 cpsui:disabled:cursor-not-allowed cpsui:disabled:text-neutral-500 cpsui:disabled:placeholder:text-neutral-400 cpsui:overflow-hidden cpsui:text-ellipsis cpsui:whitespace-nowrap" readonly="" value="CellphoneS" fdprocessedid="otfl1e">
@@ -320,8 +320,8 @@
                                        </div>
                                     </div>
                                  </div>
-                                 <a class="w-full pl-medium pr-1x-small py-3x-small text-small font-medium text-primary-500 rounded-small flex gap-2x-small items-center bg-neutral-50" href="https://cellphones.com.vn">
-                                    <span>cellphones.com.vn</span>
+                                 <a class="w-full pl-medium pr-1x-small py-3x-small text-small font-medium text-primary-500 rounded-small flex gap-2x-small items-center bg-neutral-50" href="">
+                                    <span>Azuza.com.vn</span>
                                     <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="12" width="12" xmlns="http://www.w3.org/2000/svg">
                                        <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"></path>
                                        <path d="M11 13l9 -9"></path>
