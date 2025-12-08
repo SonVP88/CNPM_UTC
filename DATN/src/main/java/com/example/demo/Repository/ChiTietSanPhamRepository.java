@@ -276,40 +276,144 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "FROM  ChiTietSanPham ctsp WHERE ctsp.trangThai = 0")
     List<ChiTietSanPhamDTO> getDanhSachSanPhamHetHang();
 
-    @Query("SELECT new com.example.demo.Dto.SanPhamViewDTO(" +
-            "sp.maSanPham, " +
-            "sp.tenSanPham, " +
-            "ctsp.hinhAnhURL, " +
-            "ctsp.giaBan, " +
-            "COALESCE(gg.giaSauKhiGiam, ctsp.giaBan), " +
-            "COALESCE(ctsp.moTa, '')" +
-            ") " +
-            "FROM ChiTietSanPham ctsp " +
-            "JOIN ctsp.sanPham sp " +
-            "LEFT JOIN GiamGiaChiTietSanPham gg ON gg.chiTietSanPham = ctsp " +
-            "WHERE ctsp.trangThai = 1 AND sp.trangThai = 1 " +
-            "ORDER BY ctsp.lastUpdate DESC")
+    @Query("""
+SELECT new com.example.demo.Dto.SanPhamViewDTO(
+    sp.maSanPham,
+    sp.tenSanPham,
+    ctsp.hinhAnhURL,
+    ctsp.giaBan,
+    COALESCE(gg.giaSauKhiGiam, ctsp.giaBan),
+    COALESCE(ctsp.moTa, '')
+)
+FROM ChiTietSanPham ctsp
+JOIN ctsp.sanPham sp
+LEFT JOIN GiamGiaChiTietSanPham gg ON gg.chiTietSanPham = ctsp
+WHERE ctsp.trangThai = 1
+  AND sp.trangThai = 1
+  AND ctsp.maChiTietSanPham = (
+      SELECT MAX(c2.maChiTietSanPham)
+      FROM ChiTietSanPham c2
+      WHERE c2.sanPham.maSanPham = ctsp.sanPham.maSanPham
+  )
+ORDER BY ctsp.maChiTietSanPham DESC
+""")
     List<SanPhamViewDTO> findTop20SanPhamMoiNhat(Pageable pageable);
 
     @Query("""
-    SELECT new com.example.demo.Dto.SanPhamViewDTO(
-        sp.maSanPham,
-        sp.tenSanPham,
-        ctsp.hinhAnhURL,
-        ctsp.giaBan,
-        COALESCE(gg.giaSauKhiGiam, ctsp.giaBan),
-        COALESCE(ctsp.moTa, '')
-    )
-    FROM ChiTietSanPham ctsp
-    JOIN ctsp.sanPham sp
-    LEFT JOIN GiamGiaChiTietSanPham gg ON gg.chiTietSanPham = ctsp
-    WHERE ctsp.nsx.maNSX = :maNsx
-      AND ctsp.trangThai = 1
-      AND sp.trangThai = 1
-    ORDER BY ctsp.maChiTietSanPham DESC
+SELECT new com.example.demo.Dto.SanPhamViewDTO(
+    sp.maSanPham,
+    sp.tenSanPham,
+    ctsp.hinhAnhURL,
+    ctsp.giaBan,
+    COALESCE(gg.giaSauKhiGiam, ctsp.giaBan),
+    COALESCE(ctsp.moTa, '')
+)
+FROM ChiTietSanPham ctsp
+JOIN ctsp.sanPham sp
+LEFT JOIN GiamGiaChiTietSanPham gg ON gg.chiTietSanPham = ctsp
+WHERE ctsp.nsx.maNSX = :maNsx
+  AND ctsp.trangThai = 1
+  AND sp.trangThai = 1
+  AND ctsp.maChiTietSanPham = (
+      SELECT MAX(c2.maChiTietSanPham)
+      FROM ChiTietSanPham c2
+      WHERE c2.sanPham.maSanPham = ctsp.sanPham.maSanPham
+  )
+ORDER BY ctsp.maChiTietSanPham DESC
 """)
     Page<SanPhamViewDTO> getSanPhamViewByNsx(
             @Param("maNsx") Long maNsx,
+            Pageable pageable
+    );
+
+
+    @Query("""
+SELECT new com.example.demo.Dto.SanPhamViewDTO(
+    sp.maSanPham,
+    sp.tenSanPham,
+    ctsp.hinhAnhURL,
+    ctsp.giaBan,
+    COALESCE(gg.giaSauKhiGiam, ctsp.giaBan),
+    COALESCE(ctsp.moTa, '')
+)
+FROM ChiTietSanPham ctsp
+JOIN ctsp.sanPham sp
+LEFT JOIN GiamGiaChiTietSanPham gg ON gg.chiTietSanPham = ctsp
+WHERE ctsp.nsx.maNSX = :maNsx
+  AND ctsp.trangThai = 1
+  AND sp.trangThai = 1
+  AND ctsp.maChiTietSanPham = (
+      SELECT MAX(ctsp2.maChiTietSanPham)
+      FROM ChiTietSanPham ctsp2
+      WHERE ctsp2.sanPham.maSanPham = ctsp.sanPham.maSanPham
+  )
+ORDER BY ctsp.giaBan ASC
+""")
+    Page<SanPhamViewDTO> getSanPhamGiaTangDan(@Param("maNsx") Long maNsx, Pageable pageable);
+
+    @Query("""
+SELECT new com.example.demo.Dto.SanPhamViewDTO(
+    sp.maSanPham,
+    sp.tenSanPham,
+    ctsp.hinhAnhURL,
+    ctsp.giaBan,
+    COALESCE(gg.giaSauKhiGiam, ctsp.giaBan),
+    COALESCE(ctsp.moTa, '')
+)
+FROM ChiTietSanPham ctsp
+JOIN ctsp.sanPham sp
+LEFT JOIN GiamGiaChiTietSanPham gg ON gg.chiTietSanPham = ctsp
+WHERE ctsp.nsx.maNSX = :maNsx
+  AND ctsp.trangThai = 1
+  AND sp.trangThai = 1
+  AND ctsp.maChiTietSanPham = (
+      SELECT MAX(ctsp2.maChiTietSanPham)
+      FROM ChiTietSanPham ctsp2
+      WHERE ctsp2.sanPham.maSanPham = ctsp.sanPham.maSanPham
+  )
+ORDER BY ctsp.giaBan DESC
+""")
+    Page<SanPhamViewDTO> getSanPhamGiaGiamDan(@Param("maNsx") Long maNsx, Pageable pageable);
+
+    @Query("""
+SELECT MIN(ctsp.giaBan), MAX(ctsp.giaBan)
+FROM ChiTietSanPham ctsp
+WHERE ctsp.nsx.maNSX = :maNsx
+  AND ctsp.trangThai = 1
+  AND ctsp.maChiTietSanPham = (
+      SELECT MAX(c2.maChiTietSanPham)
+      FROM ChiTietSanPham c2
+      WHERE c2.sanPham.maSanPham = ctsp.sanPham.maSanPham
+  )
+""")
+    Object findMinMaxGiaByNsx(@Param("maNsx") Long maNsx);
+
+    @Query("""
+SELECT new com.example.demo.Dto.SanPhamViewDTO(
+    sp.maSanPham,
+    sp.tenSanPham,
+    ctsp.hinhAnhURL,
+    ctsp.giaBan,
+    COALESCE(gg.giaSauKhiGiam, ctsp.giaBan),
+    COALESCE(ctsp.moTa, '')
+)
+FROM ChiTietSanPham ctsp
+JOIN ctsp.sanPham sp
+LEFT JOIN GiamGiaChiTietSanPham gg ON gg.chiTietSanPham = ctsp
+WHERE ctsp.nsx.maNSX = :maNsx
+  AND ctsp.trangThai = 1
+  AND sp.trangThai = 1
+  AND ctsp.giaBan BETWEEN :min AND :max
+  AND ctsp.maChiTietSanPham = (
+      SELECT MAX(c2.maChiTietSanPham)
+      FROM ChiTietSanPham c2
+      WHERE c2.sanPham.maSanPham = ctsp.sanPham.maSanPham
+  )
+""")
+    Page<SanPhamViewDTO> findByNsxAndGiaBetween(
+            @Param("maNsx") Long maNsx,
+            @Param("min") Long min,
+            @Param("max") Long max,
             Pageable pageable
     );
 

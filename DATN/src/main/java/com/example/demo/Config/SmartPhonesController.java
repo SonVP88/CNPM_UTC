@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -153,28 +154,96 @@ public class SmartPhonesController {
     }
 
 
-    @GetMapping("/{tenNsx}")
-    public String hienThiTheoNsx(
+        @GetMapping("/{tenNsx}")
+        public String hienThiTheoNsx(
+                @PathVariable String tenNsx,
+                @RequestParam(defaultValue = "0") int page,
+                Model model
+        ) {
+            Long maNsx = nSXService.getbyTenNsx(tenNsx);
+            Page<SanPhamViewDTO> pageSanPham = sanPhamService.getSanPhamByNsx(maNsx, page);
+            Map<String, Long> minMaxGia = sanPhamService.getMinMaxGia(maNsx);
+            Long maxGia = minMaxGia.get("max")/1000;
+            NumberFormat nf = NumberFormat.getInstance(new Locale("vi", "VN"));
+            String maxGiashow = nf.format(maxGia);
+            String maxGiaFormatted = nf.format(maxGia);
+
+            // Add vào model
+            model.addAttribute("maxGia", maxGia);
+            model.addAttribute("maxGiaFormatted", maxGiaFormatted);
+            model.addAttribute("maxGiashow", maxGiashow);
+            model.addAttribute("pageSanPham", pageSanPham.getContent());
+            model.addAttribute("totalPages", pageSanPham.getTotalPages());
+            model.addAttribute("currentPage", page);
+            model.addAttribute("tenNsx", tenNsx);
+            model.addAttribute("bodyPage", "/WEB-INF/views/shop.jsp");
+            model.addAttribute("pageTitle", "Trang chủ");
+            return "/layout/layout";
+        }
+
+        @GetMapping("/nsx/{tenNsx}/sort")
+        @ResponseBody
+        public List<SanPhamViewDTO> sortTheoGia(
+                @PathVariable String tenNsx,
+                @RequestParam(defaultValue = "0") int page,
+                @RequestParam("type") String type
+        ) {
+            Long maNsx = nSXService.getbyTenNsx(tenNsx);
+
+            Page<SanPhamViewDTO> pageData;
+
+            switch (type) {
+                case "asc":
+                    pageData = sanPhamService.getSanPhamGiaTangDan(maNsx, page);
+                    break;
+                case "desc":
+                    pageData = sanPhamService.getSanPhamGiaGiamDan(maNsx, page);
+                    break;
+                default:
+                    return List.of();
+            }
+
+            return pageData.getContent();
+        }
+
+    @GetMapping("nsx/{tenNsx}/load")
+    @ResponseBody
+    public Map<String, Object> loadSanPham(
             @PathVariable String tenNsx,
             @RequestParam(defaultValue = "0") int page,
-            Model model
+            @RequestParam(required = false) Long min,
+            @RequestParam(required = false) Long max,
+            @RequestParam(required = false) String sort
     ) {
         Long maNsx = nSXService.getbyTenNsx(tenNsx);
+        Page<SanPhamViewDTO> pageSanPham;
 
-        Page<SanPhamViewDTO> pageSanPham = sanPhamService.getSanPhamByNsx(maNsx, page);
+        if (min != null && max != null) {
+            pageSanPham = sanPhamService.getSanPhamTheoKhoangGia(maNsx, min, max, page);
+        } else if ("asc".equals(sort)) {
+            pageSanPham = sanPhamService.getSanPhamGiaTangDan(maNsx, page);
+        } else if ("desc".equals(sort)) {
+            pageSanPham = sanPhamService.getSanPhamGiaGiamDan(maNsx, page);
+        } else {
+            pageSanPham = sanPhamService.getSanPhamByNsx(maNsx, page);
+        }
 
-        model.addAttribute("pageSanPham", pageSanPham.getContent());
-        model.addAttribute("totalPages", pageSanPham.getTotalPages());
-        model.addAttribute("currentPage", page);
-        model.addAttribute("tenNsx", tenNsx);
-        model.addAttribute("bodyPage", "/WEB-INF/views/shop.jsp");
-        model.addAttribute("pageTitle", "Trang chủ");
+        Map<String, Object> response = new HashMap<>();
+        response.put("sanPhams", pageSanPham.getContent());
+        response.put("totalPages", pageSanPham.getTotalPages());
+        response.put("currentPage", page);
 
-        return "/layout/layout";
+        return response;
     }
 
 
 
+    @GetMapping("/nsx/{tenNsx}/price-range")
+    @ResponseBody
+    public Map<String, Long> getPriceRange(@PathVariable String tenNsx) {
+        Long maNsx = nSXService.getbyTenNsx(tenNsx);
+        return sanPhamService.getMinMaxGia(maNsx);
+    }
 
     @GetMapping("/san-pham/{tenSanPham}")
     public String viewSanPham(
@@ -259,8 +328,9 @@ public class SmartPhonesController {
             // Lấy ngày của đánh giá mới nhất (hoặc bạn có thể map từng đánh giá)
             model.addAttribute("ngayDanhGia", sdf.format(danhGiaList.get(0).getNgayDanhGia()));
         }
-
+        String tenNsx =maNSX.getTenNSX();
         // Các attribute khác cho layout
+        model.addAttribute("tenNsx", tenNsx);
         model.addAttribute("kh", maKhachHang);
         model.addAttribute("bodyPage", "/WEB-INF/views/single-product.jsp");
         model.addAttribute("pageTitle", "Trang chủ");
@@ -436,19 +506,25 @@ public class SmartPhonesController {
         model.addAttribute("page", page);
         model.addAttribute("totalItems", totalItem);
         model.addAttribute("totalPage", totalPage); // Truyền tổng số trang vào view
-        return "/chuadn/shopchuadn";
+        model.addAttribute("bodyPage", "/WEB-INF/views/chuadn/shopchuadn.jsp");
+        model.addAttribute("pageTitle", "Trang chủ");
+        return "/layout/layout";
     }
 
 
     @PostMapping("/hien-thi-shop")
     public String timKiemSanPham1(@RequestParam("tenSanPham") String tenSanPham, Model model) {
         List<SanPhamHTDTO> danhSachTimKiem = sanPhamViewRepository.SearchSanPhamHTDTO(tenSanPham);
-
+        long count =danhSachTimKiem.size();
         List<NSX> nsxList = nsxRepository.findAll();
-
+        String keytimkiem=tenSanPham;
+        model.addAttribute("keytimkiem", keytimkiem);
         model.addAttribute("listNSX", nsxList);
+        model.addAttribute("count", count);
         model.addAttribute("ctsps", danhSachTimKiem);
-        return "/chuadn/shopchuadn"; // Trả về trang shop với kết quả tìm kiếm
+        model.addAttribute("bodyPage", "/WEB-INF/views/chuadn/shopchuadn.jsp");
+        model.addAttribute("pageTitle", "Trang chủ");
+        return "/layout/layout";
     }
 
     @GetMapping("/viewCDN/{tenSanPham}")

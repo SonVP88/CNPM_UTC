@@ -134,66 +134,60 @@ public class SanPhamViewRepository {
     }
 
 
-    public List<SanPhamHTDTO> SearchSanPhamHTDTO(@Param("tenSanPham" )String tenSanPham) {
+    public List<SanPhamHTDTO> SearchSanPhamHTDTO(@Param("tenSanPham") String tenSanPham) {
+
         List<Object[]> results = entityManager.createNativeQuery(
-//                "SELECT c.tenSanPham, Max(c.hinhAnhURL) , MAX(c.giaBan),  MAX(c.giaSauKhiGiam) AS giaSauKhiGiam " +
-//                        "FROM (SELECT  SP.TenSanPham as tenSanPham, ctsp.hinhAnhURL as hinhAnhURL, ctsp.giaBan as giaBan, null as giaSauKhiGiam " +
-//                        "      FROM ChiTietSanPham ctsp JOIN SanPham SP on SP.MaSanPham = ctsp.MaSanPham WHERE ctsp.MaSanPham NOT IN (SELECT g.MaSanPham FROM GiamGiaChiTietSanPham g where g.trangThai = 1) AND ctsp.trangThai = 1 " +
-//                        "      UNION" +
-//                        "      SELECT  S.TenSanPham as tenSanPham, P.HinhAnhUrl as hinhAnhURL,P.giaBan as giaBan, g.giaSauKhiGiam as giaSauKhiGiam " +
-//                        "      FROM GiamGiaChiTietSanPham g JOIn ChiTietSanPham P on g.MaChiTietSanPham = P.MaChiTietSanPham" +
-//                        "                                   JOIN SanPham S on P.MaSanPham = S.MaSanPham WHERE P.trangThai = 1 and g.trangThai = 1) c " +
-//                        " WHERE (:tenSanPham IS NULL OR c.tenSanPham LIKE CONCAT('%', :tenSanPham, '%')) " +
-//                        "GROUP BY  c.tenSanPham")
-                " SELECT \n" +
-                        "    c.tenSanPham, \n" +
-                        "    MAX(c.hinhAnhURL) AS hinhAnhURL, \n" +
-                        "    MAX(c.giaBan) AS giaBan, \n" +
-                        "    MAX(c.giaSauKhiGiam) AS giaSauKhiGiam,\n" +
-                        "    MAX(c.tenDungLuong) AS tenDungLuong\n" +
-                        "FROM (\n" +
-                        "    SELECT \n" +
-                        "        SP.TenSanPham AS tenSanPham, \n" +
-                        "        ctsp.hinhAnhURL AS hinhAnhURL, \n" +
-                        "        ctsp.giaBan AS giaBan, \n" +
-                        "        NULL AS giaSauKhiGiam,\n" +
-                        "        dungLuong.TenDungLuong AS tenDungLuong -- Thêm trường dungLuong vào đây\n" +
-                        "    FROM \n" +
-                        "        ChiTietSanPham ctsp \n" +
-                        "        JOIN SanPham SP ON SP.MaSanPham = ctsp.MaSanPham \n" +
-                        "        JOIN DungLuong dungLuong ON dungLuong.MaDungLuong = ctsp.MaDungLuong\n" +
-                        "    WHERE \n" +
-                        "        ctsp.MaSanPham NOT IN (\n" +
-                        "            SELECT g.MaSanPham \n" +
-                        "            FROM GiamGiaChiTietSanPham g \n" +
-                        "            WHERE g.trangThai = 1\n" +
-                        "        ) \n" +
-                        "        AND ctsp.trangThai = 1\n" +
-                        "    UNION\n" +
-                        "    SELECT \n" +
-                        "        S.TenSanPham AS tenSanPham, \n" +
-                        "        P.HinhAnhUrl AS hinhAnhURL,\n" +
-                        "        P.giaBan AS giaBan, \n" +
-                        "        g.giaSauKhiGiam AS giaSauKhiGiam,\n" +
-                        "        dungLuong.TenDungLuong AS tenDungLuong -- Thêm trường dungLuong vào đây\n" +
-                        "    FROM \n" +
-                        "        GiamGiaChiTietSanPham g \n" +
-                        "        JOIN ChiTietSanPham P ON g.MaChiTietSanPham = P.MaChiTietSanPham \n" +
-                        "        JOIN DungLuong dungLuong ON dungLuong.MaDungLuong = P.MaDungLuong \n" +
-                        "        JOIN SanPham S ON P.MaSanPham = S.MaSanPham \n" +
-                        "    WHERE \n" +
-                        "        P.trangThai = 1 \n" +
-                        "        AND g.trangThai = 1\n" +
-                        "        AND (:tenSanPham IS NULL OR S.TenSanPham LIKE CONCAT('%', :tenSanPham, '%'))\n" +
-                        ") c\n" +
-                        "WHERE \n" +
-                        "    (:tenSanPham IS NULL OR c.tenSanPham LIKE CONCAT('%', :tenSanPham, '%'))\n" +
-                        "GROUP BY \n" +
-                        "    c.tenSanPham;\n")
+                        " SELECT  \n" +
+                                "    c.tenSanPham,\n" +
+                                "    c.hinhAnhURL,\n" +
+                                "    c.giaBan,\n" +
+                                "    c.giaSauKhiGiam,\n" +
+                                "    c.tenDungLuong,\n" +  // Thêm dấu phẩy
+                                "    c.moTa\n" +          // Thêm trường moTa
+                                "FROM (\n" +
+                                "    -- Sản phẩm KHÔNG có giảm giá\n" +
+                                "    SELECT \n" +
+                                "        SP.TenSanPham AS tenSanPham,\n" +
+                                "        ctsp.hinhAnhURL AS hinhAnhURL,\n" +
+                                "        ctsp.giaBan AS giaBan,\n" +
+                                "        NULL AS giaSauKhiGiam,\n" +
+                                "        dungLuong.TenDungLuong AS tenDungLuong,\n" + // Thêm moTa
+                                "        ctsp.moTa AS moTa\n" +
+                                "    FROM ChiTietSanPham ctsp\n" +
+                                "    JOIN SanPham SP ON SP.MaSanPham = ctsp.MaSanPham\n" +
+                                "    JOIN DungLuong dungLuong ON dungLuong.MaDungLuong = ctsp.MaDungLuong\n" +
+                                "    WHERE ctsp.trangThai = 1\n" +
+                                "      AND ctsp.MaSanPham NOT IN (\n" +
+                                "            SELECT g.MaSanPham \n" +
+                                "            FROM GiamGiaChiTietSanPham g\n" +
+                                "            WHERE g.trangThai = 1\n" +
+                                "      )\n" +
+                                "\n" +
+                                "    UNION ALL\n" +
+                                "\n" +
+                                "    -- Sản phẩm CÓ giảm giá\n" +
+                                "    SELECT\n" +
+                                "        S.TenSanPham AS tenSanPham,\n" +
+                                "        P.HinhAnhURL AS hinhAnhURL,\n" +
+                                "        P.giaBan AS giaBan,\n" +
+                                "        g.giaSauKhiGiam AS giaSauKhiGiam,\n" +
+                                "        dungLuong.TenDungLuong AS tenDungLuong,\n" +
+                                "        P.moTa AS moTa\n" +
+                                "    FROM GiamGiaChiTietSanPham g\n" +
+                                "    JOIN ChiTietSanPham P ON g.MaChiTietSanPham = P.MaChiTietSanPham\n" +
+                                "    JOIN DungLuong dungLuong ON dungLuong.MaDungLuong = P.MaDungLuong\n" +
+                                "    JOIN SanPham S ON P.MaSanPham = S.MaSanPham\n" +
+                                "    WHERE P.trangThai = 1\n" +
+                                "      AND g.trangThai = 1\n" +
+                                ") c\n" +
+                                "WHERE (:tenSanPham IS NULL OR c.tenSanPham LIKE CONCAT('%', :tenSanPham, '%'))\n" +
+                                "ORDER BY c.tenSanPham, c.tenDungLuong"
+                )
                 .setParameter("tenSanPham", tenSanPham)
                 .getResultList();
 
         List<SanPhamHTDTO> dtos = new ArrayList<>();
+
         for (Object[] result : results) {
             SanPhamHTDTO dto = new SanPhamHTDTO();
             dto.setTenSanPham((String) result[0]);
@@ -201,10 +195,12 @@ public class SanPhamViewRepository {
             dto.setGiaBan((BigDecimal) result[2]);
             dto.setGiaSauKhiGiam((BigDecimal) result[3]);
             dto.setDungLuong((String) result[4]);
-
+            dto.setMoTa((String) result[5]); // Mapping moTa
             dtos.add(dto);
         }
 
         return dtos;
     }
+
+
 }

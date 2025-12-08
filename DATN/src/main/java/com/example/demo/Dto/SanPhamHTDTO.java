@@ -16,6 +16,7 @@ public class SanPhamHTDTO {
     private BigDecimal giaSauKhiGiam;
     private Integer checkSPGG;
     private String dungLuong;
+    private String moTa;
 
     public SanPhamHTDTO(Long maChiTietSanPham, String tenSanPham, String hinhAnhURL, BigDecimal giaBan,BigDecimal giaSauKhiGiam, String dungLuong) {
         this.maChiTietSanPham = maChiTietSanPham;
@@ -24,6 +25,15 @@ public class SanPhamHTDTO {
         this.giaBan = giaBan;
         this.giaSauKhiGiam = giaSauKhiGiam;
         this.dungLuong = dungLuong;
+    }
+    public SanPhamHTDTO(Long maChiTietSanPham, String tenSanPham, String hinhAnhURL, BigDecimal giaBan,BigDecimal giaSauKhiGiam, String dungLuong, String moTa) {
+        this.maChiTietSanPham = maChiTietSanPham;
+        this.tenSanPham = tenSanPham;
+        this.hinhAnhURL = hinhAnhURL;
+        this.giaBan = giaBan;
+        this.giaSauKhiGiam = giaSauKhiGiam;
+        this.dungLuong = dungLuong;
+        this.moTa = moTa;
     }
 
     public void CheckGGSP(){

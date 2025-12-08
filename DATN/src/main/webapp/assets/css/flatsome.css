@@ -2147,7 +2147,6 @@ li.hide-title>a{
     text-decoration:none;
     text-rendering:optimizeLegibility;
     text-shadow:none;
-    text-transform:uppercase;
     transition:transform .3s,border .3s,background .3s,box-shadow .3s,opacity .3s,color .3s;
     vertical-align:middle
 }
