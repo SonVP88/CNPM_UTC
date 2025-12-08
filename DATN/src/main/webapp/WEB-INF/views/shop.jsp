@@ -1,6 +1,6 @@
 ﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
- <jsp:include page="/WEB-INF/views/layout/breadcrumbs.jsp" />
+<jsp:include page="/WEB-INF/views/layout/breadcrumbs.jsp" />
 <main id="main" class="">
    <div class="term-description">
       <section class="section" id="section_272345946">
@@ -241,93 +241,363 @@
                      <div class="ux-logo has-hover align-middle ux_logo inline-block" style="max-width: 100%!important; width: 110.35714285714px!important"><a class="ux-logo-link block image-" title="" href="/oneplus" style="padding: 15px;"><img src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/brand-oneplus.png" title="" alt="" class="ux-logo-image block" style="height:15px;"></a></div>
                   </div>
                </div>
-               <div id="col-1425734663" class="col filter-sidebar small-12 large-12">
-                  <div class="col-inner">
-                     <h3>Chọn theo tiêu chí</h3>
-                     <ul class="sidebar-wrapper ul-reset">
-                        <div id="woocommerce_layered_nav-11" class="woocommerce widget_layered_nav woocommerce-widget-layered-nav">
-                           <form method="get" action="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/" class="woocommerce-widget-layered-nav-dropdown">
-                              <select class="woocommerce-widget-layered-nav-dropdown dropdown_layered_nav_gia select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                 <option value="">Bất kỳ Giá</option>
-                                 <option value="tren-20-trieu">Trên 20 triệu</option>
-                              </select>
-                              <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-3hso-container" role="combobox"><span class="select2-selection__rendered" id="select2-3hso-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Bất kỳ Giá</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><input type="hidden" name="filter_gia" value="">
-                           </form>
-                        </div>
-                        <div id="woocommerce_layered_nav-6" class="woocommerce widget_layered_nav woocommerce-widget-layered-nav">
-                           <form method="get" action="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/" class="woocommerce-widget-layered-nav-dropdown">
-                              <select class="woocommerce-widget-layered-nav-dropdown dropdown_layered_nav_thuong-hieu select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                 <option value="">Bất kỳ Thương hiệu</option>
-                                 <option value="apple">Apple</option>
-                                 <option value="samsung">Samsung</option>
-                              </select>
-                              <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-p15k-container" role="combobox"><span class="select2-selection__rendered" id="select2-p15k-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Bất kỳ Thương hiệu</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><input type="hidden" name="filter_thuong-hieu" value="">
-                           </form>
-                        </div>
-                        <div id="woocommerce_layered_nav-10" class="woocommerce widget_layered_nav woocommerce-widget-layered-nav">
-                           <form method="get" action="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/" class="woocommerce-widget-layered-nav-dropdown">
-                              <select class="woocommerce-widget-layered-nav-dropdown dropdown_layered_nav_cpu select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                 <option value="">Bất kỳ CPU</option>
-                                 <option value="apple-a14-bionic">Apple A14 Bionic</option>
-                                 <option value="apple-m1">Apple M1</option>
-                              </select>
-                              <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-8lgn-container" role="combobox"><span class="select2-selection__rendered" id="select2-8lgn-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Bất kỳ CPU</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><input type="hidden" name="filter_cpu" value="">
-                           </form>
-                        </div>
-                        <div id="woocommerce_layered_nav-5" class="woocommerce widget_layered_nav woocommerce-widget-layered-nav">
-                           <form method="get" action="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/" class="woocommerce-widget-layered-nav-dropdown">
-                              <select class="woocommerce-widget-layered-nav-dropdown dropdown_layered_nav_dung-luong-ram select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                 <option value="">Bất kỳ Dung lượng RAM</option>
-                                 <option value="16gb">16GB</option>
-                                 <option value="3gb">3GB</option>
-                                 <option value="4gb">4GB</option>
-                                 <option value="6gb">6GB</option>
-                                 <option value="8gb">8GB</option>
-                              </select>
-                              <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-wijr-container" role="combobox"><span class="select2-selection__rendered" id="select2-wijr-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Bất kỳ Dung lượng RAM</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><input type="hidden" name="filter_dung-luong-ram" value="">
-                           </form>
-                        </div>
-                        <div id="woocommerce_layered_nav-4" class="woocommerce widget_layered_nav woocommerce-widget-layered-nav">
-                           <form method="get" action="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/" class="woocommerce-widget-layered-nav-dropdown">
-                              <select class="woocommerce-widget-layered-nav-dropdown dropdown_layered_nav_bo-nho-trong select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                 <option value="">Bất kỳ Bộ nhớ trong</option>
-                                 <option value="128gb">128GB</option>
-                                 <option value="1tb">1TB</option>
-                                 <option value="256gb">256GB</option>
-                                 <option value="2tb">2TB</option>
-                                 <option value="512gb">512GB</option>
-                                 <option value="64gb">64GB</option>
-                                 <option value="ssd-256gb">SSD: 256GB</option>
-                                 <option value="ssd-512gb">SSD: 512GB</option>
-                              </select>
-                              <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-50d9-container" role="combobox"><span class="select2-selection__rendered" id="select2-50d9-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Bất kỳ Bộ nhớ trong</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><input type="hidden" name="filter_bo-nho-trong" value="">
-                           </form>
-                        </div>
-                        <div id="woocommerce_layered_nav-9" class="woocommerce widget_layered_nav woocommerce-widget-layered-nav">
-                           <form method="get" action="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/" class="woocommerce-widget-layered-nav-dropdown">
-                              <select class="woocommerce-widget-layered-nav-dropdown dropdown_layered_nav_man-hinh select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                 <option value="">Bất kỳ Màn hình</option>
-                                 <option value="10-9-inches">10.9 inches</option>
-                                 <option value="11-inch">11 inch</option>
-                                 <option value="6-5-inch">6.5 inch</option>
-                                 <option value="6-7-inch">6.7 inch</option>
-                              </select>
-                              <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-inrd-container" role="combobox"><span class="select2-selection__rendered" id="select2-inrd-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Bất kỳ Màn hình</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><input type="hidden" name="filter_man-hinh" value="">
-                           </form>
-                        </div>
-                        <div id="woocommerce_layered_nav-8" class="woocommerce widget_layered_nav woocommerce-widget-layered-nav">
-                           <form method="get" action="https://cellphones.mauthemewp.com/danh-muc-san-pham/dien-thoai/" class="woocommerce-widget-layered-nav-dropdown">
-                              <select class="woocommerce-widget-layered-nav-dropdown dropdown_layered_nav_do-phan-giai select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                 <option value="">Bất kỳ Độ phân giải</option>
-                                 <option value="full-hd-2">Full HD+</option>
-                                 <option value="hd">HD</option>
-                                 <option value="man-hinh-2k">Màn hình 2K</option>
-                              </select>
-                              <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-vz7x-container" role="combobox"><span class="select2-selection__rendered" id="select2-vz7x-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Bất kỳ Độ phân giải</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><input type="hidden" name="filter_do-phan-giai" value="">
-                           </form>
-                        </div>
-                     </ul>
+               <div class="filter-block">
+                  <div class="filter-sort__title" style="display:;">Chọn theo tiêu chí
                   </div>
+                  <div class="filter-module-container bannerTopHead">
+                     <div id="filterModule" class="" style="top: 72px;">
+                        <div class="filter-sort__list-filter">
+                           <div class="filter-wrapper">
+                              <button class="btn-filter button__filter-parent filter-button" fdprocessedid="w48d3d">
+                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
+                                    <path fill="none" d="M4 4H20V6.172C19.9999 6.70239 19.7891 7.21101 19.414 7.586L15 12V19L9 21V12.5L4.52 7.572C4.18545 7.20393 4.00005 6.7244 4 6.227V4Z" stroke="#D70018" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 </svg>
+                                 Bộ lọc
+                              </button>
+                              <div id="filterAll" class="list-filter-child all">
+                                 <div class="header-filter-all">
+                                    <div class="title">
+                                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
+                                          <path d="M4 4H20V6.172C19.9999 6.70239 19.7891 7.21101 19.414 7.586L15 12V19L9 21V12.5L4.52 7.572C4.18545 7.20393 4.00005 6.7244 4 6.227V4Z" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                       </svg>
+                                       Bộ lọc
+                                    </div>
+                                    <button class="btn-close">× Đóng</button>
+                                 </div>
+                                 <div class="listFilter">
+                                    <div class="filter-wrapper">
+                                       <div class="is-flex title-filter">
+                                          <p>Bộ nhớ trong</p>
+                                          <span class="icon tooltip" style="display:none;">
+                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                             </svg>
+                                          </span>
+                                       </div>
+                                       <ul>
+                                          <li style="display:none;">
+                                             <button class="btn-filter btn-filter-item button__filter-child">
+                                                <span class="icon tooltip" style="display:none;">
+                                                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                      <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                      <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                      <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                   </svg>
+                                                </span>
+                                             </button>
+                                          </li>
+                                          <li style="display:none;">
+                                             <button class="btn-filter btn-filter-item button__filter-child">
+                                                <span class="icon tooltip" style="display:none;">
+                                                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                      <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                      <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                      <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                   </svg>
+                                                </span>
+                                             </button>
+                                          </li>
+                                          <li style="display:none;">
+                                             <button class="btn-filter btn-filter-item button__filter-child">
+                                                <span class="icon tooltip" style="display:none;">
+                                                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                      <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                      <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                      <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                   </svg>
+                                                </span>
+                                             </button>
+                                          </li>
+                                          <li style="display:;">
+                                             <button class="btn-filter btn-filter-item button__filter-child">
+                                                1 TB
+                                                <span class="icon tooltip" style="display:none;">
+                                                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                      <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                      <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                      <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                   </svg>
+                                                </span>
+                                             </button>
+                                          </li>
+                                          <li style="display:;">
+                                             <button class="btn-filter btn-filter-item button__filter-child">
+                                                512 GB
+                                                <span class="icon tooltip" style="display:none;">
+                                                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                      <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                      <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                      <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                   </svg>
+                                                </span>
+                                             </button>
+                                          </li>
+                                          <li style="display:;">
+                                             <button class="btn-filter btn-filter-item button__filter-child">
+                                                256 GB
+                                                <span class="icon tooltip" style="display:none;">
+                                                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                      <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                      <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                      <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                   </svg>
+                                                </span>
+                                             </button>
+                                          </li>
+                                          <li style="display:;">
+                                             <button class="btn-filter btn-filter-item button__filter-child">
+                                                2 TB
+                                                <span class="icon tooltip" style="display:none;">
+                                                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                      <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                      <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                      <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                   </svg>
+                                                </span>
+                                             </button>
+                                          </li>
+                                          <li style="display:;">
+                                             <button class="btn-filter btn-filter-item button__filter-child">
+                                                128 GB
+                                                <span class="icon tooltip" style="display:none;">
+                                                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                      <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                      <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                      <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                   </svg>
+                                                </span>
+                                             </button>
+                                          </li>
+                                       </ul>
+                                    </div>
+
+                                 </div>
+                                 <div class="btn-filter-group"><button class="button is-small is-danger is-light">
+                                    Đóng
+                                    </button> <button disabled="disabled" class="button is-small is-danger submit">
+                                    Xem kết quả
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="filter-wrapper filter-price">
+                              <button class="btn-filter button__filter-parent" id="btnShowprice">
+                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
+                                    <circle cx="12" cy="12" r="9" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                    <path d="M11.6847 14.3686C11.2562 14.3686 10.8726 14.2585 10.5341 14.0384C10.1955 13.8182 9.92803 13.4986 9.73153 13.0795C9.53504 12.6605 9.43679 12.1515 9.43679 11.5526C9.43679 10.9465 9.53622 10.4351 9.73509 10.0185C9.93632 9.59943 10.2074 9.28338 10.5483 9.07031C10.8892 8.85488 11.2692 8.74716 11.6882 8.74716C12.0078 8.74716 12.2706 8.80161 12.4766 8.91051C12.6825 9.01705 12.8459 9.14607 12.9666 9.29759C13.0874 9.44673 13.1809 9.58759 13.2472 9.72017H13.3004V7H14.5895V14.2727H13.3253V13.4134H13.2472C13.1809 13.5459 13.085 13.6868 12.9595 13.8359C12.834 13.9827 12.6683 14.1082 12.4624 14.2124C12.2564 14.3165 11.9972 14.3686 11.6847 14.3686ZM12.0433 13.3139C12.3156 13.3139 12.5476 13.2405 12.7393 13.0938C12.9311 12.9446 13.0767 12.7375 13.1761 12.4723C13.2756 12.2072 13.3253 11.8982 13.3253 11.5455C13.3253 11.1927 13.2756 10.8861 13.1761 10.6257C13.0791 10.3653 12.9347 10.1629 12.7429 10.0185C12.5535 9.87405 12.3203 9.80185 12.0433 9.80185C11.7569 9.80185 11.5178 9.87642 11.326 10.0256C11.1342 10.1747 10.9898 10.3807 10.8928 10.6435C10.7957 10.9063 10.7472 11.2069 10.7472 11.5455C10.7472 11.8864 10.7957 12.1906 10.8928 12.4581C10.9922 12.7232 11.1378 12.9328 11.3295 13.0866C11.5237 13.2382 11.7616 13.3139 12.0433 13.3139ZM11.8587 8.4098V7.59659H15.2607V8.4098H11.8587Z" fill="#1D1D20"></path>
+                                    <path d="M9 15.2614H15.3033V16.2727H9L9 15.2614Z" fill="#1D1D20"></path>
+                                 </svg>
+                                 Xem theo giá
+                              </button>
+                              <div class="list-filter-child" id="list-filter-child-price">
+                                 <p class="price-title">Hãy chọn mức giá phù hợp với bạn</p>
+                                 <div class="price-filter-range">
+                                    <div class="range-header">
+                                       <div class="input-price">
+                                          <div class="price-filter" data-v-bfe8053a="">
+                                             <div class="price-input-group" data-v-bfe8053a="">
+                                                <div class="input-wrapper" data-v-bfe8053a=""><input id="min-price" type="text" placeholder="0" style="padding: 8px 48px 8px 12px" value="" class="price-input m-0" data-v-bfe8053a=""> <span class="currency-suffix" data-v-bfe8053a="" style="color:#6c6262">.000đ</span></div>
+                                             </div>
+                                             -
+                                             <div class="price-input-group" data-v-bfe8053a="">
+                                                <div class="input-wrapper" data-v-bfe8053a=""><input id="max-price" type="text" placeholder="0" style="padding: 8px 48px 8px 12px" value="${maxGiaFormatted}" class="price-input m-0" data-v-bfe8053a=""> <span class="currency-suffix" data-v-bfe8053a="" style="color:#6c6262">.000đ</span></div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="vue-slider vue-slider-ltr" data-max="${maxGia}" style="padding: 12px 0px; width: auto; height: 8px;">
+                                       <div class="vue-slider-rail">
+                                          <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 100%; transition-property: width, left;  background-color: rgb(215, 16, 8);"></div>
+                                          <div aria-valuetext="" class="vue-slider-dot vue-slider-dot-hover" role="slider" aria-valuenow="0" aria-valuemin="" aria-valuemax="${maxGiashow}" aria-orientation="horizontal" tabindex="0" style="width: 24px; height: 24px; transform: translate(-50%, -50%); top: 50%; left: 0%; transition: left;">
+                                             <div class="vue-slider-dot-handle"></div>
+                                             <div class="vue-slider-dot-tooltip vue-slider-dot-tooltip-top">
+                                                <div class="vue-slider-dot-tooltip-inner vue-slider-dot-tooltip-inner-top"><span class="vue-slider-dot-tooltip-text"></span></div>
+                                             </div>
+                                          </div>
+                                          <div aria-valuetext="${maxGiashow}" class="vue-slider-dot vue-slider-dot-hover" role="slider" aria-valuenow="${maxGiashow}" aria-valuemin="" aria-valuemax="${maxGiashow}" aria-orientation="horizontal" tabindex="0" style="width: 24px; height: 24px; transform: translate(-50%, -50%); top: 50%; left: 100%; transition: left;">
+                                             <div class="vue-slider-dot-handle"></div>
+                                             <div class="vue-slider-dot-tooltip vue-slider-dot-tooltip-top">
+                                                <div class="vue-slider-dot-tooltip-inner vue-slider-dot-tooltip-inner-top"><span class="vue-slider-dot-tooltip-text">${maxGiashow}</span></div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="btn-filter-group"style="text-align: center;">
+                                    <button class="button button__filter-children-close is-small is-danger is-light">Đóng
+                                    </button> 
+                                    <button class="button button__filter-children-submit is-small is-danger submit">
+                                    Xem kết quả 
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="filter-wrapper outside" style="display:;">
+                              <button class="btn-filter button__filter-parent" fdprocessedid="p27kf9">
+                                 Bộ nhớ trong
+                                 <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L7 7L13 1" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 </svg>
+                                 <span class="icon tooltip" style="display:none;">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                       <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                       <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                       <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                 </span>
+                              </button>
+                              <div data-index="0" data-key="mobile_storage_filter" class="list-filter-child">
+                                 <ul>
+                                    <li style="display:none;">
+                                       <button class="btn-filter btn-filter-item button__filter-children">
+                                          <span class="icon tooltip" style="display:none;">
+                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                             </svg>
+                                          </span>
+                                       </button>
+                                    </li>
+                                    <li style="display:none;">
+                                       <button class="btn-filter btn-filter-item button__filter-children">
+                                          <span class="icon tooltip" style="display:none;">
+                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                             </svg>
+                                          </span>
+                                       </button>
+                                    </li>
+                                    <li style="display:none;">
+                                       <button class="btn-filter btn-filter-item button__filter-children">
+                                          <span class="icon tooltip" style="display:none;">
+                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                             </svg>
+                                          </span>
+                                       </button>
+                                    </li>
+                                    <li style="display:;">
+                                       <button class="btn-filter btn-filter-item button__filter-children" fdprocessedid="elzd94">
+                                          1 TB
+                                          <span class="icon tooltip" style="display:none;">
+                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                             </svg>
+                                          </span>
+                                       </button>
+                                    </li>
+                                    <li style="display:;">
+                                       <button class="btn-filter btn-filter-item button__filter-children" fdprocessedid="nu5arr">
+                                          512 GB
+                                          <span class="icon tooltip" style="display:none;">
+                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                             </svg>
+                                          </span>
+                                       </button>
+                                    </li>
+                                    <li style="display:;">
+                                       <button class="btn-filter btn-filter-item button__filter-children" fdprocessedid="lgdvkm">
+                                          256 GB
+                                          <span class="icon tooltip" style="display:none;">
+                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                             </svg>
+                                          </span>
+                                       </button>
+                                    </li>
+                                    <li style="display:;">
+                                       <button class="btn-filter btn-filter-item button__filter-children" fdprocessedid="utssoq">
+                                          2 TB
+                                          <span class="icon tooltip" style="display:none;">
+                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                             </svg>
+                                          </span>
+                                       </button>
+                                    </li>
+                                    <li style="display:;">
+                                       <button class="btn-filter btn-filter-item button__filter-children" fdprocessedid="q3slur">
+                                          128 GB
+                                          <span class="icon tooltip" style="display:none;">
+                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="9" cy="9" r="7.5" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                                <path d="M8.9999 5.66667H9.00824" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M8.1665 9H8.99984V12.3333H9.83317" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                             </svg>
+                                          </span>
+                                       </button>
+                                    </li>
+                                 </ul>
+                                 <div class="btn-filter-group show"><button class="button button__filter-children-close is-small is-danger is-light" fdprocessedid="0t03rr">Đóng
+                                    </button> <button disabled="disabled" class="button button__filter-children-submit is-small is-danger submit">
+                                    Xem kết quả
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                           <!---->
+                        </div>
+                        <!---->
+                     </div>
+                     <div class="clear" style="padding-top: 0px;"></div>
+                  </div>
+               </div>
+               <div class="sort-container">
+                  <div id="sortBlock" class="bannerTopHead">
+                     <div class="filter-sort__title">Sắp xếp theo</div>
+                     <div class="filter-sort__list">
+                        <a class="button__sort active">
+                           <div class="icon">
+                              <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M9.99986 14.7915L4.85653 17.4957L5.83903 11.7682L1.67236 7.71238L7.42236 6.87905L9.99403 1.66821L12.5657 6.87905L18.3157 7.71238L14.149 11.7682L15.1315 17.4957L9.99986 14.7915Z" stroke="#1D1D20" 
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg>
+                           </div>
+                           Phổ biến
+                        </a>
+                        <a class="button__sort sort-btn" id="sx-tang" data-sort="asc">
+                           <div class="icon">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M5 7H9" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 <path d="M5 12H12" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 <path d="M5 17H14" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 <path d="M14.5 9.5L17 7L19.5 9.5" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 <path d="M17 7V17" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg>
+                           </div>
+                           Giá Thấp - Cao
+                        </a>
+                        <a class="button__sort sort-btn" id="sx-giam" data-sort="desc">
+                           <div class="icon">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M5 17H9" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 <path d="M5 12H12" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 <path d="M5 7H14" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 <path d="M14.5 14.5L17 17L19.5 14.5" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 <path d="M17 17V7" stroke="#1D1D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg>
+                           </div>
+                           Giá Cao - Thấp
+                        </a>
+                     </div>
+                  </div>
+                  <div class="clear"></div>
                </div>
             </div>
          </div>
@@ -339,84 +609,90 @@
          </style>
       </section>
    </div>
-   <div class="row category-page-row">
+   <div class="row category-page-row pt-0" style="margin-top:-25px">
       <div class="col large-12">
          <div class="shop-container">
             <div class="woocommerce-notices-wrapper"></div>
-            <div class="products row row-small large-columns-5 medium-columns-3 small-columns-2">
-                <c:forEach var="sp" items="${pageSanPham}">
-                        <div class="product-small col has-hover product type-product post-1693 status-publish first instock product_cat-apple product_cat-hot-sale product_cat-ipad-pro has-post-thumbnail shipping-taxable purchasable product-type-variable has-default-attributes">
-                           <div class="col-inner">
-                              <div class="badge-container absolute left top z-1">
+            <div class="products row row-small large-columns-5 medium-columns-3 small-columns-2" id="productContainer">
+               <c:forEach var="sp" items="${pageSanPham}">
+                  <div class="product-small col has-hover product type-product post-1693 status-publish first instock product_cat-apple product_cat-hot-sale product_cat-ipad-pro has-post-thumbnail shipping-taxable purchasable product-type-variable has-default-attributes">
+                     <div class="col-inner">
+                        <div class="badge-container absolute left top z-1">
+                        </div>
+                        <div class="product-small box ">
+                           <div class="box-image">
+                              <div class="image-none">
+                                 <a href="/san-pham/${sp.tenSanPham}" aria-label="${sp.tenSanPham}">
+                                 <img loading="lazy" decoding="async" width="470" height="488" src="http://localhost:8080/img/${sp.anh}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">				</a>
+                                 <div class="item-hotsale"></div>
                               </div>
-                              <div class="product-small box ">
-                                 <div class="box-image">
-                                    <div class="image-none">
-                                       <a href="/san-pham/${sp.tenSanPham}" aria-label="${sp.tenSanPham}">
-                                       <img loading="lazy" decoding="async" width="470" height="488" src="http://localhost:8080/img/${sp.anh}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">				</a>
-                                       <div class="item-hotsale"></div>
-                                    </div>
-                                    <div class="image-tools is-small top right show-on-hover">
-                                    </div>
-                                    <div class="image-tools is-small hide-for-small bottom left show-on-hover">
-                                    </div>
-                                    <div class="image-tools grid-tools text-center hide-for-small bottom hover-slide-in show-on-hover">
-                                    </div>
+                              <div class="image-tools is-small top right show-on-hover">
+                              </div>
+                              <div class="image-tools is-small hide-for-small bottom left show-on-hover">
+                              </div>
+                              <div class="image-tools grid-tools text-center hide-for-small bottom hover-slide-in show-on-hover">
+                              </div>
+                           </div>
+                           <div class="box-text box-text-products">
+                              <div class="title-wrapper">
+                                 <p class="name product-title woocommerce-loop-product__title"><a href="/san-pham/${sp.tenSanPham}" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">${sp.tenSanPham}</a></p>
+                              </div>
+                              <div class="price-wrapper">
+                                 <div class="star-rating" title="Rated 5 out of 5">
+                                    <span style="width:100%">
+                                    <strong class="rating">5</strong> out of 5</span>
                                  </div>
-                                 <div class="box-text box-text-products">
-                                    <div class="title-wrapper">
-                                       <p class="name product-title woocommerce-loop-product__title"><a href="/san-pham/${sp.tenSanPham}" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">${sp.tenSanPham}</a></p>
-                                    </div>
-                                    <div class="price-wrapper">
-                                       <div class="star-rating" title="Rated 5 out of 5">
-                                          <span style="width:100%">
-                                          <strong class="rating">5</strong> out of 5</span>
-                                       </div>
-                                       <span class="price">
-                                          <%-- Nếu có giá khuyến mãi và nhỏ hơn giá gốc --%>
-                                          <c:choose>
-                                             <c:when test="${sp.giaBanGG != null && sp.giaBanGG < sp.giaBan}">
-                                                <ins>
-                                                <span class="woocommerce-Price-amount amount">
-                                                <bdi><fmt:formatNumber value="${sp.giaBanGG}" type="number" minFractionDigits="0"/><span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                                                </span>
-                                                </ins>
-                                                <del>
-                                                <span style="display:none;">Giá niêm yết: </span>
-                                                <span class="woocommerce-Price-amount amount">
-                                                <bdi><fmt:formatNumber value="${sp.giaBan}" type="number"/><span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                                                </span>
-                                                </del>
-                                             </c:when>
-                                             <c:otherwise>
-                                                <span class="woocommerce-Price-amount amount">
-                                                <bdi><fmt:formatNumber value="${sp.giaBan}" type="number"/><span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                                                </span>
-                                             </c:otherwise>
-                                          </c:choose>
-                                       </span>
-                                       <div class="promotion">Thu cũ lên đời - Trợ giá 1 triệu</div>
-                                       <span class="text-count-review">2 đánh giá</span>
-                                    </div>
-                                 </div>
+                                 <span class="price">
+                                    <%-- Nếu có giá khuyến mãi và nhỏ hơn giá gốc --%>
+                                    <c:choose>
+                                       <c:when test="${sp.giaBanGG != null && sp.giaBanGG < sp.giaBan}">
+                                          <ins>
+                                             <span class="woocommerce-Price-amount amount">
+                                                <bdi>
+                                                   <fmt:formatNumber value="${sp.giaBanGG}" type="number" minFractionDigits="0"/>
+                                                   <span class="woocommerce-Price-currencySymbol">₫</span>
+                                                </bdi>
+                                             </span>
+                                          </ins>
+                                          <del>
+                                             <span style="display:none;">Giá niêm yết: </span>
+                                             <span class="woocommerce-Price-amount amount">
+                                                <bdi>
+                                                   <fmt:formatNumber value="${sp.giaBan}" type="number"/>
+                                                   <span class="woocommerce-Price-currencySymbol">₫</span>
+                                                </bdi>
+                                             </span>
+                                          </del>
+                                       </c:when>
+                                       <c:otherwise>
+                                          <span class="woocommerce-Price-amount amount">
+                                             <bdi>
+                                                <fmt:formatNumber value="${sp.giaBan}" type="number"/>
+                                                <span class="woocommerce-Price-currencySymbol">₫</span>
+                                             </bdi>
+                                          </span>
+                                       </c:otherwise>
+                                    </c:choose>
+                                 </span>
+                                 <div class="promotion">Thu cũ lên đời - Trợ giá 1 triệu</div>
+                                 <span class="text-count-review">2 đánh giá</span>
                               </div>
                            </div>
                         </div>
-                     </c:forEach>
+                     </div>
+                  </div>
+               </c:forEach>
+            </div>
+            <div class="cps-block-content_btn-showmore" id="btnXemThem">
+               <a class="button btn-show-more button__show-more-product">
+                  Xem thêm 13 sản phẩm
+                  <svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M6.5 9L12.5 15L18.5 9" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+               </a>
             </div>
             <!-- row -->
          </div>
-         <!-- shop container -->
-         <c:if test="${totalPages > 1}">
-    <div class="pagination">
-        <c:forEach begin="0" end="${totalPages - 1}" var="i">
-            <a href="?page=${i}" class="${i == currentPage ? 'active' : ''}">
-                ${i + 1}
-            </a>
-        </c:forEach>
-    </div>
-</c:if>
-
       </div>
    </div>
 </main>

@@ -6,7 +6,11 @@
 		<div class="flex-col flex-grow medium-text-center">
 			<div class="is-large">
 	            <nav class="woocommerce-breadcrumb breadcrumbs uppercase" aria-label="Breadcrumb">
-                    <a href="/index">Trang chủ</a> <span class="divider">/</span> ${tenNsx}
+                    <a href="/index">Trang chủ</a> 
+                    <span class="divider">/</span> 
+                    <a href="/${tenNsx}"><span id="tenNsx">${tenNsx}
+                    </span></a>  <span class="divider">/</span> 
+                    <a><span id="tenSP">${sanPham.tenSanPham}</span></a>
                 </nav>
             </div>
         </diV>

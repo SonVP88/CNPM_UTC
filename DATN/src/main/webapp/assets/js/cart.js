@@ -149,23 +149,6 @@ $("#confirmYes").click(function () {
 });
 
 
-function updateCartCount() {
-     const cartCountEl = document.getElementById("cart-count");
-    $.ajax({
-        url: "/cart/get-count",
-        method: "GET",
-        dataType: "json",
-        success: function(data) {
-            if (data.success) {
-                const cartSize =data.cartSize
-                cartCountEl.dataset.iconLabel = cartSize;
-            }
-        },
-        error: function(xhr) {
-            console.error("Lỗi lấy số lượng giỏ hàng:", xhr.responseText);
-        }
-    });
-}
 document.querySelector("#btn-thanh-toan").addEventListener("click", function() {
     const selectedMaGHCT = getSelectedMaGHCT();
 

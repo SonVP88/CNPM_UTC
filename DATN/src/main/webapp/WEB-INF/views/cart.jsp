@@ -19,7 +19,7 @@
    </div>
    <!----> 
    <div class="container tabs-cart-type mt-3">
-      <button data-type="1" class="tab-item active" fdprocessedid="wouhpc"  style="font-size:18px;">
+      <button data-type="1" class="tab-item active" fdprocessedid="wouhpc"  style="font-size:14px;">
       Giỏ hàng
       </button><!----><!----><!----><!----><!---->
    </div>
