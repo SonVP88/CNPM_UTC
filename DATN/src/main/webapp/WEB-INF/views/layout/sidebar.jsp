@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
    .notification-panel {
-   position: fixed !important;   /* cố định trên viewport */
+   position: absolute !important;   /* cố định trên viewport */
    top: 80px;                     /* luôn ở 80px từ trên */
    left: 0;                       /* sẽ tính bằng JS */
    min-width: max-content;
@@ -32,62 +32,18 @@
                   <img src="../../../assets/img/logo/AZURA.png" alt="" style="height: 80px;width: 90px">
                   </a>
                </div>
-               <%-- <!-- Mobile Left Elements -->
-                  <div class="flex-col show-for-medium flex-left">
-                      <ul class="mobile-nav nav nav-left">
-                          <li class="header-search-form search-form html relative has-icon">
-                              <div class="header-search-form-wrapper">
-                                  <div class="searchform-wrapper ux-search-box relative is-normal">
-                                      <form role="search" method="get" class="searchform"
-                                            action="https://cellphones.mauthemewp.com/">
-                                          <div class="flex-row relative">
-                                              <div class="flex-col flex-grow">
-                                                  <label class="screen-reader-text"
-                                                         for="woocommerce-product-search-field-0">Tìm kiếm:</label>
-                                                  <input type="search" id="woocommerce-product-search-field-0"
-                                                         class="search-field mb-0" placeholder="Bạn cần tìm gì?" value=""
-                                                         name="s" autocomplete="off">
-                                                  <input type="hidden" name="post_type" value="product">
-                                              </div>
-                                              <div class="flex-col">
-                                                  <button type="submit" value="Tìm kiếm"
-                                                          class="ux-search-submit submit-button secondary button icon mb-0"
-                                                          aria-label="Gửi">
-                                                      <i class="icon-search" aria-hidden="true"></i>
-                                                  </button>
-                                              </div>
-                                          </div>
-                                          <div class="live-search-results text-left z-top">
-                                              <div class="autocomplete-suggestions"
-                                                   style="position: absolute; display: none; max-height: 300px; z-index: 9999;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                          </li>
-                      </ul>
-                  </div> --%>
-               <!-- Left Elements -->
-               <%-- <div class="flex-col hide-for-medium flex-left flex-grow">
-                  <ul class="header-nav header-nav-main nav nav-left">
-                      <!-- Các menu bên trái nếu có -->
-                  </ul>
-                  </div> --%>
-               <!-- Right Elements -->
                <div class="flex-col hide-for-medium flex-right my-auto">
                   <ul class="header-nav header-nav-main nav nav-right">
                      <li class="header-search-form search-form html relative has-icon">
                         <div class="header-search-form-wrapper">
                            <div class="searchform-wrapper ux-search-box relative is-normal">
-                              <form role="search" method="get" class="searchform" action="">
+                              <form role="search" method="get" class="searchform" action="/hien-thi-shop">
                                  <div class="flex-row relative">
                                     <div class="flex-col flex-grow">
                                        <label class="screen-reader-text"
-                                          for="woocommerce-product-search-field-1">Tìm kiếm:</label>
-                                       <input type="search" id="woocommerce-product-search-field-1"
-                                          class="search-field mb-0" placeholder="Bạn cần tìm gì?" value=""
-                                          name="s" autocomplete="off">
+                                          for="searchInput">Tìm kiếm:</label>
+                                       <input type="search" id="searchInput" class="search-field mb-0" placeholder="Bạn cần tìm gì?" value="${keytimkiem}"
+                                          name="tenSanPham" autocomplete="off">
                                        <input type="hidden" name="post_type" value="product">
                                     </div>
                                     <div class="flex-col">
@@ -100,7 +56,7 @@
                                  </div>
                                  <div class="live-search-results text-left z-top">
                                     <div class="autocomplete-suggestions"
-                                       style="position: absolute; display: none; max-height: 300px; z-index: 9999;">
+                                       style="position: absolute; display: none; max-height: 303px; z-index: 9999; background-color: #fff;width: 340px;">
                                     </div>
                                  </div>
                               </form>
@@ -304,7 +260,23 @@
             loginModalEl.style.display = "none"; 
            
       }
-      
+      function updateCartCount() {
+     const cartCountEl = document.getElementById("cart-count");
+    $.ajax({
+        url: "/cart/get-count",
+        method: "GET",
+        dataType: "json",
+        success: function(data) {
+            if (data.success) {
+                const cartSize =data.cartSize
+                cartCountEl.dataset.iconLabel = cartSize;
+            }
+        },
+        error: function(xhr) {
+            console.error("Lỗi lấy số lượng giỏ hàng:", xhr.responseText);
+        }
+    });
+}
       // Gắn event
       document.getElementById("btn-gio").addEventListener("click", checkLogin);
         document.getElementById("closechecklogin").addEventListener("click", closecheckLogin);
@@ -333,6 +305,7 @@
       // Mở panel
       openBtn.addEventListener('click', (e) => {
           e.stopPropagation();
+          console.log("a")
           updatePanelPosition(panel, openBtn);
           panel.style.display = 'flex';      // hiện panel trước animation
           panel.classList.add('show');

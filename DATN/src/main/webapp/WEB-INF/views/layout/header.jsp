@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="../../../assets/css/cart.css">
     <link rel="stylesheet" href="../../../assets/css/toast.css">
     <link rel="stylesheet" href="../../../assets/css/checkout.css">
+    <link rel="stylesheet" href="../../../assets/css/shop.css">
     <link rel="stylesheet" href="../../../assets/css/flatsome-swatches-frontend.css">
     <link rel="stylesheet" href="../../../assets/css/breadcrumbs.css">
+    <link rel="stylesheet" href="../../../assets/css/search.css">
 </head>

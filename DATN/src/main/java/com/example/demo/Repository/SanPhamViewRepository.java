@@ -134,63 +134,61 @@ public class SanPhamViewRepository {
     }
 
 
-    public List<SanPhamHTDTO> SearchSanPhamHTDTO(@Param("tenSanPham" )String tenSanPham) {
-        List<Object[]> results = entityManager.createNativeQuery(
-//                "SELECT c.tenSanPham, Max(c.hinhAnhURL) , MAX(c.giaBan),  MAX(c.giaSauKhiGiam) AS giaSauKhiGiam " +
-//                        "FROM (SELECT  SP.TenSanPham as tenSanPham, ctsp.hinhAnhURL as hinhAnhURL, ctsp.giaBan as giaBan, null as giaSauKhiGiam " +
-//                        "      FROM ChiTietSanPham ctsp JOIN SanPham SP on SP.MaSanPham = ctsp.MaSanPham WHERE ctsp.MaSanPham NOT IN (SELECT g.MaSanPham FROM GiamGiaChiTietSanPham g where g.trangThai = 1) AND ctsp.trangThai = 1 " +
-//                        "      UNION" +
-//                        "      SELECT  S.TenSanPham as tenSanPham, P.HinhAnhUrl as hinhAnhURL,P.giaBan as giaBan, g.giaSauKhiGiam as giaSauKhiGiam " +
-//                        "      FROM GiamGiaChiTietSanPham g JOIn ChiTietSanPham P on g.MaChiTietSanPham = P.MaChiTietSanPham" +
-//                        "                                   JOIN SanPham S on P.MaSanPham = S.MaSanPham WHERE P.trangThai = 1 and g.trangThai = 1) c " +
-//                        " WHERE (:tenSanPham IS NULL OR c.tenSanPham LIKE CONCAT('%', :tenSanPham, '%')) " +
-//                        "GROUP BY  c.tenSanPham")
-                " SELECT \n" +
-                        "    c.tenSanPham, \n" +
-                        "    MAX(c.hinhAnhURL) AS hinhAnhURL, \n" +
-                        "    MAX(c.giaBan) AS giaBan, \n" +
-                        "    MAX(c.giaSauKhiGiam) AS giaSauKhiGiam,\n" +
-                        "    MAX(c.tenDungLuong) AS tenDungLuong\n" +
-                        "FROM (\n" +
-                        "    SELECT \n" +
-                        "        SP.TenSanPham AS tenSanPham, \n" +
-                        "        ctsp.hinhAnhURL AS hinhAnhURL, \n" +
-                        "        ctsp.giaBan AS giaBan, \n" +
-                        "        NULL AS giaSauKhiGiam,\n" +
-                        "        dungLuong.TenDungLuong AS tenDungLuong -- Thêm trường dungLuong vào đây\n" +
-                        "    FROM \n" +
-                        "        ChiTietSanPham ctsp \n" +
-                        "        JOIN SanPham SP ON SP.MaSanPham = ctsp.MaSanPham \n" +
-                        "        JOIN DungLuong dungLuong ON dungLuong.MaDungLuong = ctsp.MaDungLuong\n" +
-                        "    WHERE \n" +
-                        "        ctsp.MaSanPham NOT IN (\n" +
-                        "            SELECT g.MaSanPham \n" +
-                        "            FROM GiamGiaChiTietSanPham g \n" +
-                        "            WHERE g.trangThai = 1\n" +
-                        "        ) \n" +
-                        "        AND ctsp.trangThai = 1\n" +
-                        "    UNION\n" +
-                        "    SELECT \n" +
-                        "        S.TenSanPham AS tenSanPham, \n" +
-                        "        P.HinhAnhUrl AS hinhAnhURL,\n" +
-                        "        P.giaBan AS giaBan, \n" +
-                        "        g.giaSauKhiGiam AS giaSauKhiGiam,\n" +
-                        "        dungLuong.TenDungLuong AS tenDungLuong -- Thêm trường dungLuong vào đây\n" +
-                        "    FROM \n" +
-                        "        GiamGiaChiTietSanPham g \n" +
-                        "        JOIN ChiTietSanPham P ON g.MaChiTietSanPham = P.MaChiTietSanPham \n" +
-                        "        JOIN DungLuong dungLuong ON dungLuong.MaDungLuong = P.MaDungLuong \n" +
-                        "        JOIN SanPham S ON P.MaSanPham = S.MaSanPham \n" +
-                        "    WHERE \n" +
-                        "        P.trangThai = 1 \n" +
-                        "        AND g.trangThai = 1\n" +
-                        "        AND (:tenSanPham IS NULL OR S.TenSanPham LIKE CONCAT('%', :tenSanPham, '%'))\n" +
-                        ") c\n" +
-                        "WHERE \n" +
-                        "    (:tenSanPham IS NULL OR c.tenSanPham LIKE CONCAT('%', :tenSanPham, '%'))\n" +
-                        "GROUP BY \n" +
-                        "    c.tenSanPham;\n")
+    public Long countSanPham(@Param("tenSanPham") String tenSanPham) {
+        Object totalResult = entityManager.createNativeQuery(
+                        "SELECT COUNT(*) FROM (\n" +
+                                "    SELECT SP.MaSanPham\n" +
+                                "    FROM ChiTietSanPham ctsp\n" +
+                                "    JOIN SanPham SP ON SP.MaSanPham = ctsp.MaSanPham\n" +
+                                "    WHERE ctsp.trangThai = 1 AND (:tenSanPham IS NULL OR SP.TenSanPham LIKE CONCAT('%', :tenSanPham, '%'))\n" +
+                                "    UNION ALL\n" +
+                                "    SELECT P.MaSanPham\n" +
+                                "    FROM GiamGiaChiTietSanPham g\n" +
+                                "    JOIN ChiTietSanPham P ON g.MaChiTietSanPham = P.MaChiTietSanPham\n" +
+                                "    JOIN SanPham S ON P.MaSanPham = S.MaSanPham\n" +
+                                "    WHERE P.trangThai = 1 AND g.trangThai = 1 AND (:tenSanPham IS NULL OR S.TenSanPham LIKE CONCAT('%', :tenSanPham, '%'))\n" +
+                                ") c"
+                )
                 .setParameter("tenSanPham", tenSanPham)
+                .getSingleResult();
+
+            Long totalCount = ((Number) totalResult).longValue();
+
+
+        return totalCount;
+    }
+
+    public List<SanPhamHTDTO> findSanPhamPaginated(String tenSanPham, int page, int size) {
+        List<Object[]> results = entityManager.createNativeQuery(
+                        "SELECT c.tenSanPham, c.hinhAnhURL, c.giaBan, c.giaSauKhiGiam, c.tenDungLuong, c.moTa, c.tenMauSac\n" +
+                                "FROM (\n" +
+                                "    -- Sản phẩm KHÔNG có giảm giá\n" +
+                                "    SELECT SP.TenSanPham AS tenSanPham, ctsp.hinhAnhURL AS hinhAnhURL, ctsp.giaBan AS giaBan,\n" +
+                                "           NULL AS giaSauKhiGiam, dungLuong.TenDungLuong AS tenDungLuong, ctsp.moTa AS moTa, mau.TenMauSac AS TenMauSac\n" +
+                                "    FROM ChiTietSanPham ctsp\n" +
+                                "    JOIN SanPham SP ON SP.MaSanPham = ctsp.MaSanPham\n" +
+                                "    JOIN DungLuong dungLuong ON dungLuong.MaDungLuong = ctsp.MaDungLuong\n" +
+                                "    JOIN MauSac mau ON mau.MaMauSac = ctsp.MaMauSac\n" +
+                                "    WHERE ctsp.trangThai = 1\n" +
+                                "      AND (:tenSanPham IS NULL OR SP.TenSanPham LIKE CONCAT('%', :tenSanPham, '%'))\n" +
+                                "    UNION ALL\n" +
+                                "    -- Sản phẩm có giảm giá\n" +
+                                "    SELECT S.TenSanPham AS tenSanPham, P.HinhAnhURL AS hinhAnhURL, P.giaBan AS giaBan,\n" +
+                                "           g.giaSauKhiGiam AS giaSauKhiGiam, dungLuong.TenDungLuong AS tenDungLuong, P.moTa AS moTa, mau.TenMauSac AS TenMauSac\n" +
+                                "    FROM GiamGiaChiTietSanPham g\n" +
+                                "    JOIN ChiTietSanPham P ON g.MaChiTietSanPham = P.MaChiTietSanPham\n" +
+                                "    JOIN DungLuong dungLuong ON dungLuong.MaDungLuong = P.MaDungLuong\n" +
+                                "    JOIN MauSac mau ON mau.MaMauSac = P.MaMauSac\n" +
+                                "    JOIN SanPham S ON P.MaSanPham = S.MaSanPham\n" +
+                                "    WHERE P.trangThai = 1 AND g.trangThai = 1\n" +
+                                "      AND (:tenSanPham IS NULL OR S.TenSanPham LIKE CONCAT('%', :tenSanPham, '%'))\n" +
+                                ") c\n" +
+                                "ORDER BY c.tenSanPham, c.tenDungLuong\n" +
+                                "OFFSET :offset ROWS FETCH NEXT :size ROWS ONLY"
+                )
+                .setParameter("tenSanPham", tenSanPham)
+                .setParameter("offset", page * size)
+                .setParameter("size", size)
                 .getResultList();
 
         List<SanPhamHTDTO> dtos = new ArrayList<>();
@@ -201,10 +199,60 @@ public class SanPhamViewRepository {
             dto.setGiaBan((BigDecimal) result[2]);
             dto.setGiaSauKhiGiam((BigDecimal) result[3]);
             dto.setDungLuong((String) result[4]);
-
+            dto.setMoTa((String) result[5]);
+            dto.setTenMau((String) result[6]); // thêm tên màu
             dtos.add(dto);
         }
-
         return dtos;
     }
+
+
+    public List<SanPhamHTDTO> findSanPhamPaginatedSorted(String tenSanPham, int page, int size, boolean asc) {
+        // Xác định ORDER BY theo flag asc/desc
+        String orderBy = asc ? "COALESCE(c.giaSauKhiGiam, c.giaBan) ASC"
+                : "COALESCE(c.giaSauKhiGiam, c.giaBan) DESC";
+
+        List<Object[]> results = entityManager.createNativeQuery(
+                        "SELECT c.tenSanPham, c.hinhAnhURL, c.giaBan, c.giaSauKhiGiam, c.tenDungLuong, c.moTa, c.tenMauSac " +
+                                "FROM ( " +
+                                "    SELECT SP.TenSanPham AS tenSanPham, ctsp.hinhAnhURL AS hinhAnhURL, ctsp.giaBan AS giaBan, " +
+                                "           NULL AS giaSauKhiGiam, dungLuong.TenDungLuong AS tenDungLuong, ctsp.moTa AS moTa, mau.TenMauSac AS TenMauSac " +
+                                "    FROM ChiTietSanPham ctsp " +
+                                "    JOIN SanPham SP ON SP.MaSanPham = ctsp.MaSanPham " +
+                                "    JOIN DungLuong dungLuong ON dungLuong.MaDungLuong = ctsp.MaDungLuong " +
+                                "    JOIN MauSac mau ON mau.MaMauSac = ctsp.MaMauSac " +
+                                "    WHERE ctsp.trangThai = 1 AND (:tenSanPham IS NULL OR SP.TenSanPham LIKE CONCAT('%', :tenSanPham, '%')) " +
+                                "    UNION ALL " +
+                                "    SELECT S.TenSanPham AS tenSanPham, P.HinhAnhURL AS hinhAnhURL, P.giaBan AS giaBan, " +
+                                "           g.giaSauKhiGiam AS giaSauKhiGiam, dungLuong.TenDungLuong AS tenDungLuong, P.moTa AS moTa, mau.TenMauSac AS TenMauSac " +
+                                "    FROM GiamGiaChiTietSanPham g " +
+                                "    JOIN ChiTietSanPham P ON g.MaChiTietSanPham = P.MaChiTietSanPham " +
+                                "    JOIN DungLuong dungLuong ON dungLuong.MaDungLuong = P.MaDungLuong " +
+                                "    JOIN MauSac mau ON mau.MaMauSac = P.MaMauSac " +
+                                "    JOIN SanPham S ON P.MaSanPham = S.MaSanPham " +
+                                "    WHERE P.trangThai = 1 AND g.trangThai = 1 AND (:tenSanPham IS NULL OR S.TenSanPham LIKE CONCAT('%', :tenSanPham, '%')) " +
+                                ") c " +
+                                "ORDER BY " + orderBy + " " +
+                                "OFFSET :offset ROWS FETCH NEXT :size ROWS ONLY"
+                )
+                .setParameter("tenSanPham", tenSanPham)
+                .setParameter("offset", page * size)
+                .setParameter("size", size)
+                .getResultList();
+
+        List<SanPhamHTDTO> dtos = new ArrayList<>();
+        for (Object[] result : results) {
+            SanPhamHTDTO dto = new SanPhamHTDTO();
+            dto.setTenSanPham((String) result[0]);
+            dto.setHinhAnhURL((String) result[1]);
+            dto.setGiaBan((BigDecimal) result[2]);
+            dto.setGiaSauKhiGiam((BigDecimal) result[3]);
+            dto.setDungLuong((String) result[4]);
+            dto.setMoTa((String) result[5]);
+            dto.setTenMau((String) result[6]);
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+
 }
