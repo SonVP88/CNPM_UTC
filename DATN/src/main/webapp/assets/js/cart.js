@@ -111,6 +111,7 @@ function updateTotal() {
     }
 }
 $(document).on("click", ".btnXoa", function () {
+    console.log("a")
     maCTSP = $(this).data("ctsp");
     maGHCT = $(this).data("ghct");
     $("#confirmDeleteModal").css("display", "flex");

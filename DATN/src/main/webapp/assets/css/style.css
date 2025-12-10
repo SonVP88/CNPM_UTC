@@ -4408,3 +4408,62 @@ div.review_vote {display: flex;align-items: center;position: absolute;top: 0;rig
   from {opacity:0;}
   to {opacity:1; }
 }
+.header .search-form .autocomplete-suggestions, .header-block .autocomplete-suggestions {
+    max-height: 80vh;
+}
+.searchform-wrapper .autocomplete-suggestions {
+    -webkit-overflow-scrolling: touch;
+    max-height: 50vh;
+    overflow-y: scroll;
+    overflow-y: auto;
+}
+.live-search-results .autocomplete-suggestion {
+    padding: 10px;
+    display: block;
+}
+
+.live-search-results .autocomplete-suggestion img {
+    width: 50px;
+    border-radius: 0;
+    height: 50px;
+    float: left;
+}
+.autocomplete-suggestion img {
+    border-radius: 99px;
+    display: inline-block;
+    height: 40px;
+    margin-right: 10px;
+    width: 40px;
+}
+.autocomplete-suggestion img+.search-name {
+    margin-top: -.15em;
+    padding-left: .5em;
+}
+.live-search-results .search-name {
+    width: 100%;
+    font-size: 12px;
+}
+.autocomplete-suggestion .search-price {
+    font-size: .8em;
+    margin-left: 5px;
+    padding-top: 3px;
+}
+.live-search-results .search-price ins span.amount {
+    color: #e0052b;
+    font-size: 14px;
+}
+span.amount {
+    color: #111;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.col .live-search-results, .header .search-form .live-search-results, .header-block .live-search-results {
+    background-color: hsla(0, 0%, 100%, .95);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+    color: #111;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: left;
+    top: 105%;
+}

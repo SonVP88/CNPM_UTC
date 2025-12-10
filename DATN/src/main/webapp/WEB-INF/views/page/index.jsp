@@ -1,5 +1,8 @@
 ﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<% 
+   com.example.demo.Entity.KhachHang kh = (com.example.demo.Entity.KhachHang) session.getAttribute("khachHang"); 
+   %>
 <div class="container" style="margin-top: 15px;">
    <div class="row">
       <div class="col large-3 hide-for-medium box_left">
@@ -8,99 +11,32 @@
                <div class="menu-main-menu-container">
                   <ul id="menu-main-menu-1" class="menu">
                      <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-27 menu-item-design-default has-dropdown has-icon-left has-child" aria-expanded="false">
-                        <a href="/apple" class="nav-top-link" aria-expanded="false" aria-haspopup="menu"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-1.png" alt="">Điện thoại</a>
+                        <a href="/apple" class="nav-top-link" aria-expanded="false" aria-haspopup="menu"><img class="ux-menu-icon" width="20" height="20" src="http://localhost:8080/wp-content/uploads/2021/08/menu-icon-1.png" alt="">Điện thoại</a>
                         <button class="toggle" aria-label="Chuyển đổi"><i class="icon-angle-down" aria-hidden="true"></i></button>
                         <ul class="sub-menu">
                            <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-1289 nav-dropdown-col has-child" aria-expanded="false">
                               <a href="/apple">Apple</a>
                               <button class="toggle" aria-label="Chuyển đổi"><i class="icon-angle-down" aria-hidden="true"></i></button>
                               <ul class="sub-menu nav-column">
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1290"><a href="https://cellphones.mauthemewp.com/apple/iphone-11-series/">iPhone 11 Series</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1291"><a href="https://cellphones.mauthemewp.com/apple/iphone-12-series/">iPhone 12 Series</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1292"><a href="https://cellphones.mauthemewp.com/apple/iphone-se/">iPhone SE</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1293"><a href="https://cellphones.mauthemewp.com/apple/iphone-13-series/">iPhone 13 Series</a></li>
+                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1290"><a href="http://localhost:8080/apple/iphone-11-series/">iPhone 11 Series</a></li>
+                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1291"><a href="http://localhost:8080/apple/iphone-12-series/">iPhone 12 Series</a></li>
+                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1292"><a href="http://localhost:8080/apple/iphone-se/">iPhone SE</a></li>
+                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1293"><a href="http://localhost:8080/apple/iphone-13-series/">iPhone 13 Series</a></li>
                               </ul>
                            </li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-36"><a href="https://cellphones.mauthemewp.com/samsung/">Samsung</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-39"><a href="https://cellphones.mauthemewp.com/xiaomi/">Xiaomi</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-33"><a href="https://cellphones.mauthemewp.com/oppo/">OPPO</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1283"><a href="https://cellphones.mauthemewp.com/nokia/">Nokia</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1286"><a href="https://cellphones.mauthemewp.com/realme/">Realme</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1288"><a href="https://cellphones.mauthemewp.com/vsmart/">Vsmart</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-29"><a href="https://cellphones.mauthemewp.com/asus/">ASUS</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1287"><a href="https://cellphones.mauthemewp.com/vivo/">Vivo</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1284"><a href="https://cellphones.mauthemewp.com/oneplus/">OnePlus</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1285"><a href="https://cellphones.mauthemewp.com/nubia/">Nubia</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1294"><a href="https://cellphones.mauthemewp.com/dien-thoai-pho-thong/">Điện thoại phổ thông</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-36"><a href="http://localhost:8080/samsung/">Samsung</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-39"><a href="http://localhost:8080/xiaomi/">Xiaomi</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-33"><a href="http://localhost:8080/oppo/">OPPO</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1283"><a href="http://localhost:8080/nokia/">Nokia</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1286"><a href="http://localhost:8080/realme/">Realme</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1288"><a href="http://localhost:8080/vsmart/">Vsmart</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-29"><a href="http://localhost:8080/asus/">ASUS</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1287"><a href="http://localhost:8080/vivo/">Vivo</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1284"><a href="http://localhost:8080/oneplus/">OnePlus</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1285"><a href="http://localhost:8080/nubia/">Nubia</a></li>
+                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1294"><a href="http://localhost:8080/dien-thoai-pho-thong/">Điện thoại phổ thông</a></li>
                         </ul>
                      </li>
-                     <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-1357 menu-item-design-default has-dropdown has-icon-left has-child" aria-expanded="false">
-                        <a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/laptop/" class="nav-top-link" aria-expanded="false" aria-haspopup="menu"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-2.png" alt="">Laptop, PC, Màn hình</a>
-                        <button class="toggle" aria-label="Chuyển đổi"><i class="icon-angle-down" aria-hidden="true"></i></button>
-                        <ul class="sub-menu">
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-1632 nav-dropdown-col has-child" aria-expanded="false">
-                              <a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/laptop/mac/">Mac</a>
-                              <button class="toggle" aria-label="Chuyển đổi"><i class="icon-angle-down" aria-hidden="true"></i></button>
-                              <ul class="sub-menu nav-column">
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1640"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/laptop/mac/macbook-air/">MacBook Air</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1641"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/laptop/mac/macbook-pro/">Macbook Pro</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1639"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/laptop/mac/mac-mini/">Mac mini</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1638"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/laptop/mac/imac/">iMac</a></li>
-                              </ul>
-                           </li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1629"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/laptop/dell/">Dell</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1633"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/laptop/microsoft-surface/">Microsoft Surface</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1634"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/laptop/msi/">MSI</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1630"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/laptop/hp/">HP</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1631"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/laptop/lenovo/">Lenovo</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1635"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/man-hinh/">Màn hình</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1636"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/may-in/">Máy in</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1637"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/may-tinh-de-ban/">Máy tính để bàn</a></li>
-                        </ul>
-                     </li>
-                     <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-59 menu-item-design-default has-icon-left"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/tablet/" class="nav-top-link"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-3.png" alt="">Tablet</a></li>
-                     <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-66 menu-item-design-default has-dropdown has-icon-left has-child" aria-expanded="false">
-                        <a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/am-thanh/" class="nav-top-link" aria-expanded="false" aria-haspopup="menu"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-4.png" alt="">Âm thanh</a>
-                        <button class="toggle" aria-label="Chuyển đổi"><i class="icon-angle-down" aria-hidden="true"></i></button>
-                        <ul class="sub-menu">
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-1273 nav-dropdown-col has-child" aria-expanded="false">
-                              <a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/am-thanh/loa/">Loa</a>
-                              <button class="toggle" aria-label="Chuyển đổi"><i class="icon-angle-down" aria-hidden="true"></i></button>
-                              <ul class="sub-menu nav-column">
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1274"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/am-thanh/loa/loa-bluetooth/">Loa Bluetooth</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1275"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/am-thanh/loa/loa-keo/">Loa kéo</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1276"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/am-thanh/loa/loa-tivi-soundbar/">Loa Tivi | Soundbar</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1277"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/am-thanh/loa/loa-vi-tinh/">Loa vi tính</a></li>
-                              </ul>
-                           </li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-1278 nav-dropdown-col has-child" aria-expanded="false">
-                              <a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/am-thanh/tai-nghe/">Tai nghe</a>
-                              <button class="toggle" aria-label="Chuyển đổi"><i class="icon-angle-down" aria-hidden="true"></i></button>
-                              <ul class="sub-menu nav-column">
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1279"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/am-thanh/tai-nghe/tai-nghe-bluetooth/">Tai nghe Bluetooth</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1280"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/am-thanh/tai-nghe/tai-nghe-chup-tai/">Tai nghe chụp tai</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1281"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/am-thanh/tai-nghe/tai-nghe-khong-day/">Tai nghe không dây</a></li>
-                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1282"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/am-thanh/tai-nghe/tai-nghe-nhet-tai/">Tai nghe nhét tai</a></li>
-                              </ul>
-                           </li>
-                        </ul>
-                     </li>
-                     <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-77 menu-item-design-default has-dropdown has-icon-left has-child" aria-expanded="false">
-                        <a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dong-ho/" class="nav-top-link" aria-expanded="false" aria-haspopup="menu"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-5.png" alt="">Đồng hồ</a>
-                        <button class="toggle" aria-label="Chuyển đổi"><i class="icon-angle-down" aria-hidden="true"></i></button>
-                        <ul class="sub-menu">
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-88"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dong-ho/dong-ho-xiaomi/">Xiaomi</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-83"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dong-ho/dong-ho-huawei/">Huawei</a></li>
-                           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-84"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/dong-ho/dong-ho-oppo/">OPPO</a></li>
-                        </ul>
-                     </li>
-                     <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-90 menu-item-design-default has-icon-left"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/nha-thong-minh/" class="nav-top-link"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-6.png" alt="">Nhà thông minh</a></li>
-                     <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-96 menu-item-design-default has-icon-left"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/phu-kien/" class="nav-top-link"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-7.png" alt="">Phụ kiện</a></li>
-                     <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-108 menu-item-design-default has-icon-left"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/thu-cu/" class="nav-top-link"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/icon-menu_08.png" alt="">Thu cũ</a></li>
-                     <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-105 menu-item-design-default has-icon-left"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/hang-cu/" class="nav-top-link"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/icon-menu_09.png" alt="">Hàng cũ</a></li>
-                     <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-107 menu-item-design-default has-icon-left"><a href="https://cellphones.mauthemewp.com/danh-muc-san-pham/sim-the/" class="nav-top-link"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-10.png" alt="">Sim thẻ</a></li>
-                     <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-217 menu-item-design-default has-icon-left"><a href="https://cellphones.mauthemewp.com/category/tin-cong-nghe/" class="nav-top-link"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-11.png" alt="">Tin công nghệ</a></li>
-                     <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-216 menu-item-design-default has-icon-left"><a href="https://cellphones.mauthemewp.com/category/khuyen-mai/" class="nav-top-link"><img class="ux-menu-icon" width="20" height="20" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/menu-icon-12.png" alt="">Khuyến mại</a></li>
                   </ul>
                </div>
             </div>
@@ -110,12 +46,12 @@
          <div class="swiper-container">
             <div class="mySwiper2 swiper-initialized swiper-horizontal swiper-backface-hidden">
                <div class="swiper-wrapper" id="swiper-wrapper-b8945dddd39e32a4" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-3700px, 0px, 0px); transition-delay: 0ms;">
-                  <div class="swiper-slide swiper-slide-next" style="width: 740px;" role="group" aria-label="3 / 6" data-swiper-slide-index="2"><a href=""><img src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/samsung_mua_nhi_u.png"></a></div>
-                  <div class="swiper-slide" style="width: 740px;" role="group" aria-label="4 / 6" data-swiper-slide-index="3"><a href=""><img src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/T3300-new.png"></a></div>
-                  <div class="swiper-slide" style="width: 740px;" role="group" aria-label="5 / 6" data-swiper-slide-index="4"><a href=""><img src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/TV.png"></a></div>
-                  <div class="swiper-slide" role="group" aria-label="6 / 6" data-swiper-slide-index="5" style="width: 740px;"><a href=""><img src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/13ACL6.png"></a></div>
-                  <div class="swiper-slide swiper-slide-prev" style="width: 740px;" role="group" aria-label="1 / 6" data-swiper-slide-index="0"><a href=""><img src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/A73.png"></a></div>
-                  <div class="swiper-slide swiper-slide-active" style="width: 740px;" role="group" aria-label="2 / 6" data-swiper-slide-index="1"><a href=""><img src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/iPhone_11-new.png"></a></div>
+                  <div class="swiper-slide swiper-slide-next" style="width: 740px;" role="group" aria-label="3 / 6" data-swiper-slide-index="2"><a href=""><img src="http://localhost:8080/assets/img/banner/samsung_mua_nhi_u.png"></a></div>
+                  <div class="swiper-slide" style="width: 740px;" role="group" aria-label="4 / 6" data-swiper-slide-index="3"><a href=""><img src="http://localhost:8080/assets/img/banner/T3300-new.png"></a></div>
+                  <div class="swiper-slide" style="width: 740px;" role="group" aria-label="5 / 6" data-swiper-slide-index="4"><a href=""><img src="http://localhost:8080/assets/img/banner/TV.png"></a></div>
+                  <div class="swiper-slide" role="group" aria-label="6 / 6" data-swiper-slide-index="5" style="width: 740px;"><a href=""><img src="http://localhost:8080/assets/img/banner/13ACL6.png"></a></div>
+                  <div class="swiper-slide swiper-slide-prev" style="width: 740px;" role="group" aria-label="1 / 6" data-swiper-slide-index="0"><a href=""><img src="http://localhost:8080/assets/img/banner/A73.png"></a></div>
+                  <div class="swiper-slide swiper-slide-active" style="width: 740px;" role="group" aria-label="2 / 6" data-swiper-slide-index="1"><a href=""><img src="http://localhost:8080/assets/img/banner/iPhone_11-new.png"></a></div>
                </div>
                <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-b8945dddd39e32a4">
                   <svg class="swiper-navigation-icon" width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -168,15 +104,125 @@
             </script>
          </div>
       </div>
+      <%
+         if (kh == null) { 
+         %>
       <div class="col large-3 hide-for-medium box_right">
          <div class="image-ads">
-            <div class="item-image-ads"><a href=""><img src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/banner-top-1.png"></a></div>
-            <div class="item-image-ads"><a href=""><img src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/banner-top-2.png"></a></div>
-            <div class="item-image-ads"><a href=""><img src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/banner-top-3.png"></a></div>
+            <div class="item-image-ads">
+               <div class="d-none d-md-block shadow rounded-3 bg-white p-3 text-dark">
+                  <div class="fw-bold d-flex">
+                     Trần Hữu Cường
+                     <div class="mt-1 d-flex gap-1" style="margin-left:10px">
+                        <div class="badge bg-dark text-uppercase p-1" style="color:#fff;height:1rem">S-Null</div>
+                     </div>
+                  </div>
+                  <div class="d-flex align-items-center gap-1">
+                     <div class="text-muted" style="font-size: 12px;">086*****34</div>
+                     <button class="btn btn-link p-0 text-muted">
+                        <!-- SVG Icon -->
+                     </button>
+                  </div>
+                  <div class="mb-2 d-flex align-items-center gap-2" style="font-size: 12px;">
+                     <div class="d-flex align-items-center justify-content-center rounded-circle p-1" style="background: linear-gradient(to bottom, #DC3545, #FF5733); width: 30px; height: 30px;">
+                        <!-- SVG Coin Icon -->
+                     </div>
+                     <a href="https://smember.com.vn" class="d-flex flex-column text-decoration-none ">
+                     <span class="fw-bold" style="font-size:16px;">0đ</span>
+                     <span class="text-muted" style="font-size: 10px;">Tổng tiền tích lũy</span>
+                     </a>
+                     <svg class="ms-auto" width="16" height="16" fill="currentColor">
+                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 4 8 8-8 8"></path>
+                     </svg>
+                  </div>
+                  <a href="https://smember.com.vn/promotion" class="d-flex align-items-center gap-2 text-decoration-none mb-2" style="font-size: 12px;">
+                     <div class="d-flex align-items-center justify-content-center rounded-circle p-1" style="background: linear-gradient(to bottom, #DC3545, #FF5733); width: 30px; height: 30px;">
+                        <!-- SVG Icon -->
+                     </div>
+                     <span>Xem ưu đãi của bạn</span>
+                     <svg class="ms-auto" width="16" height="16" fill="currentColor">
+                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 4 8 8-8 8 mb-2"></path>
+                     </svg>
+                  </a>
+                  <a href="https://smember.com.vn/promotion" class="d-flex align-items-center gap-2 text-decoration-none mb-2" style="font-size: 12px;">
+                     <div class="d-flex align-items-center justify-content-center rounded-circle p-1" style="background: linear-gradient(to bottom, #DC3545, #FF5733); width: 30px; height: 30px;">
+                        <!-- SVG Icon -->
+                     </div>
+                     <span>Xem ưu đãi của bạn</span>
+                     <svg class="ms-auto" width="16" height="16" fill="currentColor">
+                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 4 8 8-8 8"></path>
+                     </svg>
+                  </a>
+                  <a href="https://smember.com.vn/promotion" class="d-flex align-items-center gap-2 text-decoration-none mb-2" style="font-size: 12px;">
+                     <div class="d-flex align-items-center justify-content-center rounded-circle p-1" style="background: linear-gradient(to bottom, #DC3545, #FF5733); width: 30px; height: 30px;">
+                        <!-- SVG Icon -->
+                     </div>
+                     <span>Xem ưu đãi của bạn</span>
+                     <svg class="ms-auto" width="16" height="16" fill="currentColor">
+                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 4 8 8-8 8"></path>
+                     </svg>
+                  </a>
+                  <a href="https://smember.com.vn/promotion" class="d-flex align-items-center gap-2 text-decoration-none mb-2" style="font-size: 12px;">
+                     <div class="d-flex align-items-center justify-content-center rounded-circle p-1" style="background: linear-gradient(to bottom, #DC3545, #FF5733); width: 30px; height: 30px;">
+                        <!-- SVG Icon -->
+                     </div>
+                     <span>Xem ưu đãi của bạn</span>
+                     <svg class="ms-auto" width="16" height="16" fill="currentColor">
+                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 4 8 8-8 8"></path>
+                     </svg>
+                  </a>
+                  <a href="https://smember.com.vn/promotion" class="d-flex align-items-center gap-2 text-decoration-none mb-2" style="font-size: 12px;">
+                     <div class="d-flex align-items-center justify-content-center rounded-circle p-1" style="background: linear-gradient(to bottom, #DC3545, #FF5733); width: 30px; height: 30px;">
+                        <!-- SVG Icon -->
+                     </div>
+                     <span>Xem ưu đãi của bạn</span>
+                     <svg class="ms-auto" width="16" height="16" fill="currentColor">
+                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 4 8 8-8 8"></path>
+                     </svg>
+                  </a>
+               </div>
+            </div>
          </div>
       </div>
-      <div class="menu-mobile">
+      <% 
+         } else { 
+         %>
+      <!-- Container chính -->
+      <div class="d-flex flex-column w-100 col large-3 " style="max-height: 496px; min-width: 224px; gap: 8px;">
+         <!-- Mobile Scrollable Menu -->
+         <div class="d-block d-md-none mb-0">
+            <div class="overflow-auto" style="white-space: nowrap;">
+               <a href="/danh-sach-khuyen-mai" class="d-inline-flex flex-column align-items-center justify-content-center text-center me-2" style="width: 25%;">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-light mb-1" style="width: 40px; height: 40px;">
+                     <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:32:32/q:90/plain/https://cellphones.com.vn/media/wysiwyg/icon_hot_deal_home_190825.png" alt="Deal siêu HOT" width="32" height="32" class="img-fluid">
+                  </div>
+                  <p class="mb-0" style="font-size: 12px; line-height: 1.2;">Deal<br>siêu HOT</p>
+               </a>
+               <a href="/uu-dai-sinh-vien-hoc-sinh" class="d-inline-flex flex-column align-items-center justify-content-center text-center me-2" style="width: 25%;">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-light mb-1" style="width: 40px; height: 40px;">
+                     <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:32:32/q:90/plain/https://cellphones.com.vn/media/wysiwyg/icon_edu_promotion_home_190825.png" alt="Ưu đãi cho giáo dục" width="32" height="32" class="img-fluid">
+                  </div>
+                  <p class="mb-0" style="font-size: 12px; line-height: 1.2;">Ưu đãi<br>cho giáo dục</p>
+               </a>
+               <!-- Thêm các items khác tương tự -->
+            </div>
+         </div>
+         <!-- Desktop User Card -->
+         <!-- Desktop Menu List -->
+         <div class="d-none d-md-block overflow-auto shadow rounded-3 bg-white p-3" style="max-height: 50vh; font-size: 12px;">
+            <div class="mb-2">
+               <a href="/uu-dai-sinh-vien-hoc-sinh" class="d-block text-center mb-1 py-1 rounded" style="background-color: rgba(0,0,0,0.05); text-decoration: none;">Ưu đãi cho giáo dục</a>
+               <a href="https://smember.com.vn/promotion/s-edu" class="d-flex align-items-center gap-2 text-decoration-none mb-1">
+               <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:18:18/q:90/plain/https://cellphones.com.vn/media/wysiwyg/icon_student_home_190825.png" width="18" height="18">
+               <span>Đăng ký <b>nhận ưu đãi</b></span>
+               </a>
+               <!-- Thêm các items khác tương tự -->
+            </div>
+         </div>
       </div>
+      <% 
+         } 
+         %>
    </div>
    <section class="section" id="section_804548742">
       <div class="section-bg fill">
@@ -188,7 +234,7 @@
                   <div class="img has-hover hide-for-medium x md-x lg-x y md-y lg-y" id="image_938452842">
                      <a class="" href="#">
                         <div class="img-inner dark">
-                           <img fetchpriority="high" decoding="async" width="1200" height="75" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/09/km-o-Special_Banner_1200x75_6.jpg" class="attachment-original size-original" alt="">						
+                           <img fetchpriority="high" decoding="async" width="1200" height="75" src="http://localhost:8080/assets/img/banner/km-o-Special_Banner_1200x75_6.jpg" class="attachment-original size-original" alt="">						
                         </div>
                      </a>
                      <style>
@@ -199,7 +245,7 @@
                   </div>
                   <div class="img has-hover show-for-medium x md-x lg-x y md-y lg-y" id="image_975644744">
                      <div class="img-inner dark" style="margin:0px 0px 10px 0px;">
-                        <img decoding="async" width="800" height="150" src="https://cellphones.mauthemewp.com/wp-content/uploads/2021/08/banner-ads-mobile.png" class="attachment-original size-original" alt="">						
+                        <img decoding="async" width="800" height="150" src="http://localhost:8080/wp-content/uploads/2021/08/banner-ads-mobile.png" class="attachment-original size-original" alt="">						
                      </div>
                      <style>
                         #image_975644744 {
@@ -286,20 +332,29 @@
                                           <c:choose>
                                              <c:when test="${sp.giaBanGG != null && sp.giaBanGG < sp.giaBan}">
                                                 <ins>
-                                                <span class="woocommerce-Price-amount amount">
-                                                <bdi><fmt:formatNumber value="${sp.giaBanGG}" type="number" minFractionDigits="0"/><span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                                                </span>
+                                                   <span class="woocommerce-Price-amount amount">
+                                                      <bdi>
+                                                         <fmt:formatNumber value="${sp.giaBanGG}" type="number" minFractionDigits="0"/>
+                                                         <span class="woocommerce-Price-currencySymbol">₫</span>
+                                                      </bdi>
+                                                   </span>
                                                 </ins>
                                                 <del>
-                                                <span style="display:none;">Giá niêm yết: </span>
-                                                <span class="woocommerce-Price-amount amount">
-                                                <bdi><fmt:formatNumber value="${sp.giaBan}" type="number"/><span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                                                </span>
+                                                   <span style="display:none;">Giá niêm yết: </span>
+                                                   <span class="woocommerce-Price-amount amount">
+                                                      <bdi>
+                                                         <fmt:formatNumber value="${sp.giaBan}" type="number"/>
+                                                         <span class="woocommerce-Price-currencySymbol">₫</span>
+                                                      </bdi>
+                                                   </span>
                                                 </del>
                                              </c:when>
                                              <c:otherwise>
                                                 <span class="woocommerce-Price-amount amount">
-                                                <bdi><fmt:formatNumber value="${sp.giaBan}" type="number"/><span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                                                   <bdi>
+                                                      <fmt:formatNumber value="${sp.giaBan}" type="number"/>
+                                                      <span class="woocommerce-Price-currencySymbol">₫</span>
+                                                   </bdi>
                                                 </span>
                                              </c:otherwise>
                                           </c:choose>
@@ -346,7 +401,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/phu-kien-apple.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/phu-kien-apple.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -360,7 +415,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/pin-du-phong.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/pin-du-phong.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -374,7 +429,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/dan-man-hinh.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/dan-man-hinh.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -388,7 +443,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/day-deo-dong-ho.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/day-deo-dong-ho.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -402,7 +457,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/the-nho-usb.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/the-nho-usb.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -416,7 +471,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/camera.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/camera.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -430,7 +485,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/thiet-bi-mang.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/thiet-bi-mang.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -444,7 +499,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/balo.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/balo.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -458,7 +513,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/cap-sac.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/cap-sac.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -472,7 +527,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/bao-da-op-lung.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/bao-da-op-lung.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -486,7 +541,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/o-cung.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/o-cung.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -500,7 +555,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/chuot-ban-phim.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/chuot-ban-phim.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -514,7 +569,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/gaming-gear.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/gaming-gear.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -528,7 +583,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/quat-mini.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/quat-mini.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -542,7 +597,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/phu-kien-chup-anh.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/phu-kien-chup-anh.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -556,7 +611,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/phu-kien-laptop.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/phu-kien-laptop.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -570,7 +625,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/ram.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/ram.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -584,7 +639,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/cpu.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/cpu.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -598,7 +653,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/card-man-hinh.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/card-man-hinh.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>
@@ -612,7 +667,7 @@
                         <div class="icon-box-img" style="width: 110px">
                            <div class="icon">
                               <div class="icon-inner">
-                                 <img loading="lazy" decoding="async" width="262" height="300" src="https://cellphones.mauthemewp.com/wp-content/uploads/2022/04/mainbroad.png" class="attachment-medium size-medium" alt="">					
+                                 <img loading="lazy" decoding="async" width="262" height="300" src="http://localhost:8080/wp-content/uploads/2022/04/mainbroad.png" class="attachment-medium size-medium" alt="">					
                               </div>
                            </div>
                         </div>

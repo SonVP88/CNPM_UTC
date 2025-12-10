@@ -37,13 +37,12 @@
                      <li class="header-search-form search-form html relative has-icon">
                         <div class="header-search-form-wrapper">
                            <div class="searchform-wrapper ux-search-box relative is-normal">
-                              <form role="search" method="post" class="searchform" action="/hien-thi-shop">
+                              <form role="search" method="get" class="searchform" action="/hien-thi-shop">
                                  <div class="flex-row relative">
                                     <div class="flex-col flex-grow">
                                        <label class="screen-reader-text"
-                                          for="woocommerce-product-search-field-1">Tìm kiếm:</label>
-                                       <input type="search" id="woocommerce-product-search-field-1"
-                                          class="search-field mb-0" placeholder="Bạn cần tìm gì?" value=""
+                                          for="searchInput">Tìm kiếm:</label>
+                                       <input type="search" id="searchInput" class="search-field mb-0" placeholder="Bạn cần tìm gì?" value="${keytimkiem}"
                                           name="tenSanPham" autocomplete="off">
                                        <input type="hidden" name="post_type" value="product">
                                     </div>
@@ -57,7 +56,7 @@
                                  </div>
                                  <div class="live-search-results text-left z-top">
                                     <div class="autocomplete-suggestions"
-                                       style="position: absolute; display: none; max-height: 300px; z-index: 9999;">
+                                       style="position: absolute; display: none; max-height: 303px; z-index: 9999; background-color: #fff;width: 340px;">
                                     </div>
                                  </div>
                               </form>

@@ -1,4 +1,4 @@
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/assets/js/cart.js"></script>
 <script src="/assets/js/vendor/jquery-1.12.0.min.js"></script>
 <script src="/assets/js/popper.js"></script>
@@ -12,4 +12,6 @@
 <script src="/assets/js/singleproduct.js"></script>
 <script src="/assets/js/toast.js"></script>
 <script src="/assets/js/checkout.js"></script>
+<script src="/assets/js/sidebar.js"></script>
 <script src="/assets/js/shop.js"></script>
+<script src="/assets/js/search.js"></script>

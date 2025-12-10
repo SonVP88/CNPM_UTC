@@ -426,106 +426,174 @@ public class SmartPhonesController {
     }
 
     //Chưa đăng nhập
-    @GetMapping("/hien-thi-shop")
-    public String hienThi1(Model model,
-                           @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                           @RequestParam(value = "type", required = false) Long type,
-                           @RequestParam(value = "range", required = false) String range) {
-        int limit = 9; // Số lượng sản phẩm trên mỗi trang
-        int offset = (page - 1) * limit; // Offset để truy vấn từ bản ghi nào
-
-
-        int totalItem = service.getTotalItem(type, range, null, null); // Số lượng sản phẩm trong cơ sở dữ liệu (tổng số)
-        int totalPage = (int) Math.ceil((double) totalItem / limit);
-
-
-        List<SanPhamHTDTO> chiTietSanPhamList;
-
-        if (range != null && !range.isEmpty()) {
-            // Xử lý khi có range từ URL
-            String[] priceRange = range.split("-");
-
-            if (priceRange.length == 2) {
-                try {
-                    BigDecimal minPrice = new BigDecimal(priceRange[0]);
-                    BigDecimal maxPrice = new BigDecimal(priceRange[1]);
-
-                    if (type != null) {
-                        // Lọc sản phẩm theo nhà sản xuất và khoảng giá
-                        if (range.equals("0-11000")) {
-                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(type, BigDecimal.valueOf(0), BigDecimal.valueOf(10999999), offset, limit);
-                        } else if (range.equals("11000-15000")) {
-                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(type, BigDecimal.valueOf(11000000), BigDecimal.valueOf(15000000), offset, limit);
-                        } else if (range.equals("15000-999999999")) {
-                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(type, BigDecimal.valueOf(15000000), BigDecimal.valueOf(999999999), offset, limit);
-                        } else {
-                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(type, null, null, offset, limit);
-                        }
-                    } else {
-                        // Lọc sản phẩm chỉ theo khoảng giá
-                        if (range.equals("0-11000")) {
-                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(null, BigDecimal.valueOf(0), BigDecimal.valueOf(10999999), offset, limit);
-                        } else if (range.equals("11000-15000")) {
-                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(null, BigDecimal.valueOf(11000000), BigDecimal.valueOf(15000000), offset, limit);
-                        } else if (range.equals("15000-999999999")) {
-                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(null, BigDecimal.valueOf(15000000), BigDecimal.valueOf(999999999), offset, limit);
-                        } else {
-                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(null, null, null, offset, limit);
-                        }
-                    }
-                } catch (NumberFormatException e) {
-                    // Xử lý nếu giá không đúng định dạng số
-                    e.printStackTrace();
-                    chiTietSanPhamList = new ArrayList<>(); // hoặc xử lý khác theo yêu cầu
-                }
-            } else {
-                // Xử lý nếu range không hợp lệ
-                chiTietSanPhamList = new ArrayList<>(); // hoặc xử lý khác theo yêu cầu
-            }
-        } else {
-            // Xử lý khi không có range từ URL
-            if (type != null) {
-                chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(type, null, null, offset, limit);
-            } else {
-                chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(null, null, null, offset, limit);
-            }
-        }
-
-
-        model.addAttribute("ctsps", chiTietSanPhamList);
-
-        List<NSX> nsxList = nsxRepository.findAll();
-        model.addAttribute("listNSX", nsxList);
-
-        List<DungLuong> dungLuongList = dungLuongRepository.findAll();
-        model.addAttribute("listDungLuong", dungLuongList);
-
-        List<MauSac> mauSacList = mauSacRepository.findAll();
-        model.addAttribute("listMS", mauSacList);
-
-        model.addAttribute("page", page);
-        model.addAttribute("totalItems", totalItem);
-        model.addAttribute("totalPage", totalPage); // Truyền tổng số trang vào view
-        model.addAttribute("bodyPage", "/WEB-INF/views/chuadn/shopchuadn.jsp");
-        model.addAttribute("pageTitle", "Trang chủ");
-        return "/layout/layout";
-    }
-
+//    @GetMapping("/hien-thi-shop")
+//    public String hienThi1(Model model,
+//                           @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+//                           @RequestParam(value = "type", required = false) Long type,
+//                           @RequestParam(value = "range", required = false) String range) {
+//        int limit = 9; // Số lượng sản phẩm trên mỗi trang
+//        int offset = (page - 1) * limit; // Offset để truy vấn từ bản ghi nào
+//
+//
+//        int totalItem = service.getTotalItem(type, range, null, null); // Số lượng sản phẩm trong cơ sở dữ liệu (tổng số)
+//        int totalPage = (int) Math.ceil((double) totalItem / limit);
+//
+//
+//        List<SanPhamHTDTO> chiTietSanPhamList;
+//
+//        if (range != null && !range.isEmpty()) {
+//            // Xử lý khi có range từ URL
+//            String[] priceRange = range.split("-");
+//
+//            if (priceRange.length == 2) {
+//                try {
+//                    BigDecimal minPrice = new BigDecimal(priceRange[0]);
+//                    BigDecimal maxPrice = new BigDecimal(priceRange[1]);
+//
+//                    if (type != null) {
+//                        // Lọc sản phẩm theo nhà sản xuất và khoảng giá
+//                        if (range.equals("0-11000")) {
+//                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(type, BigDecimal.valueOf(0), BigDecimal.valueOf(10999999), offset, limit);
+//                        } else if (range.equals("11000-15000")) {
+//                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(type, BigDecimal.valueOf(11000000), BigDecimal.valueOf(15000000), offset, limit);
+//                        } else if (range.equals("15000-999999999")) {
+//                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(type, BigDecimal.valueOf(15000000), BigDecimal.valueOf(999999999), offset, limit);
+//                        } else {
+//                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(type, null, null, offset, limit);
+//                        }
+//                    } else {
+//                        // Lọc sản phẩm chỉ theo khoảng giá
+//                        if (range.equals("0-11000")) {
+//                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(null, BigDecimal.valueOf(0), BigDecimal.valueOf(10999999), offset, limit);
+//                        } else if (range.equals("11000-15000")) {
+//                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(null, BigDecimal.valueOf(11000000), BigDecimal.valueOf(15000000), offset, limit);
+//                        } else if (range.equals("15000-999999999")) {
+//                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(null, BigDecimal.valueOf(15000000), BigDecimal.valueOf(999999999), offset, limit);
+//                        } else {
+//                            chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(null, null, null, offset, limit);
+//                        }
+//                    }
+//                } catch (NumberFormatException e) {
+//                    // Xử lý nếu giá không đúng định dạng số
+//                    e.printStackTrace();
+//                    chiTietSanPhamList = new ArrayList<>(); // hoặc xử lý khác theo yêu cầu
+//                }
+//            } else {
+//                // Xử lý nếu range không hợp lệ
+//                chiTietSanPhamList = new ArrayList<>(); // hoặc xử lý khác theo yêu cầu
+//            }
+//        } else {
+//            // Xử lý khi không có range từ URL
+//            if (type != null) {
+//                chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(type, null, null, offset, limit);
+//            } else {
+//                chiTietSanPhamList = sanPhamViewRepository.fetchSanPhamHTDTO(null, null, null, offset, limit);
+//            }
+//        }
+//
+//
+//        model.addAttribute("ctsps", chiTietSanPhamList);
+//
+//        List<NSX> nsxList = nsxRepository.findAll();
+//        model.addAttribute("listNSX", nsxList);
+//
+//        List<DungLuong> dungLuongList = dungLuongRepository.findAll();
+//        model.addAttribute("listDungLuong", dungLuongList);
+//
+//        List<MauSac> mauSacList = mauSacRepository.findAll();
+//        model.addAttribute("listMS", mauSacList);
+//
+//        model.addAttribute("page", page);
+//        model.addAttribute("totalItems", totalItem);
+//        model.addAttribute("totalPage", totalPage); // Truyền tổng số trang vào view
+//        model.addAttribute("bodyPage", "/WEB-INF/views/chuadn/shopchuadn.jsp");
+//        model.addAttribute("pageTitle", "Trang chủ");
+//        return "/layout/layout";
+//    }
 
     @PostMapping("/hien-thi-shop")
-    public String timKiemSanPham1(@RequestParam("tenSanPham") String tenSanPham, Model model) {
-        List<SanPhamHTDTO> danhSachTimKiem = sanPhamViewRepository.SearchSanPhamHTDTO(tenSanPham);
-        long count =danhSachTimKiem.size();
+    public String timKiemSanPham1(@RequestParam("tenSanPham") String tenSanPham,
+                                  @RequestParam(defaultValue = "0") int page,
+                                  Model model) {
+        int size = 20; // số lượng bản ghi hiển thị mỗi trang
+        List<SanPhamHTDTO> danhSachSanPham = sanPhamViewRepository.findSanPhamPaginated(tenSanPham, page, size);
+        Long totalCount = sanPhamViewRepository.countSanPham(tenSanPham);
+        int remaining = Math.toIntExact(totalCount - (page * size + danhSachSanPham.size()));
         List<NSX> nsxList = nsxRepository.findAll();
-        String keytimkiem=tenSanPham;
+        String keytimkiem = tenSanPham;
+        model.addAttribute("remaining", remaining);
         model.addAttribute("keytimkiem", keytimkiem);
         model.addAttribute("listNSX", nsxList);
-        model.addAttribute("count", count);
-        model.addAttribute("ctsps", danhSachTimKiem);
+        model.addAttribute("ctsps", danhSachSanPham);
+        model.addAttribute("totalCount", totalCount);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageSize", size);
         model.addAttribute("bodyPage", "/WEB-INF/views/chuadn/shopchuadn.jsp");
         model.addAttribute("pageTitle", "Trang chủ");
         return "/layout/layout";
     }
+
+    @GetMapping("/hien-thi-shop")
+    public String hienThiShop(@RequestParam(required = false) String tenSanPham,
+                              @RequestParam(defaultValue = "0") int page,
+                              Model model) {
+        int size = 20; // số lượng bản ghi hiển thị mỗi trang
+        List<SanPhamHTDTO> danhSachSanPham = sanPhamViewRepository.findSanPhamPaginated(tenSanPham, page, size);
+        Long totalCount = sanPhamViewRepository.countSanPham(tenSanPham);
+        int remaining = Math.toIntExact(totalCount - (page * size + danhSachSanPham.size()));
+        List<NSX> nsxList = nsxRepository.findAll();
+        String keytimkiem = tenSanPham;
+        model.addAttribute("remaining", remaining);
+        model.addAttribute("keytimkiem", keytimkiem);
+        model.addAttribute("listNSX", nsxList);
+        model.addAttribute("ctsps", danhSachSanPham);
+        model.addAttribute("totalCount", totalCount);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageSize", size);
+        model.addAttribute("bodyPage", "/WEB-INF/views/chuadn/shopchuadn.jsp");
+        model.addAttribute("pageTitle", "Trang chủ");
+        return "/layout/layout";
+    }
+    @GetMapping("/api/tim-kiem-san-pham")
+    @ResponseBody
+    public List<SanPhamHTDTO> timKiemSanPham(@RequestParam("keyword") String keyword) {
+        // Tìm 10 kết quả đầu tiên
+        return sanPhamViewRepository.findSanPhamPaginated(keyword, 0, 10);
+    }
+
+    @GetMapping("/hien-thi-shop/load-more")
+    @ResponseBody
+    public Map<String, Object> loadMoreSanPham(
+            @RequestParam String tenSanPham,
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam(required = false) String sort) {
+
+        List<SanPhamHTDTO> products;
+
+        // Kiểm tra sort
+        if ("asc".equalsIgnoreCase(sort)) {
+            products = sanPhamViewRepository.findSanPhamPaginatedSorted(tenSanPham, page, size, true); // true = tăng dần
+        } else if ("desc".equalsIgnoreCase(sort)) {
+            products = sanPhamViewRepository.findSanPhamPaginatedSorted(tenSanPham, page, size, false); // false = giảm dần
+        } else {
+            products = sanPhamViewRepository.findSanPhamPaginated(tenSanPham, page, size); // không sort
+        }
+
+        long totalCount = sanPhamViewRepository.countSanPham(tenSanPham);
+        long remaining = totalCount - ((page + 1) * size);
+        if (remaining < 0) remaining = 0;
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("products", products);
+        response.put("remaining", remaining);
+
+        return response;
+    }
+
+
+
+
 
     @GetMapping("/viewCDN/{tenSanPham}")
     public String ViewUpdateChuaDangNhap(Model model, @PathVariable(name = "tenSanPham") String tenSanPham) {
