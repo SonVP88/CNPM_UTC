@@ -63,10 +63,7 @@ public class SanPham {
     @Column(name = "lastupdate")
     private Date lastUpdate;
 
-    @Column(name = "Hangsanxuat")
-    private String Hangsanxuat;
-
-//    @Column(name = "hinhanhurl")
+//   @Column(name = "hinhanhurl")
 //    private String hinhAnhUrl;
 
 //    @Column(name = "giaBan")

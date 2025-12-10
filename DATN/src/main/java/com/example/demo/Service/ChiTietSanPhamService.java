@@ -5,8 +5,10 @@ import com.example.demo.Dto.ListDungLuongOfSanPhamDTO;
 import com.example.demo.Dto.ListMauSacOfSanPhamDTO;
 import com.example.demo.Dto.Request.ChiTietSanPhamRequest;
 import com.example.demo.Dto.Response.DetailSanPhamResponse;
+import com.example.demo.Dto.SanPhamHTDTO;
 import com.example.demo.Entity.ChiTietSanPham;
 import com.example.demo.Entity.GiamGiaChiTietSanPham;
+import com.example.demo.Entity.NSX;
 import com.example.demo.Entity.SanPham;
 import com.example.demo.Repository.*;
 import com.example.demo.Utils.Constants;
@@ -245,5 +247,19 @@ public class ChiTietSanPhamService {
         } else {
             return chiTietSanPhamRepository.findBySanPham_MaSanPham(sanPhamId);
         }
+    }
+
+    public NSX getSanPhamByNSX(Long maSanPham) {
+        return chiTietSanPhamRepository.findNSXByMaSanPham(maSanPham);
+    }
+
+    public List<DetailSanPhamResponse> findTop5SanPhamGanNhat(Long maSP, Long maNSX) {
+        Pageable pageable = PageRequest.of(0, 5);
+        return sanPhamRepository.findTop5SanPhamGanNhat(maSP, maNSX, pageable);
+    }
+
+    public List<ChiTietSanPham> findByNsxMaNSXAndTrangThai(Long maNsx) {
+        Pageable pageable = PageRequest.of(0, 5);
+        return chiTietSanPhamRepository.findByNsxMaNSXAndTrangThai(maNsx, 1, pageable);
     }
 }

@@ -29,6 +29,7 @@ public class DetailSanPhamResponse {
     private String cameratruoc;
     private String heDieuHanh;
     private Integer ram;
+    private BigDecimal giaBanGG;
     private Integer soLuongBan;
     private Integer soLuongNhap;
     private List<ListMauSacOfSanPhamDTO> listMauSacOfSanPhamDTOS;
@@ -68,6 +69,26 @@ public class DetailSanPhamResponse {
         this.ram = ram;
         this.soLuongBan = soLuongBan;
         this.soLuongNhap = soLuongNhap;
+    }
+    public DetailSanPhamResponse(Long maSanPham, String tenSanPham, String hinhAnh, Integer tinhTrang, String tenNSX, String tenChip, Integer dungLuongPin, String manHinh, String sim, String moTa, String camerasau, String cameratruoc, String heDieuHanh, Integer ram,Integer soLuongBan,Integer soLuongNhap,BigDecimal giaBan,BigDecimal giaBanGG) {
+        this.maSanPham = maSanPham;
+        this.tenSanPham = tenSanPham;
+        this.hinhAnh = hinhAnh;
+        this.tinhTrang = tinhTrang;
+        this.tenNSX = tenNSX;
+        this.tenChip = tenChip;
+        this.dungLuongPin = dungLuongPin;
+        this.manHinh = manHinh;
+        this.sim = sim;
+        this.moTa = moTa;
+        this.camerasau = camerasau;
+        this.cameratruoc = cameratruoc;
+        this.heDieuHanh = heDieuHanh;
+        this.ram = ram;
+        this.soLuongBan = soLuongBan;
+        this.soLuongNhap = soLuongNhap;
+        this.giaBan = giaBan;
+        this.giaBanGG = giaBanGG;
     }
 
 }

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -8,22 +9,20 @@
     <a class="skip-link screen-reader-text" href="#main">Bỏ qua nội dung</a>
 
     <div id="wrapper">
-    
+
         <div class="header-overlay">
             <jsp:include page="/WEB-INF/views/layout/sidebar.jsp" />
         </div>
 
-        <main id="main" class="mx-auto max-w-screen-xl">
+        <main id="main" class="mx-auto max-w-screen-xl" style="background-color:#f4f6f8">
             <div class="main_content">
                 <jsp:include page="${bodyPage}" />
             </div>
         </main>
 
         <!-- Footer cố định -->
-        <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 
     </div>
  <jsp:include page="/WEB-INF/views/layout/script.jsp" />
-
 </body>
 </html>

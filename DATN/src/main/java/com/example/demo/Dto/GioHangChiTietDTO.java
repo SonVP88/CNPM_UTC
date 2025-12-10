@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GioHangChiTietDTO {
-    private Long magiohangchitiet;
+        private Long magiohangchitiet;
     private Integer soLuong;
     private Integer trangThai;
     private GioHang gioHang;

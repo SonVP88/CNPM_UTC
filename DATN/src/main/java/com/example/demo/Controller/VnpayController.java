@@ -81,14 +81,18 @@ public class VnpayController {
 
     @Autowired
     private VnpayServiceDN vnpayServiceDN;
+    @Autowired
+    private NSXService nSXService;
 
     @GetMapping("index")
     public String home(Model model) {
         // Set body page và tiêu đề
         List<SanPhamViewDTO> products = SanPhamService.get20SanPhamMoiNhat();
+        List<NSX> nsx = nSXService.getAll();
         model.addAttribute("bodyPage", "/WEB-INF/views/page/index.jsp");
         model.addAttribute("pageTitle", "Trang chủ");
         model.addAttribute("products", products);
+        model.addAttribute("nsx", nsx);
         return "/layout/layout";
     }
 

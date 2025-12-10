@@ -2147,7 +2147,6 @@ li.hide-title>a{
     text-decoration:none;
     text-rendering:optimizeLegibility;
     text-shadow:none;
-    text-transform:uppercase;
     transition:transform .3s,border .3s,background .3s,box-shadow .3s,opacity .3s,color .3s;
     vertical-align:middle
 }
@@ -2904,7 +2903,7 @@ span+.image-icon{
     display:none
 }
 [data-icon-label]:after{
-    background-color:var(--fs-color-secondary);
+    background-color:#f98315;
     border-radius:99px;
     box-shadow:1px 1px 3px 0 rgba(0,0,0,.3);
     color:#fff;

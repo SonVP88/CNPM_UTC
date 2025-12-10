@@ -6,19 +6,22 @@ import com.example.demo.Dto.Request.SanPhamRequest;
 import com.example.demo.Dto.SanPhamViewDTO;
 import com.example.demo.Dto.SanPhamTHongKeDTO;
 import com.example.demo.Entity.ChiTietSanPham;
+import com.example.demo.Entity.DanhGia;
 import com.example.demo.Entity.SanPham;
 import com.example.demo.Repository.ChiTietSanPhamRepository;
+import com.example.demo.Repository.DanhGiaRepository;
 import com.example.demo.Repository.SanPhamRepository;
 import com.example.demo.Utils.Constants;
 import com.example.demo.Utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class SanPhamService {
@@ -28,6 +31,9 @@ public class SanPhamService {
 
     @Autowired
     private ChiTietSanPhamRepository chiTietSanPhamRepository;
+    @Autowired
+    private DanhGiaRepository danhGiaRepository;
+
 
     public List<SanPham> getAll() {
         return repository.findAll();
@@ -76,8 +82,35 @@ public class SanPhamService {
         System.out.println("Service - danhSachMoiNhat size: " + dtos.size());
         return dtos;
     }
+    public Page<SanPhamViewDTO> getSanPhamByNsx(Long maNsx, int page) {
+        Pageable pageable = PageRequest.of(page, 20); // 12 sản phẩm mỗi trang
+        return chiTietSanPhamRepository.getSanPhamViewByNsx(maNsx, pageable);
+    }
 
+    public Page<SanPhamViewDTO> getSanPhamGiaTangDan(Long maNsx, int page) {
+        Pageable pageable = PageRequest.of(page, 20);
+        return chiTietSanPhamRepository.getSanPhamGiaTangDan(maNsx, pageable);
+    }
 
+    public Page<SanPhamViewDTO> getSanPhamGiaGiamDan(Long maNsx, int page) {
+        Pageable pageable = PageRequest.of(page, 20);
+        return chiTietSanPhamRepository.getSanPhamGiaGiamDan(maNsx, pageable);
+    }
+    public Map<String, Long> getMinMaxGia(Long maNsx) {
+
+        Object result = chiTietSanPhamRepository.findMinMaxGiaByNsx(maNsx);
+
+        Object[] arr = (Object[]) result; // ← ép đúng kiểu
+
+        Long min = arr[0] == null ? 0L : ((Number) arr[0]).longValue();
+        Long max = arr[1] == null ? 0L : ((Number) arr[1]).longValue();
+
+        Map<String, Long> map = new HashMap<>();
+        map.put("min", min);
+        map.put("max", max);
+
+        return map;
+    }
 
 
 
@@ -194,5 +227,24 @@ public class SanPhamService {
         return repository.sanPhamCheckTT(tenSanPham, maDungLuong, maMauSac, maSP);
     }
 
+
+    public Page<SanPhamViewDTO> getSanPhamByNsxSort(Long maNsx, int page, String sort) {
+        // Kiểm tra direction: mặc định DESC nếu không đúng
+        Sort.Direction direction = Sort.Direction.DESC;
+        if ("asc".equalsIgnoreCase(sort)) {
+            direction = Sort.Direction.ASC;
+        }
+
+        // Tạo pageable với 20 sản phẩm mỗi trang
+        Pageable pageable = PageRequest.of(page, 20, Sort.by(direction, "maChiTietSanPham"));
+
+        // Gọi repository
+        return chiTietSanPhamRepository.getSanPhamViewByNsx(maNsx, pageable);
+    }
+
+    public Page<SanPhamViewDTO> getSanPhamTheoKhoangGia(Long maNsx, Long min, Long max, int page) {
+        Pageable pageable = PageRequest.of(page, 12); // 12 sản phẩm/trang, bạn chỉnh được
+        return chiTietSanPhamRepository.findByNsxAndGiaBetween(maNsx, min, max, pageable);
+    }
 
 }

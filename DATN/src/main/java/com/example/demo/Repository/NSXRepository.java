@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface NSXRepository extends JpaRepository<NSX, Long> {
@@ -23,4 +24,5 @@ public interface NSXRepository extends JpaRepository<NSX, Long> {
     @Query("SELECT nsx FROM NSX nsx WHERE nsx.trangThai = 1 AND nsx.tenNSX = :tenNSX")
     NSX findAllActiveByTen(@Param("tenNSX") String tenNSX);
 
+    Optional<NSX> findByTenNSX(String tenNsx);
 }
