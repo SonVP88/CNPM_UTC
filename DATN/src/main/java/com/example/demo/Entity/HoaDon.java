@@ -34,6 +34,7 @@ public class HoaDon {
     @Column(name = "mahoadon")
     private Long maHoaDon;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ngaytao")
     private Date ngayTao;
 
@@ -71,9 +72,11 @@ public class HoaDon {
     @Column(name = "ghichu")
     private String ghiChu;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createddate")
     private Date createdDate;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "lastupdate")
     private Date lastUpdate;
 

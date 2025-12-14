@@ -592,9 +592,6 @@ public class SmartPhonesController {
     }
 
 
-
-
-
     @GetMapping("/viewCDN/{tenSanPham}")
     public String ViewUpdateChuaDangNhap(Model model, @PathVariable(name = "tenSanPham") String tenSanPham) {
         DetailSanPhamResponse sanPham = service.detailSanPhamByTenSanPham(tenSanPham);

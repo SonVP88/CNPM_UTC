@@ -6,58 +6,98 @@ document.addEventListener("DOMContentLoaded", () => {
     const colorContainer = document.querySelector(".ux-swatches");
     const dungLuongBtns = document.querySelectorAll(".item-linked-product");
     const btnAddcart = document.querySelector(".single_add_to_cart_button");
+    const btnBuyNow = document.getElementById("btnBuyNow");
     const maSanPham = el ? parseInt(el.id) : null;
 
-    btnAddcart.addEventListener("click", async (e) => {
+btnAddcart.addEventListener("click", async (e) => {
     e.preventDefault();
 
+    const productDetail = await getSelectedProductDetail();
+    if (!productDetail) return;
+
+    const dataCart = await addToCart(productDetail.maChiTietSanPham, 1);
+
+    if (dataCart.success) {
+        showSuccessToast(dataCart.message);
+        updateCartCount();
+    } else {
+        showErrorToast(dataCart.message);
+    }
+});
+
+btnBuyNow.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    /* 🔐 CHECK LOGIN TRƯỚC */
+    const loginRes = await checkLogin();
+    if (!loginRes.loggedIn) {
+        showErrorToast("Bạn cần đăng nhập trước khi mua hàng");
+        return;
+    }
+
+    /* ✅ ĐÃ LOGIN → TIẾP TỤC */
+    const productDetail = await getSelectedProductDetail();
+    if (!productDetail) return;
+
+    const dataCart = await addToCart(productDetail.maChiTietSanPham, 1);
+    if (!dataCart.maGHCT) {
+        showErrorToast("Không lấy được mã giỏ hàng chi tiết!");
+        return;
+    }
+
+    /* 🚀 POST SANG CHECKOUT */
+    const form = document.getElementById("checkoutForm");
+    const input = document.getElementById("checkoutMaGHCTs");
+
+    input.value = dataCart.maGHCT;
+    form.submit();
+});
+
+async function addToCart(maChiTietSanPham, quantity = 1) {
+    const resCart = await fetch("/cart/add-san-pham", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            maChiTietSanPham,
+            quantity
+        })
+    });
+
+    return await resCart.json();
+}
+async function checkLogin() {
+    const res = await fetch('/account/check-login', {
+        method: 'GET',
+        credentials: 'same-origin'
+    });
+    return await res.json();
+}
+
+async function getSelectedProductDetail() {
     const activeDungLuong = document.querySelector(".item-linked-product.active");
     const activeColor = document.querySelector(".ux-swatch.selected");
 
     if (!activeDungLuong || !activeColor) {
         alert("Vui lòng chọn dung lượng và màu sắc!");
-        return;
+        return null;
     }
 
     const maDungLuong = activeDungLuong.id;
     const maMauSac = activeColor.getAttribute("data-value");
 
-    try {
-        // Lấy chi tiết sản phẩm
-        const resDetail = await fetch(`/api/getProductDetail?id=${maSanPham}&maDungLuong=${maDungLuong}&maMauSac=${maMauSac}`);
-        const productDetail = await resDetail.json();
-        
-        if (!productDetail || !productDetail.maChiTietSanPham) {
-            alert("Không lấy được thông tin chi tiết sản phẩm!");
-            return;
-        }
-       
-        const maChiTietSanPham = productDetail.maChiTietSanPham;
+    const res = await fetch(
+        `/api/getProductDetail?id=${maSanPham}&maDungLuong=${maDungLuong}&maMauSac=${maMauSac}`
+    );
 
-        // Thêm vào giỏ hàng
-        const resCart = await fetch("/cart/add-san-pham", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                maChiTietSanPham: maChiTietSanPham,
-                quantity: 1
-            })
-        });
-
-        const dataCart = await resCart.json();
-
-        if (dataCart.success) {
-            showSuccessToast(dataCart.message);
-            updateCartCount();
-        } else {
-
-            showErrorToast(dataCart.message);
-        }
-
-    } catch (err) {
-        showErrorToast("Lỗi không xác định!");
+    const data = await res.json();
+    if (!data || !data.maChiTietSanPham) {
+        alert("Không lấy được sản phẩm!");
+        return null;
     }
-});
+
+    return data;
+}
+
     // ================= CLICK DUNG LƯỢNG =================
    dungLuongBtns.forEach(dl => {
     dl.addEventListener("click", () => {
@@ -189,3 +229,5 @@ document.addEventListener("DOMContentLoaded", () => {
     // Bind màu lần đầu (màu của dung lượng mặc định)
     bindColorEvents();  
 });
+
+

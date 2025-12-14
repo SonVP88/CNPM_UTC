@@ -1,13 +1,6 @@
 package com.example.demo.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -47,10 +40,11 @@ public class HoaDonChiTiet {
     @ManyToOne
     @JoinColumn(name = "machitietsanpham")
     private ChiTietSanPham chiTietSanPham;
-
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createddate")
     private Date createdDate;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "lastupdate")
     private Date lastUpdate;
 

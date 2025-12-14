@@ -49,7 +49,7 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, Long> {
     HoaDon getHoaDonByKhachHangAndTrangThai(KhachHang khachHang, Integer trangThai);
 
     @Query("SELECT new com.example.demo.Dto.HoaDonChiTietDTO(hd.maHoaDon, kh.maKhachHang, " +
-            "kh.ten, hd.nguoiNhan, hd.diaChi, hd.trangThai, hd.tongTien, hd.loaiThanhToan) " +
+            "kh.ten, hd.nguoiNhan, hd.diaChi, hd.trangThai, hd.tongTien, hd.loaiThanhToan,hd.ngayTao,hd.sdt,hd.tinh,hd.xa) " +
             "FROM HoaDon hd " +
             "JOIN KhachHang kh ON kh.maKhachHang = hd.khachHang.maKhachHang " +
             "WHERE hd.maHoaDon = :maHoaDon")

@@ -26,10 +26,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.swing.text.NumberFormatter;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class CartController {
@@ -187,7 +185,7 @@ public class CartController {
             // Tổng số lượng sản phẩm trong giỏ hàng
             int cartSize = gioHangChiTietRepository.getByGioHang_KhachHang(user)
                     .stream().mapToInt(GioHangChiTiet::getSoLuong).sum();
-
+            result.put("maGHCT", gioHangChiTiet.getMagiohangchitiet());
             result.put("success", true);
             result.put("cartSize", cartSize);
             result.put("productId", maChiTietSanPham);
@@ -463,12 +461,84 @@ public class CartController {
         return response;
     }
 
-    @GetMapping("/out")
-    public String out(Model model) {
+    @PostMapping("/cart/check-out")
+    public String thanhToan(
+            @RequestParam String maGHCTs,
+            Model model,
+            HttpSession session
+    ) {
+        KhachHang khachHang = (KhachHang) session.getAttribute("khachHang");
+        if (khachHang == null) {
+            return "redirect:/index";
+        }
+
+        List<Long> listMaGHCT = Arrays.stream(maGHCTs.split(","))
+                .map(Long::parseLong)
+                .toList();
+
+        buildCheckoutData(listMaGHCT, khachHang, model);
+
         model.addAttribute("bodyPage", "/WEB-INF/views/checkout.jsp");
-        model.addAttribute("pageTitle", "Trang chủ");
+        model.addAttribute("pageTitle", "Thanh toán");
+
         return "/layout/layoutcart";
     }
+
+    @PostMapping("/cart/buy-now")
+    public String buyNow(
+            @RequestParam String maGHCTs,
+            Model model,
+            HttpSession session
+    ) {
+        KhachHang khachHang = (KhachHang) session.getAttribute("khachHang");
+        if (khachHang == null) {
+            return "redirect:/index";
+        }
+        List<Long> maCTSP = Arrays.stream(maGHCTs.split(","))
+                .map(Long::parseLong)
+                .collect(Collectors.toList());
+        buildCheckoutData(maCTSP, khachHang, model);
+        model.addAttribute("bodyPage", "/WEB-INF/views/checkout.jsp");
+        model.addAttribute("pageTitle", "Thanh toán");
+        return "/layout/layoutcart";
+    }
+
+
+    public void buildCheckoutData(
+            List<Long> listMaGHCT,
+            KhachHang khachHang,
+            Model model
+    ) {
+        List<Map<String, Object>> listGhctWithDiscount = new ArrayList<>();
+        BigDecimal tongTien = BigDecimal.ZERO;
+
+        for (Long maGHCT : listMaGHCT) {
+            GioHangChiTiet chiTiet = gioHangChiTietService.getByMa(maGHCT);
+            if (chiTiet == null) continue;
+
+            Map<String, Object> item = new HashMap<>();
+            item.put("gioHangChiTiet", chiTiet);
+
+            ChiTietSanPham ctsp = chiTiet.getChiTietSanPham();
+            GiamGiaChiTietSanPham giamGia = giamGiaCTSPRepository.findByChiTietSanPham(ctsp);
+            item.put("giaGiam", giamGia);
+
+            BigDecimal donGia = (giamGia != null && giamGia.getGiaSauKhiGiam() != null)
+                    ? giamGia.getGiaSauKhiGiam()
+                    : ctsp.getGiaBan();
+
+            BigDecimal thanhTien = donGia.multiply(BigDecimal.valueOf(chiTiet.getSoLuong()));
+            item.put("thanhTien", thanhTien);
+
+            tongTien = tongTien.add(thanhTien);
+            listGhctWithDiscount.add(item);
+        }
+
+        model.addAttribute("listghct", listGhctWithDiscount);
+        model.addAttribute("tongTien", tongTien);
+        model.addAttribute("kh", khachHang);
+    }
+
     @GetMapping("/cart/get-count")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getCount(HttpSession session) {

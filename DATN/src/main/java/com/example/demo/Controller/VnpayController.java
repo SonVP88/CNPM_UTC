@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 
+import com.example.demo.Config.CartController;
 import com.example.demo.Dto.GioHangChiTietDTO;
 import com.example.demo.Dto.SanPhamViewDTO;
 import com.example.demo.Entity.*;
@@ -16,6 +17,7 @@ import jakarta.mail.MessagingException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +29,11 @@ import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class VnpayController {
@@ -39,7 +43,8 @@ public class VnpayController {
     private SanPhamService SanPhamService;
     @Autowired
     private KhachHangService khachHangService;
-
+    @Autowired
+    private CartController cartController;
     @Autowired
     private ChiTietSanPhamRepository chiTietSanPhamRepository;
 
@@ -78,7 +83,8 @@ public class VnpayController {
 
     @Autowired
     private GiamGiaCTSPRepository giamGiaCTSPRepository;
-
+    @Autowired
+    private GioHangChiTietService gioHangChiTietService;
     @Autowired
     private VnpayServiceDN vnpayServiceDN;
     @Autowired
@@ -489,211 +495,156 @@ public class VnpayController {
     }
 
 
-    @GetMapping("/vnpay-payment")
-    public String ThanhToanKhiDangNhap(@CookieValue(name = "makhachhang") Long makhachhang,
-                                       @CookieValue(name = "tongTien") BigDecimal orderTotal,
-                                       @CookieValue(name = "tinh") String tinh,
-                                       @CookieValue(name = "huyen") String huyen, @CookieValue(name = "xa") String xa,
-                                       @CookieValue(name = "nguoiNhan") String nguoiNhan,
-                                       @CookieValue(name = "sdt") String sdt,
-                                       @CookieValue(name = "diaChi") String diaChi,
-                                       HttpServletRequest request, HttpServletResponse response, Model model) throws DocumentException, MessagingException, IOException {
+    @PostMapping("/cart/submit-order")
+    public String thanhToanVNPay(
+            @RequestParam String email,
+            @RequestParam String nguoiNhan,
+            @RequestParam String sdt,
+            @RequestParam String tinh,
+            @RequestParam String xa,
+            @RequestParam String diaChi,
+            @RequestParam(required = false) String note,
+            @RequestParam String maGHCTs,
+            HttpServletRequest request,
+            HttpSession session,
+            Model model
+    ) throws MessagingException {
+        boolean hasError = false;
+
+        if (email == null || email.trim().isEmpty()) {
+            model.addAttribute("error", "Email không được để trống");
+            hasError = true;
+        } else if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            model.addAttribute("error", "Email không đúng định dạng");
+            hasError = true;
+        }
+
+        if (nguoiNhan == null || nguoiNhan.trim().isEmpty()) {
+            model.addAttribute("error", "Vui lòng nhập tên người nhận");
+            hasError = true;
+        }
+
+        if (sdt == null || !sdt.matches("^0[0-9]{9}$")) {
+            model.addAttribute("error", "Số điện thoại không hợp lệ");
+            hasError = true;
+        }
+
+        if (tinh == null || tinh.trim().isEmpty()) {
+            model.addAttribute("error", "Vui lòng chọn tỉnh/thành");
+            hasError = true;
+        }
+
+        if (xa == null || xa.trim().isEmpty()) {
+            model.addAttribute("error", "Vui lòng chọn xã/phường");
+            hasError = true;
+        }
+
+        if (diaChi == null || diaChi.trim().isEmpty()) {
+            model.addAttribute("error", "Địa chỉ không được để trống");
+            hasError = true;
+        }
+        if (hasError) {
+            model.addAttribute("email", email);
+            model.addAttribute("nguoiNhan", nguoiNhan);
+            model.addAttribute("sdt", sdt);
+            model.addAttribute("tinh", tinh);
+            model.addAttribute("xa", xa);
+            model.addAttribute("diaChi", diaChi);
+            model.addAttribute("note", note);
+
+            List<Long> listMaGHCT = Arrays.stream(maGHCTs.split(","))
+                    .map(Long::parseLong)
+                    .toList();
+
+            KhachHang khachHang = (KhachHang) session.getAttribute("khachHang");
+            cartController.buildCheckoutData(listMaGHCT, khachHang, model);
+
+            model.addAttribute("bodyPage", "/WEB-INF/views/checkout.jsp");
+            model.addAttribute("pageTitle", "Thanh toán");
+
+            return "/layout/layoutcart";
+        }
 
         int paymentStatus = vnPayService.orderReturn(request);
-
-        model.addAttribute("makhachhang", makhachhang);
-
-        String orderInfo = request.getParameter("vnp_OrderInfo");
-        String paymentTime = request.getParameter("vnp_PayDate");
-        String transactionId = request.getParameter("vnp_TransactionNo");
-        String totalPrice = request.getParameter("vnp_Amount");
-
-        model.addAttribute("orderId", orderInfo);
-        model.addAttribute("totalPrice", totalPrice);
-        model.addAttribute("paymentTime", paymentTime);
-        model.addAttribute("transactionId", transactionId);
-
-
-        if (paymentStatus == 1) {
-            Cookie[] cookies = request.getCookies();
-            String danhSachSoLuongJsonEncoded = " ";
-            String chiTietSanPhamJsonEncoded = " ";
-
-
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("listSoLuong")) {
-                        danhSachSoLuongJsonEncoded = cookie.getValue();
-                    } else if (cookie.getName().equals("listMaChiTietSanPham")) {
-                        chiTietSanPhamJsonEncoded = cookie.getValue();
-                    }
-                }
-            }
-
-// Giải mã danh sách số lượng
-            List<Integer> listSoLuong = new ArrayList<>();
-            if (danhSachSoLuongJsonEncoded != null) {
-                try {
-                    String danhSachSoLuongJson = URLDecoder.decode(danhSachSoLuongJsonEncoded, "UTF-8");
-                    ObjectMapper mapper = new ObjectMapper();
-                    listSoLuong = mapper.readValue(danhSachSoLuongJson, new TypeReference<List<Integer>>() {
-                    });
-                    System.out.println(listSoLuong);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-// Giải mã danh sách chi tiết sản phẩm
-            List<Integer> chiTietSanPhamList = new ArrayList<>();
-            if (chiTietSanPhamJsonEncoded != null) {
-                try {
-                    String chiTietSanPhamJson = URLDecoder.decode(chiTietSanPhamJsonEncoded, "UTF-8");
-                    ObjectMapper mapper = new ObjectMapper();
-                    chiTietSanPhamList = mapper.readValue(chiTietSanPhamJson, new TypeReference<List<Integer>>() {
-                    });
-                    System.out.println(chiTietSanPhamList);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            String giaTriDaGiaiMaTinh = "", giaTriDaGiaiMaHuyen = "", giaTriDaGiaiMaXa = "", giaTriDaGiaiMaNguoiNhan = "", giaTriDaGiaiMaDiaChi = "", giaTriDaGiaiMaEmail = "", giaTriDaGiaiMaMaVoucher = "";
-
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    switch (cookie.getName()) {
-                        case "tinh":
-                            giaTriDaGiaiMaTinh = URLDecoder.decode(cookie.getValue(), "UTF-8");
-                            break;
-                        case "huyen":
-                            giaTriDaGiaiMaHuyen = URLDecoder.decode(cookie.getValue(), "UTF-8");
-                            break;
-                        case "xa":
-                            giaTriDaGiaiMaXa = URLDecoder.decode(cookie.getValue(), "UTF-8");
-                            break;
-                        case "nguoiNhan":
-                            giaTriDaGiaiMaNguoiNhan = URLDecoder.decode(cookie.getValue(), "UTF-8");
-                            break;
-                        case "diaChi":
-                            giaTriDaGiaiMaDiaChi = URLDecoder.decode(cookie.getValue(), "UTF-8");
-                            break;
-                        case "maVoucher":
-                            giaTriDaGiaiMaMaVoucher = URLDecoder.decode(cookie.getValue(), "UTF-8");
-                            break;
-
-                    }
-                }
-            }
-            KhachHang kh = khachHangService.getByMa(makhachhang);
-            List<HoaDon> hd = hoaDonService.getAllBykhachHang(khachHangService.getByMa(makhachhang));
-            model.addAttribute("hd", hd);
-            model.addAttribute("kh", kh);
-
-            Map<String, Integer> DSSP = new HashMap<>();
-            List<SanPham> listSP = new ArrayList<>();
-
-            GioHang gh = gioHangService.getByKhachHang(kh);
-            List<HoaDon> listHD = hoaDonService.getAllBykhachHang(kh);
-            List<GioHangChiTietDTO> listGHCT = gioHangChiTietRepository.getGHCTByMaGH(gh.getMaGioHang());
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDateTime now = LocalDateTime.now();
-            String datenow = dtf.format(now).toLowerCase();
-            Long maVoucherLong = null;
-            if(giaTriDaGiaiMaMaVoucher != ""){
-                maVoucherLong = Long.parseLong(giaTriDaGiaiMaMaVoucher);
-            }
-            HoaDon hd1 = HoaDon.builder().
-                    nguoiNhan(giaTriDaGiaiMaNguoiNhan).
-                    khachHang(khachHangService.getByMa(makhachhang)).
-                    diaChi(giaTriDaGiaiMaDiaChi).
-                    ngayTao(java.sql.Date.valueOf(datenow)).
-                    nhanVien(nhanVienRepository.getReferenceById(1L)).
-                    tongTien(orderTotal).
-                    trangThai(0).
-                    loaiThanhToan(1).
-                    ngayThanhToan(java.sql.Date.valueOf(datenow)).
-                    sdt(sdt).
-                    tinh(giaTriDaGiaiMaTinh).huyen(giaTriDaGiaiMaHuyen).xa(giaTriDaGiaiMaXa).
-                    maVoucher(maVoucherLong).
-                    build();
-            hoaDonRepository.save(hd1);
-
-            for (int i = 0; i < listGHCT.size(); i++) {
-                for (int j = 0; j < listGHCT.get(i).getSoLuong(); j++) {
-                    HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
-                    hoaDonChiTiet.setHoaDon(hd1);
-                    hoaDonChiTiet.setChiTietSanPham(listGHCT.get(i).getChiTietSanPham());
-                    GiamGiaChiTietSanPham giamGiaChiTietSanPham = giamGiaCTSPRepository.fillGGCTSP(listGHCT.get(i).getChiTietSanPham().getMaChiTietSanPham());
-                    if (giamGiaChiTietSanPham != null) {
-                        hoaDonChiTiet.setGiaTien(giamGiaChiTietSanPham.getGiaSauKhiGiam());
-                    } else {
-                        hoaDonChiTiet.setGiaTien(listGHCT.get(i).getChiTietSanPham().getGiaBan());
-                    }
-                    hoaDonChiTiet.setSoLuongMua(1);
-                    hoaDonChiTiet.setTrangThai(1);
-                    hoaDonChiTietRepository.save(hoaDonChiTiet);
-                }
-                ChiTietSanPham chiTietSanPham = chiTietSanPhamService.getByMa(listGHCT.get(i).getChiTietSanPham().getMaChiTietSanPham());
-                if (chiTietSanPham.getSoLuongBan() >= chiTietSanPham.getSoLuongNhap()) {
-                    chiTietSanPham.setTrangThai(0);
-//                    chiTietSanPham.getSanPham().setTrangThai(0);
-                }
-                chiTietSanPhamRepository.save(chiTietSanPham);
-            }
-
-            model.addAttribute("hd", hd);
-            model.addAttribute("listHD", listHD);
-            model.addAttribute("sanPham", listSP);
-            model.addAttribute("DSSP", DSSP);
-
-
-            hoaDonService.sendEmailWithAttachment(hd1.getKhachHang().getEmail());
-            for (GioHangChiTietDTO ghct : listGHCT) {
-                GioHangChiTiet gioHangChiTiet = gioHangChiTietRepository.findById(ghct.getMagiohangchitiet()).orElse(null);
-                gioHangChiTietRepository.delete(gioHangChiTiet);
-            }
-
-            Cookie cookie3 = new Cookie("tongTien", null);
-            Cookie cookie12 = new Cookie("listSoLuong", null);
-            Cookie cookie13 = new Cookie("listMaChiTietSanPham", null);
-            Cookie cookie4 = new Cookie("tinh", null);
-            Cookie cookie5 = new Cookie("huyen", null);
-            Cookie cookie6 = new Cookie("xa", null);
-
-            Cookie cookie8 = new Cookie("nguoiNhan", null);
-
-            Cookie cookie10 = new Cookie("sdt", null);
-            Cookie cookie11 = new Cookie("diaChi", null);
-
-            cookie3.setMaxAge(0);
-            cookie4.setMaxAge(0);
-            cookie5.setMaxAge(0);
-            cookie6.setMaxAge(0);
-
-            cookie8.setMaxAge(0);
-
-            cookie10.setMaxAge(0);
-            cookie11.setMaxAge(0);
-            cookie12.setMaxAge(0);
-            cookie13.setMaxAge(0);
-
-
-            response.addCookie(cookie3);
-            response.addCookie(cookie4);
-            response.addCookie(cookie5);
-            response.addCookie(cookie6);
-            response.addCookie(cookie8);
-
-            response.addCookie(cookie10);
-            response.addCookie(cookie11);
-            response.addCookie(cookie12);
-            response.addCookie(cookie13);
-
-            return "/VNP/ordersuccess";
-        } else {
+        if (paymentStatus != 1) {
             return "/VNP/orderfaildn";
         }
+
+        List<Long> listMaGHCT = Arrays.stream(maGHCTs.split(","))
+                .map(Long::parseLong)
+                .collect(Collectors.toList());
+        KhachHang khachHang = (KhachHang) session.getAttribute("khachHang");
+        if (khachHang == null) {
+            return "redirect:/index";
+        }
+        // 4️⃣ Tạo hóa đơn
+        HoaDon hoaDon = HoaDon.builder()
+                .khachHang(khachHang)
+                .nguoiNhan(nguoiNhan)
+                .sdt(sdt)
+                .diaChi(diaChi)
+                .tinh(tinh)
+                .xa(xa)
+                .ghiChu(note)
+                .ngayTao(new java.util.Date())
+                .createdDate(new java.util.Date())
+                .lastUpdate(new java.util.Date())
+                .loaiThanhToan(1) // VNPay
+                .trangThai(0)
+                .build();
+
+        hoaDonRepository.save(hoaDon);
+        BigDecimal tongTien = BigDecimal.ZERO;
+        // 5️⃣ Tạo hóa đơn chi tiết
+        for (Long maGHCT : listMaGHCT) {
+            GioHangChiTiet ghct = gioHangChiTietService.getByMa(maGHCT);
+            if (ghct == null) continue;
+
+            ChiTietSanPham ctsp = ghct.getChiTietSanPham();
+
+            // lấy giá (ưu tiên giảm giá)
+            GiamGiaChiTietSanPham gg =
+                    giamGiaCTSPRepository.findByChiTietSanPham(ctsp);
+
+            BigDecimal donGia = (gg != null)
+                    ? gg.getGiaSauKhiGiam()
+                    : ctsp.getGiaBan();
+
+            HoaDonChiTiet hdct = HoaDonChiTiet.builder()
+                    .hoaDon(hoaDon)
+                    .chiTietSanPham(ctsp)
+                    .soLuongMua(ghct.getSoLuong())
+                    .createdDate(new java.util.Date())
+                    .lastUpdate(new java.util.Date())
+                    .giaTien(donGia)
+                    .trangThai(1)
+                    .imei("12345678")
+                    .build();
+
+            hoaDonChiTietRepository.save(hdct);
+            tongTien = tongTien.add(
+                    donGia.multiply(BigDecimal.valueOf(ghct.getSoLuong()))
+            );
+
+            // trừ kho
+            ctsp.setSoLuongNhap(ctsp.getSoLuongNhap() - ghct.getSoLuong());
+            chiTietSanPhamRepository.save(ctsp);
+
+            // xóa khỏi giỏ
+            gioHangChiTietRepository.delete(ghct);
+        }
+
+        // 6️⃣ Update tổng tiền
+        hoaDon.setTongTien(tongTien);
+        hoaDonRepository.save(hoaDon);
+
+        // 7️⃣ Gửi email xác nhận
+        hoaDonService.sendEmailWithAttachment(email);
+
+        model.addAttribute("hoaDon", hoaDon);
+        return "redirect:/index";
     }
+
 
     //thanh toán ngay
     @PostMapping("/submitOrder2")
