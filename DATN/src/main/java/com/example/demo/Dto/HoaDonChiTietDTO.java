@@ -16,13 +16,16 @@ public class HoaDonChiTietDTO {
     private Long maKhachHang;
     private String tenKhachHang;
     private String nguoiNhan;
+    private String sdt;
     private String diaChi;
+    private String tinh;
+    private String xa;
     private Integer trangThai;
     private List<DanhSachSanPhamHoaDonDTO> danhSachSanPhamHoaDonDTOS;
     private BigDecimal tongTien;
     private Integer loaiThanhToan;
     private Date ngayThanhToan;
-
+    private Date ngayTao;
     private String tongTienString;
     private String trangThaiString;
     private List<String> danhSachSanPham;
@@ -49,6 +52,20 @@ public class HoaDonChiTietDTO {
         this.tongTien = tongTien;
         this.loaiThanhToan = loaiThanhToan;
         this.ngayThanhToan = ngayThanhToan;
+    }
+    public HoaDonChiTietDTO(Long maHoaDon, Long maKhachHang, String tenKhachHang, String nguoiNhan, String diaChi, Integer trangThai, BigDecimal tongTien, Integer loaiThanhToan, Date ngayTao,String sdt,String tinh,String xa) {
+        this.maHoaDon = maHoaDon;
+        this.maKhachHang = maKhachHang;
+        this.tenKhachHang = tenKhachHang;
+        this.nguoiNhan = nguoiNhan;
+        this.diaChi = diaChi;
+        this.trangThai = trangThai;
+        this.tongTien = tongTien;
+        this.loaiThanhToan = loaiThanhToan;
+        this.ngayTao = ngayTao;
+        this.sdt = sdt;
+        this.tinh = tinh;
+        this.xa = xa;
     }
 
     public void convertDataToString(){

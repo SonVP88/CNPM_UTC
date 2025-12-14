@@ -150,32 +150,19 @@ $("#confirmYes").click(function () {
 });
 
 
-document.querySelector("#btn-thanh-toan").addEventListener("click", function() {
+document.querySelector("#btn-thanh-toan").addEventListener("click", function () {
     const selectedMaGHCT = getSelectedMaGHCT();
-
+    console.log(selectedMaGHCT);
     if (selectedMaGHCT.length === 0) {
         alert("Vui lòng chọn sản phẩm trước khi thanh toán!");
         return;
     }
-
-    // Gửi danh sách sang server
-    fetch('/thanh-toan', {
-        method: 'get',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ maGHCTs: selectedMaGHCT })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            window.location.href = '/thanh-toan';
-        } else {
-            alert(data.message || "Thanh toán thất bại");
-        }
-    })
-    .catch(err => console.error(err));
+    const iput=document.getElementById("maGHCTs");
+    iput.value = selectedMaGHCT.join(",");
+     document.getElementById("checkoutForm").submit();
 });
+
+
 
 $(document).ready(function() {
     updateCartCount();

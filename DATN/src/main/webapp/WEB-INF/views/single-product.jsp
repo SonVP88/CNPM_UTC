@@ -150,7 +150,7 @@
                         %>
                   </p>
                </div>
-               <form class="variations_form cart ux-swatches-js-attached" action="" method="post" enctype="multipart/form-data" data-product_id="1693" >
+               <form id="checkoutForm" action="/cart/check-out" method="post" class="variations_form cart ux-swatches-js-attached" enctype="multipart/form-data" data-product_id="1693" >
                   <div class="single_variation_wrap">
                      <table class="variations" cellspacing="0">
                         <tbody>
@@ -284,13 +284,14 @@
                         </div>
                         <button type="button" id="single_add_to_cart_button" class="single_add_to_cart_button button alt">
                         <i class="fa-solid fa-basket-shopping"></i> Thêm Vào Giỏ Hàng</button>
-                        <button type="button" class="button buy_now_button" fdprocessedid="zqsgr">Mua ngay</button>
+                        <button id="btnBuyNow" type="button" class="button buy_now_button" fdprocessedid="zqsgr">Mua ngay</button>
                         <input type="hidden" name="is_buy_now" class="is_buy_now" value="0" autocomplete="off">
                         <input type="hidden" name="add-to-cart" value="1693">
                         <input type="hidden" name="product_id" value="1693">
                         <input type="hidden" name="variation_id" class="variation_id" value="1694">
                      </div>
                   </div>
+                  <input type="hidden" name="maGHCTs" id="checkoutMaGHCTs">
                </form>
                <script type="text/javascript">
                   jQuery(document).ready(function () {
@@ -671,3 +672,4 @@
       </div>
    </div>
 </div>
+<script src="/assets/js/singleproduct.js"></script>

@@ -16,10 +16,26 @@ import java.util.List;
 public interface HoaDonChiTietRepository extends JpaRepository<HoaDonChiTiet, Long> {
     List<HoaDonChiTiet> getAllByHoaDon(HoaDon hd);
 
-    @Query("SELECT new com.example.demo.Dto.DanhSachSanPhamHoaDonDTO(hdct.maHoaDonChiTiet,sp.tenSanPham, hdct.soLuongMua, " +
-            "hdct.giaTien, hdct.imei, ctsp.mauSac.tenMauSac, ctsp.dungLuong.tenDungLuong) FROM HoaDonChiTiet hdct " +
+    @Query("SELECT new com.example.demo.Dto.DanhSachSanPhamHoaDonDTO(" +
+            "hdct.maHoaDonChiTiet, " +
+            "sp.tenSanPham, " +
+            "hdct.soLuongMua, " +
+            "hdct.giaTien, " +
+            "hdct.imei, " +
+            "ctsp.mauSac.tenMauSac, " +
+            "ctsp.dungLuong.tenDungLuong, " +
+            "ctsp.hinhAnhURL, " +
+            "hd.sdt, " +
+            "gctsp.giaSauKhiGiam, " +
+            "gsp.phanTramSale, " +
+            "gsp.tenGiamGia, " +
+            "gctsp.moTa) " +
+            "FROM HoaDonChiTiet hdct " +
             "JOIN ChiTietSanPham ctsp ON ctsp.maChiTietSanPham = hdct.chiTietSanPham.maChiTietSanPham " +
             "JOIN SanPham sp ON sp.maSanPham = ctsp.sanPham.maSanPham " +
+            "JOIN HoaDon hd ON hd.maHoaDon = hdct.hoaDon.maHoaDon " +
+            "LEFT JOIN GiamGiaChiTietSanPham gctsp ON gctsp.chiTietSanPham.maChiTietSanPham = ctsp.maChiTietSanPham " +
+            "LEFT JOIN GiamGiaSanPham gsp ON gsp.maGiamGia = gctsp.giamGiaSanPham.maGiamGia " +
             "WHERE hdct.hoaDon.maHoaDon = :maHoaDon")
     List<DanhSachSanPhamHoaDonDTO> getDsSPOFHoaDon(@Param("maHoaDon") Long maHoaDon);
 

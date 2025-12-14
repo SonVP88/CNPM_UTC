@@ -117,7 +117,10 @@
                <p>Tạm tính: <span>${tongTien}đ</span></p>
             </div>
          </div>
-         <button disabled="disabled" class="btn-action disabled" id="btn-thanh-toan">
+        <form id="checkoutForm" method="post" action="/cart/check-out">
+        <input type="hidden" name="maGHCTs" id="maGHCTs">
+        </form>
+         <button disabled="disabled" class="btn-action disabled" data-id="" id="btn-thanh-toan">
          Mua ngay
          </button>
       </div>
@@ -141,4 +144,4 @@
         </div>
     </div>
 </div>
-
+<script src="/assets/js/cart.js"></script>
