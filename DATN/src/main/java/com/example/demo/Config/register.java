@@ -514,57 +514,57 @@ public class register {
         );
     }
 
-    @PostMapping("/order/buy-again")
-    @ResponseBody
-    public ResponseEntity<?> buyAgain(
-            @RequestBody Map<String, Object> payload,
-            HttpSession session
-    ) {
-        KhachHang kh = (KhachHang) session.getAttribute("khachHang");
-        if (kh == null) {
-            return ResponseEntity.status(401)
-                    .body(Map.of("success", false, "message", "Vui lòng đăng nhập"));
-        }
-
-        Long maDonHang = Long.valueOf(payload.get("maDonHang").toString());
-
-        HoaDon donHang = hoaDonService.getByMa(maDonHang);
-        if (donHang == null || !donHang.getKhachHang().getMaKhachHang().equals(kh.getMaKhachHang())) {
-            return ResponseEntity.badRequest()
-                    .body(Map.of("success", false, "message", "Đơn hàng không hợp lệ"));
-        }
-
-        GioHang gioHang = gioHangService.getByKhachHang(kh);
-        List<Long> maGHCTs = new ArrayList<>();
-
-        for (HoaDonChiTiet dhct : donHang) {
-
-            ChiTietSanPham ctsp = dhct.getChiTietSanPham();
-
-            // ❗ check còn bán / còn tồn
-            if (ctsp.getTrangThai() != 1) continue;
-
-            GioHangChiTiet ghct = gioHangChiTietRepository.getByChiTietSanPhamAndGioHang(ctsp, gioHang);
-
-            if (ghct == null) {
-                ghct = new GioHangChiTiet();
-                ghct.setChiTietSanPham(ctsp);
-                ghct.setGioHang(gioHang);
-                ghct.setSoLuong(dhct.getSoLuong());
-                ghct.setTrangThai(1);
-            } else {
-                ghct.setSoLuong(ghct.getSoLuong() + dhct.getSoLuong());
-            }
-
-            gioHangChiTietRepository.save(ghct);
-            maGHCTs.add(ghct.getMaGHCT());
-        }
-
-        return ResponseEntity.ok(Map.of(
-                "success", true,
-                "maGHCTs", maGHCTs
-        ));
-    }
+//    @PostMapping("/order/buy-again")
+//    @ResponseBody
+//    public ResponseEntity<?> buyAgain(
+//            @RequestBody Map<String, Object> payload,
+//            HttpSession session
+//    ) {
+//        KhachHang kh = (KhachHang) session.getAttribute("khachHang");
+//        if (kh == null) {
+//            return ResponseEntity.status(401)
+//                    .body(Map.of("success", false, "message", "Vui lòng đăng nhập"));
+//        }
+//
+//        Long maDonHang = Long.valueOf(payload.get("maDonHang").toString());
+//
+//        HoaDon donHang = hoaDonService.getByMa(maDonHang);
+//        if (donHang == null || !donHang.getKhachHang().getMaKhachHang().equals(kh.getMaKhachHang())) {
+//            return ResponseEntity.badRequest()
+//                    .body(Map.of("success", false, "message", "Đơn hàng không hợp lệ"));
+//        }
+//
+//        GioHang gioHang = gioHangService.getByKhachHang(kh);
+//        List<Long> maGHCTs = new ArrayList<>();
+//
+//        for (HoaDonChiTiet dhct : donHang) {
+//
+//            ChiTietSanPham ctsp = dhct.getChiTietSanPham();
+//
+//            // ❗ check còn bán / còn tồn
+//            if (ctsp.getTrangThai() != 1) continue;
+//
+//            GioHangChiTiet ghct = gioHangChiTietRepository.getByChiTietSanPhamAndGioHang(ctsp, gioHang);
+//
+//            if (ghct == null) {
+//                ghct = new GioHangChiTiet();
+//                ghct.setChiTietSanPham(ctsp);
+//                ghct.setGioHang(gioHang);
+//                ghct.setSoLuong(dhct.getSoLuong());
+//                ghct.setTrangThai(1);
+//            } else {
+//                ghct.setSoLuong(ghct.getSoLuong() + dhct.getSoLuong());
+//            }
+//
+//            gioHangChiTietRepository.save(ghct);
+//            maGHCTs.add(ghct.getMaGHCT());
+//        }
+//
+//        return ResponseEntity.ok(Map.of(
+//                "success", true,
+//                "maGHCTs", maGHCTs
+//        ));
+//    }
 
 
     @PostMapping("/update/{maKhachHang}")
